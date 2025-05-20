@@ -56,7 +56,7 @@ const Shipping = () => {
     return (
         <div>
           <Header/>
-          <section className='bg-[url("http://localhost:3001/images/banner/shop.png")] h-[220px] mt-6 bg-cover bg-no-repeat relative bg-left'>
+          <section className='bg-[url("http://localhost:3000/images/banner/shop.png")] h-[220px] mt-6 bg-cover bg-no-repeat relative bg-left'>
             <div className='absolute left-0 top-0 w-full h-full bg-[#2422228a]'>
                 <div className='w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto'>
                     <div className='flex flex-col justify-center gap-1 items-center h-full w-full text-white'>
@@ -130,7 +130,7 @@ const Shipping = () => {
             </div>
 
             <div className='flex flex-col gap-1 mt-7 mb-2 w-full'>
-               <button className='px-3 py-[6px] rounded-sm hover:shadow-green-500/50 hover:shadow-lg bg-green-500 text-white'>Save Change </button>
+               <button className='px-3 py-[6px] rounded-sm hover:shadow-blue-500/50 hover:shadow-lg bg-blue-500 text-white'>Save Change </button>
             </div> 
             </div> 
                 </form>
@@ -149,7 +149,7 @@ const Shipping = () => {
                     <span onClick={() => setRes(false)} className='text-indigo-500 cursor-pointer'>Change </span>
                 </p>
 
-                <p className='text-slate-600 text-sm' >Email To ariyan@gmail.com</p>
+                <p className='text-slate-600 text-sm' >Email To info@nimbo.co.zw</p>
 
             </div>
             }
@@ -215,7 +215,7 @@ const Shipping = () => {
 
                 <div className='flex justify-between items-center'>
                     <span>Total</span>
-                    <span className='text-lg text-[#059473]'>${price + shipping_fee} </span>
+                    <span className='text-lg text-[#42accf]'>${price + shipping_fee} </span>
                 </div>
                 <button onClick={placeOrder} disabled={res ? false : true} className={`px-5 py-[6px] rounded-sm hover:shadow-red-500/50 hover:shadow-lg ${res ? 'bg-red-500' : 'bg-red-300'}  text-sm text-white uppercase`}>
                    Place Order 

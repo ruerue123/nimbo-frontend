@@ -133,7 +133,7 @@ const Reviews = ({product}) => {
              <RatingTemp rating={0} />
             </div>
             <div className='w-[200px] h-[14px] bg-slate-200 relative'>
-                <div className='h-full bg-[#Edbb0E] w-[0%]'> 
+                <div className='h-full bg-[#42accf] w-[0%]'> 
                 </div> 
             </div>
             <p className='text-sm text-slate-600 w-[0%]'>0</p>
@@ -173,7 +173,7 @@ const Reviews = ({product}) => {
                     onChange={(e) => setRat(e)}
                     initialRating={rat}
                     emptySymbol={<span className='text-slate-600 text-4xl'><CiStar/></span>}
-                    fullSymbol={<span className='text-[#Edbb0E] text-4xl'><FaStar/></span>} 
+                    fullSymbol={<span className='text-[#42accf] text-4xl'><FaStar/></span>} 
                     /> 
                  </div> 
                  <form onSubmit={review_submit}>

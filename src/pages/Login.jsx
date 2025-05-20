@@ -76,7 +76,7 @@ const Login = () => {
         <input onChange={inputHandle} value={state.password}  className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md' type="password" name="password" id="password" placeholder='Password' required />
     </div>
 
-    <button className='px-8 w-full py-2 bg-[#059473] shadow-lg hover:shadow-green-500/40 text-white rounded-md'>Login</button>
+    <button className='px-8 w-full py-2 bg-[#42accf] shadow-lg hover:shadow-blue-500/40 text-white rounded-md'>Login</button>
  
         </form>
     <div className='flex justify-center items-center py-2'>
@@ -100,13 +100,13 @@ const Login = () => {
         <p>Don't Have An Account ? <Link className='text-blue-500' to='/register'> Register</Link> </p>
     </div> 
 
-     <a target='_blank' href="http://localhost:3001/login">
+     <a target='_blank' href="http://localhost:3000/login">
      <div className='px-8 w-full py-2 bg-[#42accf] shadow hover:shadow-blue-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
             Login As a Seller
      </div>
      </a>
  
-     <a target='_blank' href="http://localhost:3001/register">
+     <a target='_blank' href="http://localhost:3000/register">
      <div className='px-8 w-full py-2 bg-[#42accf] shadow hover:shadow-blue-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
             Register As a Seller
      </div>
@@ -117,7 +117,7 @@ const Login = () => {
             </div> 
 
         <div className='w-full h-full py-4 pr-4'>
-            <img src="http://localhost:3001/images/login.jpg" alt="" />
+            <img src="http://localhost:3000/images/login.jpg" alt="" />
          </div>    
 
          </div>

@@ -166,7 +166,7 @@ const Details = () => {
     return (
         <div>
             <Header/>
-    <section className='bg-[url("http://localhost:3001/images/banner/shop.png")] h-[220px] mt-6 bg-cover bg-no-repeat relative bg-left'>
+    <section className='bg-[url("http://localhost:3000/images/banner/shop.png")] h-[220px] mt-6 bg-cover bg-no-repeat relative bg-left'>
     <div className='absolute left-0 top-0 w-full h-full bg-[#2422228a]'>
         <div className='w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto'>
             <div className='flex flex-col justify-center gap-1 items-center h-full w-full text-white'>
@@ -290,16 +290,16 @@ const Details = () => {
 
     <ul className='flex justify-start items-center gap-3'>
         <li>
-            <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-indigo-500 rounded-full text-white' href="#"> <FaFacebookF /> </a>
+            <a className='w-[38px] h-[38px] hover:bg-[#42accf] hover:text-white flex justify-center items-center bg-indigo-500 rounded-full text-white' href="#"> <FaFacebookF /> </a>
         </li>
         <li>
-            <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-cyan-500 rounded-full text-white' href="#"> <FaTwitter /> </a>
+            <a className='w-[38px] h-[38px] hover:bg-[#42accf] hover:text-white flex justify-center items-center bg-cyan-500 rounded-full text-white' href="#"> <FaTwitter /> </a>
         </li>
         <li>
-            <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-purple-500 rounded-full text-white' href="#"> <FaLinkedin /> </a>
+            <a className='w-[38px] h-[38px] hover:bg-[#42accf] hover:text-white flex justify-center items-center bg-purple-500 rounded-full text-white' href="#"> <FaLinkedin /> </a>
         </li>
         <li>
-            <a className='w-[38px] h-[38px] hover:bg-[#059473] hover:text-white flex justify-center items-center bg-blue-500 rounded-full text-white' href="#"> <FaGithub /> </a>
+            <a className='w-[38px] h-[38px] hover:bg-[#42accf] hover:text-white flex justify-center items-center bg-blue-500 rounded-full text-white' href="#"> <FaGithub /> </a>
         </li>
     </ul> 
 
@@ -328,9 +328,9 @@ const Details = () => {
             <div className='w-[72%] md-lg:w-full'>
                 <div className='pr-4 md-lg:pr-0'>
                     <div className='grid grid-cols-2'>
-                    <button onClick={() => setState('reviews')} className={`py-1 hover:text-white px-5 hover:bg-[#059473] ${state === 'reviews' ? 'bg-[#059473] text-white' : 'bg-slate-200 text-slate-700'} rounded-sm`}>Reviews </button>
+                    <button onClick={() => setState('reviews')} className={`py-1 hover:text-white px-5 hover:bg-[#42accf] ${state === 'reviews' ? 'bg-[#42accf] text-white' : 'bg-slate-200 text-slate-700'} rounded-sm`}>Reviews </button>
                     
-                    <button onClick={() => setState('description')} className={`py-1 hover:text-white px-5 hover:bg-[#059473] ${state === 'description' ? 'bg-[#059473] text-white' : 'bg-slate-200 text-slate-700' } rounded-sm`}>Description </button>
+                    <button onClick={() => setState('description')} className={`py-1 hover:text-white px-5 hover:bg-[#42accf] ${state === 'description' ? 'bg-[#42accf] text-white' : 'bg-slate-200 text-slate-700' } rounded-sm`}>Description </button>
                     </div>
 
     <div>

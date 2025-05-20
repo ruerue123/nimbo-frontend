@@ -21,7 +21,7 @@ const ChangePassword = () => {
             <input className='outline-none px-3 py-1 border rounded-md text-slate-600' type="password" name="confirm_password" id="confirm_password"  placeholder='Confirm Password'/>
             </div>
             <div>
-                <button className='px-8 py-2 bg-[#059473] shadow-lg hover:shadow-green-500/30 text-white rounded-md'>Update Password </button>
+                <button className='px-8 py-2 bg-[#42accf] shadow-lg hover:shadow-blue-500/30 text-white rounded-md'>Update Password </button>
             </div>
 
 
