@@ -9,7 +9,11 @@ import toast from 'react-hot-toast';
 import io from 'socket.io-client'
 import {FaList} from 'react-icons/fa'
 
-const socket = io('http://localhost:5000')
+const socket = io('https://nimbo-backend-1.onrender.com', {
+  withCredentials: true,
+  transports: ['websocket'],
+});
+
 
 const Chat = () => {
 
