@@ -76,7 +76,7 @@ const Header = () => {
                                     <a href="#"><FaGithub /> </a> 
                                 </div>
         <div className='flex group cursor-pointer text-slate-800 text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute before:absolute before:h-[18px] before:bg-[#afafaf] before:w-[1px] before:-left-[20px]'>
-            <img src="http://localhost:3001/images/language.png" alt="" />
+            <img src="/images/language.png" alt="" />
             <span><IoMdArrowDropdown /></span>
             <ul className='absolute invisible transition-all top-12 rounded-sm duration-200 text-white p-2 w-[100px] flex flex-col gap-3 group-hover:visible group-hover:top-6 group-hover:bg-black z-10'>
             <li>English</li>
@@ -108,7 +108,7 @@ const Header = () => {
                     <div className='flex justify-between items-center'>
  
                 <Link to='/'>
-                    <img src="http://localhost:3000/images/logo.png" alt="" />
+                    <img src="/images/logo.png" alt="" />
                 </Link>
                 <div className='justify-center items-center w-[30px] h-[30px] bg-white text-slate-600 border border-slate-600 rounded-sm cursor-pointer lg:hidden md-lg:flex xl:hidden hidden' onClick={() => setShowShidebar(false)}>
                     <span> <FaList/> </span>

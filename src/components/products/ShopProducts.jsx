@@ -13,13 +13,13 @@ const ShopProducts = ({styles,products}) => {
             <img className='h-[240px] rounded-md md:h-[270px] xs:h-[170px] w-full object-cover' src={ p.images[0] } alt="" />
 
           <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
-            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
+            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
             <FaRegHeart />
             </li>
-            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
+            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
             <FaEye />
             </li>
-            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
+            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
             <RiShoppingCartLine />
             </li>
         </ul>    
