@@ -108,13 +108,13 @@ const Register = () => {
         <p>You Have No Account? <Link className='text-blue-500' to='/login'> Login</Link> </p>
     </div> 
 
-    <a target='_blank' href="http://localhost:3001/login">
+    <a target='_blank' href="https://nimbo-dashboard.vercel.app/login">
      <div className='px-8 w-full py-2 bg-[#42accf] shadow hover:shadow-red-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
             Login As a Seller
      </div>
      </a>
 
-     <a target='_blank' href="http://localhost:3001/register">
+     <a target='_blank' href="https://nimbo-dashboard.vercel.app/register">
      <div className='px-8 w-full py-2 bg-[#42accf] shadow hover:shadow-red-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
             Register As a Seller
      </div>
