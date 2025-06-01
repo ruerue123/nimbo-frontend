@@ -10,7 +10,7 @@ export const get_category = createAsyncThunk(
             // console.log(data)
             return fulfillWithValue(data)
         } catch (error) {
-            console.log(error.respone)
+            console.log(error.response)
             return rejectWithValue(error)
         }
     }
@@ -24,7 +24,7 @@ export const get_products = createAsyncThunk(
              console.log(data)
             return fulfillWithValue(data)
         } catch (error) {
-            console.log(error.respone)
+            console.log(error.response)
             return rejectWithValue(error)
         }
     }
@@ -40,7 +40,7 @@ export const price_range_product = createAsyncThunk(
              console.log(data)
             return fulfillWithValue(data)
         } catch (error) {
-            console.log(error.respone)
+            console.log(error.response)
             return rejectWithValue(error)
         }
     }
@@ -51,7 +51,7 @@ export const query_products = createAsyncThunk(
     'product/query_products',
     async(query , { fulfillWithValue,rejectWithValue }) => {
         try {
-            const {data} = await api.get(`/home/query-products?category=${query.category}&&rating=${query.rating}&&lowPrice=${query.low}&&highPrice=${query.high}&&sortPrice=${query.sortPrice}&&pageNumber=${query.pageNumber}&&searchValue=${query.searchValue ? query.searchValue : ''} `)
+            const {data} = await api.get(`/home/query-products?category=${query.category}&&rating=${query.rating}&&lowPrice=0&&highPrice=100&&sortPrice=${query.sortPrice}&&pageNumber=${query.pageNumber}&&searchValue=${query.searchValue ? query.searchValue : ''} `)
             //  console.log(data)
             return fulfillWithValue(data)
         } catch (error) {
