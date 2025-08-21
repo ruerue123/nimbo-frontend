@@ -256,38 +256,29 @@ const Header = () => {
             </div>  
     </div>
 
-
-    <div className='w-[85%] lg:w-[90%] mx-auto'>
-        <div className='flex w-full flex-wrap md-lg:gap-8'>
-            <div className='w-3/12 md-lg:w-full'>
-                <div className='bg-white relative'>
-                   <div onClick={() => setCategoryShow(!categoryShow) } className='h-[50px] bg-[#42accf] text-white flex justify-center md-lg:justify-between md-lg:px-6 items-center gap-3 font-bold text-md cursor-pointer'>
-            <div className='flex justify-center items-center gap-3'>
-                <span><FaList/></span>
-                <span>All Category </span>
-            </div>
-            <span className='pt-1'><IoIosArrowDown /></span>
-                    </div>
-
-        <div className={`${categoryShow ? 'h-0' : 'h-[400px]'} overflow-hidden transition-all md-lg:relative duration-500 absolute z-[99999] bg-[#dbf3ed] w-full border-x`}>
-            <ul className='py-2 text-slate-600 font-medium'>
-                {
-                    categorys.map((c,i) => {
-                        return (
-                         <li key={i} className='flex justify-start items-center gap-2 px-[24px] py-[6px]'>
-                            <img src={c.image} className='w-[30px] h-[30px] rounded-full overflow-hidden' alt="" />
-                            <Link to={`/products?category=${c.name}`} className='text-sm block'>{c.name}</Link>
-                         </li>
-                        )
-                    })
-                }
-            </ul>
-
-        </div>
-
-
-                </div>
-            </div>
+<div
+  className={`${categoryShow ? 'h-0' : 'max-h-[400px]'} overflow-y-auto transition-all md-lg:relative duration-500 absolute z-[99999] bg-[#dbf3ed] w-full border-x custom-scrollbar`}>
+  <ul className="py-2 text-slate-600 font-medium">
+    {categorys.map((c, i) => (
+      <li
+        key={i}
+        className="flex justify-start items-center gap-2 px-[24px] py-[6px]"
+      >
+        <img
+          src={c.image}
+          className="w-[30px] h-[30px] rounded-full overflow-hidden"
+          alt=""
+        />
+        <Link
+          to={`/products?category=${c.name}`}
+          className="text-sm block"
+        >
+          {c.name}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
 
         <div className='w-9/12 pl-8 md-lg:pl-0 md-lg:w-full'>
             <div className='flex flex-wrap w-full justify-between items-center md-lg:gap-6'>
