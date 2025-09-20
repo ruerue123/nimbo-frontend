@@ -54,55 +54,59 @@ const FeatureProducts = ({products}) => {
 
 
     return ( 
-        <div className='w-[85%] mx-auto'>
+        <div className='w-[85%] flex flex-wrap mx-auto'>
             <div className='w-full'>
-                <div className='text-center flex justify-center items-center flex-col text-4xl text-slate-600 font-bold relative pb-[45px]'>
-                    <h2>Feature Products </h2>
-                    <div className='w-[100px] h-[2px] bg-[#42accf] mt-4'></div>
+            <div className='text-center flex justify-center items-center flex-col text-4xl text-slate-600 font-bold relative pb-[45px]'>
+                <h2>Feature Products </h2>
+                <div className='w-[100px] h-[2px] bg-[#42accf] mt-4'></div>
+            </div>
+            </div>
+
+        <div className='w-full grid grid-cols-4 md-lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6'>
+    {
+        products.map((p,i) => <div key={i} className='border group transition-all duration-500 hover:shadow-md hover:-mt-3'>
+            <div className='relative overflow-hidden'>
+            
+        {
+            p.discount ? <div className='flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2'>{p.discount}% </div> : ''
+        }
+
+        <img className='sm:w-full w-full h-[240px]' src={p.images[0]} alt="" />  
+
+        <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
+            <li onClick={() => add_wishlist(p)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
+            <FaRegHeart />
+            </li>
+            <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
+            <FaEye />
+            </Link> 
+            <li onClick={() => add_card(p._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
+            <RiShoppingCartLine />
+            </li>
+        </ul>    
+            </div>
+
+        <div className='py-3 text-slate-600 px-2'>
+            <h2 className='font-bold'>{p.name} </h2>
+            <div className='flex justify-start items-center gap-3'>
+                <span className='text-md font-semibold'>${p.price}</span>
+                <div className='flex'>
+                    <Rating ratings={p.rating} />
                 </div>
+
             </div>
+        </div>    
 
-            {/* Responsive Product Grid */}
-            <div className='w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6'>
-                {products.map((p,i) => (
-                    <div key={i} className='bg-white shadow rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-lg hover:scale-[1.02]'>
-                        {/* Discount Badge */}
-                        {p.discount && (
-                            <div className='flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2'>
-                                {p.discount}%
-                            </div>
-                        )}
 
-                        {/* Product Image */}
-                        <div className='relative w-full aspect-square bg-gray-100 flex items-center justify-center overflow-hidden'>
-                            <img className='object-contain w-full h-full' src={p.images[0]} alt={p.name} />  
-                            {/* Hover Actions */}
-                            <ul className='flex transition-all duration-500 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
-                                <li onClick={() => add_wishlist(p)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white transition-all'>
-                                    <FaRegHeart />
-                                </li>
-                                <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white transition-all'>
-                                    <FaEye />
-                                </Link> 
-                                <li onClick={() => add_card(p._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white transition-all'>
-                                    <RiShoppingCartLine />
-                                </li>
-                            </ul>  
-                        </div>
 
-                        {/* Product Details */}
-                        <div className='p-3 flex flex-col flex-grow text-slate-600'>
-                            <h2 className='font-bold text-sm truncate'>{p.name}</h2>
-                            <div className='flex justify-between items-center mt-2'>
-                                <span className='text-md font-semibold text-[#42accf]'>${p.price}</span>
-                                <div className='flex'>
-                                    <Rating ratings={p.rating} />
-                                </div>
-                            </div>
-                        </div>    
-                    </div>
-                ))}
-            </div>
+
+        </div>
+        )
+    }
+
+        </div>
+
+            
         </div>
     );
 };
