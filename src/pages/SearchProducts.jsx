@@ -39,9 +39,15 @@ const SearchProducts = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [sortPrice, setSortPrice] = useState('');
 
+
+    
+    
+const low = state.values[0];
+const high = state.values[1];
+
     useEffect(() => {
-        const low = state.values[0] || '';
-        const high = state.values[1] || '';
+        // const low = state.values[0] || '';
+        // const high = state.values[1] || '';
         dispatch(
             query_products({
                 low,

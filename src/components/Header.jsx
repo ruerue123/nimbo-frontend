@@ -6,7 +6,8 @@ import { FaFacebookF, FaList, FaLock, FaUser } from "react-icons/fa";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHeart, FaCartShopping, FaPhoneAlt } from "react-icons/fa6";
+import { FaHeart, FaCartShopping } from "react-icons/fa6";
+import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { get_card_products, get_wishlist_products } from '../store/reducers/cardReducer';
@@ -71,7 +72,7 @@ const Header = () => {
                         <div className='flex items-center gap-6'>
                             <div className='flex items-center gap-3'>
                                 {[FaFacebookF, FaTwitter, FaLinkedin, FaGithub].map((Icon, i) => (
-                                    <a key={i} href="#" className='w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors'>
+                                    <a key={i} href="www.facebook.com" className='w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors'>
                                         <Icon />
                                     </a>
                                 ))}
