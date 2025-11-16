@@ -40,7 +40,7 @@ const Contact = () => {
                         ></textarea>
 
                         <button
-                            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold"
+                            className="w-full bg-gradient-to-r from-cyan-400 to-cyan-600 text-white py-3 rounded-lg font-bold"
                         >
                             Send Message
                         </button>

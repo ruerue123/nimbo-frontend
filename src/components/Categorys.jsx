@@ -35,11 +35,11 @@ const Categorys = () => {
         <div className="w-[87%] mx-auto py-16 relative">
             {/* Section Header */}
             <div className="text-center mb-12">
-                <h2 className='text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                <h2 className='text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                     Shop by Category
                 </h2>
                 <p className="text-gray-600 mb-4">Explore our diverse range of product categories</p>
-                <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+                <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 mx-auto rounded-full"></div>
             </div>
 
             {/* Categories Carousel */}
@@ -73,7 +73,7 @@ const Categorys = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                     <div className="bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg">
-                                        <h3 className="font-bold text-gray-900 text-center group-hover:text-blue-600 transition-colors">
+                                        <h3 className="font-bold text-gray-900 text-center group-hover:text-cyan-400 transition-colors">
                                             {c.name}
                                         </h3>
                                     </div>

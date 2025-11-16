@@ -110,15 +110,15 @@ const high = state.values[1];
                         <button className="p-2.5 bg-white rounded-full shadow-lg hover:bg-red-50 transition-colors">
                             <FaHeart className="text-red-500 text-lg" />
                         </button>
-                        <button className="p-2.5 bg-white rounded-full shadow-lg hover:bg-blue-50 transition-colors">
-                            <FaShoppingCart className="text-blue-600 text-lg" />
+                        <button className="p-2.5 bg-white rounded-full shadow-lg hover:bg-cyan-50 transition-colors">
+                            <FaShoppingCart className="text-cyan-400 text-lg" />
                         </button>
                     </div>
                 </div>
 
                 <div className="p-5">
                     <p className="text-xs text-gray-500 mb-1 font-medium">{product.brand}</p>
-                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[2.5rem] group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[2.5rem] group-hover:text-cyan-400 transition-colors">
                         {product.name}
                     </h3>
 
@@ -131,7 +131,7 @@ const high = state.values[1];
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
                                 ${discountedPrice}
                             </span>
                             {product.discount > 0 && (
@@ -174,7 +174,7 @@ const high = state.values[1];
                 <div className="flex-1 p-5 flex flex-col justify-between">
                     <div>
                         <p className="text-xs text-gray-500 mb-1 font-medium">{product.brand}</p>
-                        <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
                             {product.name}
                         </h3>
 
@@ -188,7 +188,7 @@ const high = state.values[1];
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
                                 ${discountedPrice}
                             </span>
                             {product.discount > 0 && (
@@ -201,8 +201,8 @@ const high = state.values[1];
                             <button className="p-2 bg-red-50 rounded-full hover:bg-red-100 transition-colors">
                                 <FaHeart className="text-red-500" />
                             </button>
-                            <button className="p-2 bg-blue-50 rounded-full hover:bg-blue-100 transition-colors">
-                                <FaShoppingCart className="text-blue-600" />
+                            <button className="p-2 bg-cyan-50 rounded-full hover:bg-cyan-100 transition-colors">
+                                <FaShoppingCart className="text-cyan-400" />
                             </button>
                         </div>
                     </div>

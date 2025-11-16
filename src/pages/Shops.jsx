@@ -105,8 +105,8 @@ const Shops = () => {
                         <button className="p-2.5 bg-white rounded-full shadow-lg hover:bg-red-50 transition-colors">
                             <FaHeart className="text-red-500 text-lg" />
                         </button>
-                        <button className="p-2.5 bg-white rounded-full shadow-lg hover:bg-blue-50 transition-colors">
-                            <FaShoppingCart className="text-blue-600 text-lg" />
+                        <button className="p-2.5 bg-white rounded-full shadow-lg hover:bg-cyan-50 transition-colors">
+                            <FaShoppingCart className="text-cyan-400 text-lg" />
                         </button>
                     </div>
                     {!product.stock && (
@@ -118,7 +118,7 @@ const Shops = () => {
                 
                 <div className="p-5">
                     <p className="text-xs text-gray-500 mb-1 font-medium">{product.brand}</p>
-                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[2.5rem] group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[2.5rem] group-hover:text-cyan-400 transition-colors">
                         {product.name}
                     </h3>
                     
@@ -131,7 +131,7 @@ const Shops = () => {
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
                                 ${discountedPrice}
                             </span>
                             {product.discount > 0 && (
@@ -174,7 +174,7 @@ const Shops = () => {
                 <div className="flex-1 p-5 flex flex-col justify-between">
                     <div>
                         <p className="text-xs text-gray-500 mb-1 font-medium">{product.brand}</p>
-                        <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
                             {product.name}
                         </h3>
                         
@@ -188,7 +188,7 @@ const Shops = () => {
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
                                 ${discountedPrice}
                             </span>
                             {product.discount > 0 && (
@@ -201,8 +201,8 @@ const Shops = () => {
                             <button className="p-2 bg-red-50 rounded-full hover:bg-red-100 transition-colors">
                                 <FaHeart className="text-red-500" />
                             </button>
-                            <button className="p-2 bg-blue-50 rounded-full hover:bg-blue-100 transition-colors">
-                                <FaShoppingCart className="text-blue-600" />
+                            <button className="p-2 bg-cyan-50 rounded-full hover:bg-cyan-100 transition-colors">
+                                <FaShoppingCart className="text-cyan-400" />
                             </button>
                         </div>
                     </div>
@@ -216,7 +216,7 @@ const Shops = () => {
             <Header />
             
             {/* Hero Banner */}
-            <section className='relative h-[280px] mt-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 overflow-hidden'>
+            <section className='relative h-[280px] mt-6 bg-gradient-to-r from-cyan-400 via-cyan-600 to-pink-500 overflow-hidden'>
                 <div className='absolute inset-0 bg-black opacity-20'></div>
                 <div className='absolute inset-0' style={{
                     backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
@@ -237,7 +237,7 @@ const Shops = () => {
                     <div className={`md:block hidden ${!filter ? 'mb-6' : 'mb-0'}`}>
                         <button 
                             onClick={() => setFilter(!filter)} 
-                            className='w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all'
+                            className='w-full py-3 px-4 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all'
                         >
                             {filter ? 'Show Filters' : 'Hide Filters'}
                         </button>
@@ -257,9 +257,9 @@ const Shops = () => {
                                                     checked={category === c.name} 
                                                     onChange={(e) => queryCategory(e, c.name)} 
                                                     type="checkbox" 
-                                                    className='w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500 cursor-pointer'
+                                                    className='w-5 h-5 rounded border-gray-300 text-cyan-400 focus:ring-2 focus:ring-cyan-500 cursor-pointer'
                                                 />
-                                                <span className='text-gray-700 group-hover:text-blue-600 transition-colors font-medium'>{c.name}</span>
+                                                <span className='text-gray-700 group-hover:text-cyan-400 transition-colors font-medium'>{c.name}</span>
                                             </label>
                                         ))}
                                     </div>
@@ -280,11 +280,11 @@ const Shops = () => {
                                             </div>
                                         )}
                                         renderThumb={({ props }) => (
-                                            <div className='w-5 h-5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full shadow-lg' {...props} />
+                                            <div className='w-5 h-5 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full shadow-lg' {...props} />
                                         )}
                                     />
                                     <div className='mt-4 text-center'>
-                                        <span className='text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                                        <span className='text-lg font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                             ${Math.floor(state.values[0])} - ${Math.floor(state.values[1])}
                                         </span>
                                     </div>
@@ -331,7 +331,7 @@ const Shops = () => {
                             <div className='bg-white rounded-2xl p-4 mb-6 shadow-sm border border-gray-100'>
                                 <div className='flex justify-between items-center flex-wrap gap-4'>
                                     <h2 className='text-lg font-semibold text-gray-800'>
-                                        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                        <span className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
                                             {totalProduct}
                                         </span> Products Found
                                     </h2>
@@ -339,7 +339,7 @@ const Shops = () => {
                                     <div className='flex items-center gap-3'>
                                         <select 
                                             onChange={(e) => setSortPrice(e.target.value)} 
-                                            className='px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 text-gray-700 font-medium bg-white transition-all'
+                                            className='px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 text-gray-700 font-medium bg-white transition-all'
                                         >
                                             <option value="">Sort By</option>
                                             <option value="low-to-high">Price: Low to High</option>
@@ -349,13 +349,13 @@ const Shops = () => {
                                         <div className='flex gap-2 md-lg:hidden'>
                                             <button 
                                                 onClick={() => setStyles('grid')} 
-                                                className={`p-3 rounded-lg transition-all ${styles === 'grid' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                                className={`p-3 rounded-lg transition-all ${styles === 'grid' ? 'bg-gradient-to-r from-cyan-400 to-cyan-600 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                                             >
                                                 <BsFillGridFill />
                                             </button>
                                             <button 
                                                 onClick={() => setStyles('list')} 
-                                                className={`p-3 rounded-lg transition-all ${styles === 'list' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                                className={`p-3 rounded-lg transition-all ${styles === 'list' ? 'bg-gradient-to-r from-cyan-400 to-cyan-600 text-white shadow-lg' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                                             >
                                                 <FaThList />
                                             </button>

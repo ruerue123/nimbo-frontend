@@ -158,7 +158,7 @@ const Details = () => {
             <Header />
             
             {/* Hero Banner */}
-            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 overflow-hidden'>
+            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-cyan-400 via-indigo-600 to-cyan-600 overflow-hidden'>
                 <div className='absolute inset-0 bg-black opacity-20'></div>
                 <div className='absolute inset-0' style={{
                     backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
@@ -177,9 +177,9 @@ const Details = () => {
             <section className='bg-white border-b'>
                 <div className='w-[85%] md:w-[90%] mx-auto py-4'>
                     <div className='flex items-center text-sm text-gray-600 gap-2'>
-                        <Link to='/' className="hover:text-blue-600">Home</Link>
+                        <Link to='/' className="hover:text-cyan-400">Home</Link>
                         <IoIosArrowForward />
-                        <Link to='/' className="hover:text-blue-600">{product.category}</Link>
+                        <Link to='/' className="hover:text-cyan-400">{product.category}</Link>
                         <IoIosArrowForward />
                         <span className="text-gray-900 font-medium">{product.name}</span>
                     </div>
@@ -217,7 +217,7 @@ const Details = () => {
                                                 onClick={() => setImage(img)}
                                                 className='px-2'
                                             >
-                                                <div className={`cursor-pointer rounded-xl overflow-hidden border-2 transition-all ${image === img ? 'border-blue-600 shadow-lg' : 'border-gray-200 hover:border-gray-300'}`}>
+                                                <div className={`cursor-pointer rounded-xl overflow-hidden border-2 transition-all ${image === img ? 'border-cyan-400 shadow-lg' : 'border-gray-200 hover:border-gray-300'}`}>
                                                     <img className='w-full h-[120px] object-cover' src={img} alt="" />
                                                 </div>
                                             </div>
@@ -230,7 +230,7 @@ const Details = () => {
                         {/* Product Info */}
                         <div className='flex flex-col gap-6'>
                             <div>
-                                <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-3">
+                                <div className="inline-block px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-semibold mb-3">
                                     {product.brand}
                                 </div>
                                 <h1 className='text-4xl md:text-3xl font-bold text-gray-900 mb-4'>{product.name}</h1>
@@ -247,7 +247,7 @@ const Details = () => {
                             <div className='flex items-center gap-4 py-4 border-y border-gray-200'>
                                 {product.discount !== 0 ? (
                                     <>
-                                        <span className='text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                                        <span className='text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                             ${product.price - Math.floor((product.price * product.discount) / 100)}
                                         </span>
                                         <div>
@@ -258,7 +258,7 @@ const Details = () => {
                                         </div>
                                     </>
                                 ) : (
-                                    <span className='text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                                    <span className='text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                         ${product.price}
                                     </span>
                                 )}
@@ -291,7 +291,7 @@ const Details = () => {
 
                                     <button 
                                         onClick={add_card} 
-                                        className='flex-1 py-3 px-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-xl transition-all'
+                                        className='flex-1 py-3 px-6 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-xl transition-all'
                                     >
                                         Add To Cart
                                     </button>
@@ -318,9 +318,9 @@ const Details = () => {
                                     <span className='text-gray-600 font-semibold w-32'>Share:</span>
                                     <div className='flex gap-2'>
                                         {[
-                                            { Icon: FaFacebookF, color: 'bg-blue-600' },
+                                            { Icon: FaFacebookF, color: 'bg-cyan-400' },
                                             { Icon: FaTwitter, color: 'bg-sky-500' },
-                                            { Icon: FaLinkedin, color: 'bg-blue-700' },
+                                            { Icon: FaLinkedin, color: 'bg-cyan-700' },
                                             { Icon: FaGithub, color: 'bg-gray-800' }
                                         ].map(({ Icon, color }, i) => (
                                             <button 
@@ -365,13 +365,13 @@ const Details = () => {
                                 <div className='grid grid-cols-2'>
                                     <button 
                                         onClick={() => setState('reviews')} 
-                                        className={`py-4 font-semibold transition-all ${state === 'reviews' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                                        className={`py-4 font-semibold transition-all ${state === 'reviews' ? 'bg-gradient-to-r from-cyan-400 to-cyan-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                                     >
                                         Reviews
                                     </button>
                                     <button 
                                         onClick={() => setState('description')} 
-                                        className={`py-4 font-semibold transition-all ${state === 'description' ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+                                        className={`py-4 font-semibold transition-all ${state === 'description' ? 'bg-gradient-to-r from-cyan-400 to-cyan-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                                     >
                                         Description
                                     </button>
@@ -390,7 +390,7 @@ const Details = () => {
                         {/* More from Shop */}
                         <div className='w-[350px] md-lg:w-full'>
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
-                                <div className='px-6 py-4 bg-gradient-to-r from-blue-600 to-purple-600'>
+                                <div className='px-6 py-4 bg-gradient-to-r from-cyan-400 to-cyan-600'>
                                     <h2 className='font-bold text-white text-lg'>From {product.shopName}</h2>
                                 </div>
                                 <div className='p-4 space-y-4 max-h-[600px] overflow-y-auto'>
@@ -404,7 +404,7 @@ const Details = () => {
                                                     </div>
                                                 )}
                                             </div>
-                                            <h3 className='text-gray-900 font-semibold mb-1 group-hover:text-blue-600 transition-colors'>{p.name}</h3>
+                                            <h3 className='text-gray-900 font-semibold mb-1 group-hover:text-cyan-400 transition-colors'>{p.name}</h3>
                                             <div className='flex items-center justify-between'>
                                                 <span className='text-xl font-bold text-gray-900'>${p.price}</span>
                                                 <Rating ratings={p.rating} />
@@ -451,7 +451,7 @@ const Details = () => {
                                             )}
                                         </div>
                                         <div className='p-4'>
-                                            <h3 className='text-gray-900 font-semibold mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors'>{p.name}</h3>
+                                            <h3 className='text-gray-900 font-semibold mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors'>{p.name}</h3>
                                             <div className='flex items-center justify-between'>
                                                 <span className='text-xl font-bold text-gray-900'>${p.price}</span>
                                                 <Rating ratings={p.rating} />

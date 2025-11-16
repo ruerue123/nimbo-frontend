@@ -54,11 +54,11 @@ const FeatureProducts = ({ products }) => {
         <div className='w-[85%] flex flex-wrap mx-auto'>
             <div className='w-full mb-12'>
                 <div className='text-center'>
-                    <h2 className='text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                    <h2 className='text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                         Featured Products
                     </h2>
                     <p className="text-gray-600 mb-4">Discover our hand-picked selection</p>
-                    <div className='w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full'></div>
+                    <div className='w-24 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 mx-auto rounded-full'></div>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@ const FeatureProducts = ({ products }) => {
                                 </li>
                                 <Link
                                     to={`/product/details/${p.slug}`}
-                                    className='w-11 h-11 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-blue-500 hover:text-white shadow-lg transition-all hover:scale-110'
+                                    className='w-11 h-11 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-cyan-500 hover:text-white shadow-lg transition-all hover:scale-110'
                                 >
                                     <FaEye />
                                 </Link>
@@ -101,11 +101,11 @@ const FeatureProducts = ({ products }) => {
                         </div>
 
                         <div className='p-4'>
-                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-blue-600 transition-colors'>
+                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-cyan-400 transition-colors'>
                                 {p.name}
                             </h2>
                             <div className='flex justify-between items-center'>
-                                <span className='text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                                <span className='text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                     ${p.price}
                                 </span>
                                 <div className='flex text-amber-400'>

@@ -37,7 +37,7 @@ const ShopProducts = ({ styles, products }) => {
                             <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-red-500 hover:text-white shadow-lg transition-all hover:scale-110'>
                                 <FaRegHeart />
                             </li>
-                            <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-blue-500 hover:text-white shadow-lg transition-all hover:scale-110'>
+                            <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-cyan-500 hover:text-white shadow-lg transition-all hover:scale-110'>
                                 <FaEye />
                             </li>
                             <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-green-500 hover:text-white shadow-lg transition-all hover:scale-110'>
@@ -48,12 +48,12 @@ const ShopProducts = ({ styles, products }) => {
 
                     <div className='p-5 flex flex-col justify-between flex-1'>
                         <div>
-                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors'>
+                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors'>
                                 {p.name}
                             </h2>
                         </div>
                         <div className='flex justify-between items-center mt-3'>
-                            <span className='text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                            <span className='text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                 ${p.price}
                             </span>
                             <div className='flex text-amber-400'>
