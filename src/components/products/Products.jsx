@@ -1,11 +1,11 @@
+// ============ Products.jsx (Sidebar) - Modern redesigned version ============
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import { Link } from 'react-router-dom';
-import 'react-multi-carousel/lib/styles.css' 
-import { IoIosArrowBack,IoIosArrowForward } from "react-icons/io";
-  
-const Products = ({title,products}) => {
-    
+import 'react-multi-carousel/lib/styles.css';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+const Products = ({ title, products }) => {
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },
@@ -23,59 +23,69 @@ const Products = ({title,products}) => {
             breakpoint: { max: 464, min: 0 },
             items: 1
         },
-    }
+    };
 
-    const ButtonGroup = ({next,previous}) => {
+    const ButtonGroup = ({ next, previous }) => {
         return (
-            <div className='flex justify-between items-center'>
-                <div className='text-xl font-bold text-slate-600'> {title} </div>
-                <div className='flex justify-center items-center gap-3 text-slate-600'>
-                    <button onClick={()=>previous()} className='w-[30px] h-[30px] flex justify-center items-center bg-slate-300 border border-slate-200'>
+            <div className='flex justify-between items-center mb-4'>
+                <h3 className='text-xl font-bold text-gray-900'>{title}</h3>
+                <div className='flex gap-2'>
+                    <button
+                        onClick={() => previous()}
+                        className='w-9 h-9 flex justify-center items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all hover:scale-110'
+                    >
                         <IoIosArrowBack />
                     </button>
-                    <button onClick={()=>next()} className='w-[30px] h-[30px] flex justify-center items-center bg-slate-300 border border-slate-200'>
-                    <IoIosArrowForward /> 
-
+                    <button
+                        onClick={() => next()}
+                        className='w-9 h-9 flex justify-center items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all hover:scale-110'
+                    >
+                        <IoIosArrowForward />
                     </button>
                 </div>
-
             </div>
-        )
-
-    }
-
+        );
+    };
 
     return (
-        <div className='flex gap-8 flex-col-reverse'>
+        <div className='bg-white rounded-2xl p-4 shadow-sm border border-gray-100'>
             <Carousel
-                    autoPlay={false}
-                    infinite={false}
-                    arrows={false} 
-                    responsive={responsive}
-                    transitionDuration={500}
-                    renderButtonGroupOutside={true}
-                    customButtonGroup={<ButtonGroup/>}
-                >
-       {
-        products.map((p,i)=> {
-            return(
-                <div key={i} className='flex flex-col justify-start gap-2'>
-               {
-                p.map((pl, j) =>  <Link key={j} className='flex justify-start items-start' to='#'>
-                <img className='w-[110px] h-[110px]' src={pl.images[0]} alt="" />
-                <div className='px-3 flex justify-start items-start gap-1 flex-col text-slate-600'>
-                    <h2>{pl.name} </h2>
-                    <span className='text-lg font-bold'>${pl.price}</span> 
-                </div>  
-            </Link>
-                 )
-               }
-            </div>   
-            )
-        })
-       }         
-                
-                </Carousel>   
+                autoPlay={false}
+                infinite={false}
+                arrows={false}
+                responsive={responsive}
+                transitionDuration={500}
+                renderButtonGroupOutside={true}
+                customButtonGroup={<ButtonGroup />}
+            >
+                {products.map((p, i) => (
+                    <div key={i} className='flex flex-col gap-3'>
+                        {p.map((pl, j) => (
+                            <Link
+                                key={j}
+                                to={`/product/details/${pl.slug}`}
+                                className='flex items-start gap-3 p-2 rounded-xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all group'
+                            >
+                                <div className='w-20 h-20 rounded-lg overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex-shrink-0'>
+                                    <img
+                                        className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-300'
+                                        src={pl.images[0]}
+                                        alt={pl.name}
+                                    />
+                                </div>
+                                <div className='flex-1 flex flex-col gap-1'>
+                                    <h4 className='text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-blue-600 transition-colors'>
+                                        {pl.name}
+                                    </h4>
+                                    <span className='text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                                        ${pl.price}
+                                    </span>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                ))}
+            </Carousel>
         </div>
     );
 };

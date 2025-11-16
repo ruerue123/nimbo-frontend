@@ -1,47 +1,68 @@
+// ============ ShopProducts.jsx - Modern redesigned version ============
 import React from 'react';
 import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Rating from '../Rating';
+import { Link } from 'react-router-dom';
 
-const ShopProducts = ({styles,products}) => {
+const ShopProducts = ({ styles, products }) => {
     return (
-        <div className={`w-full grid ${styles === 'grid' ? 'grid-cols-3 md-lg:grid-cols-2 md:grid-cols-2' : 'grid-cols-1 md-lg:grid-cols-2 md:grid-cols-2'} gap-3 `}>
-            {
-                products.map((p, i)=> <div key={i} className={`flex transition-all duration-1000 hover:shadow-md hover:-translate-y-3 ${styles === 'grid' ? 'flex-col justify-start items-start' : 'justify-start items-center md-lg:flex-col md-lg:justify-start md-lg:items-start'} w-full gap-4 bg-white p-1 rounded-md`}>
+        <div className={`w-full grid ${styles === 'grid' ? 'grid-cols-3 md-lg:grid-cols-2 md:grid-cols-2' : 'grid-cols-1 md-lg:grid-cols-2 md:grid-cols-2'} gap-6`}>
+            {products.map((p, i) => (
+                <Link
+                    key={i}
+                    to={`/product/details/${p.slug}`}
+                    className={`group flex transition-all duration-300 hover:shadow-xl ${styles === 'grid'
+                            ? 'flex-col bg-white rounded-2xl overflow-hidden border border-gray-100'
+                            : 'bg-white rounded-2xl overflow-hidden border border-gray-100 md-lg:flex-col'
+                        }`}
+                >
+                    <div className={`relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 ${styles === 'grid'
+                            ? 'w-full aspect-square'
+                            : 'w-[250px] h-[250px] md-lg:w-full md-lg:aspect-square flex-shrink-0'
+                        }`}>
+                        <img
+                            className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
+                            src={p.images[0]}
+                            alt={p.name}
+                        />
 
-        <div className={styles === 'grid' ? 'w-full relative group h-[210px] md:h-[270px] xs:h-[170px] overflow-hidden' : 'md-lg:w-full relative group h-[210px] md:h-[270px] overflow-hidden'}>
-            <img className='h-[240px] rounded-md md:h-[270px] xs:h-[170px] w-full object-cover' src={ p.images[0] } alt="" />
+                        {p.discount > 0 && (
+                            <div className='absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg'>
+                                -{p.discount}%
+                            </div>
+                        )}
 
-          <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
-            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
-            <FaRegHeart />
-            </li>
-            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
-            <FaEye />
-            </li>
-            <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#42accf] hover:text-white hover:rotate-[720deg] transition-all'>
-            <RiShoppingCartLine />
-            </li>
-        </ul>    
-     </div>
+                        <ul className='flex transition-all duration-500 -bottom-12 justify-center items-center gap-2 absolute w-full group-hover:bottom-4 px-4'>
+                            <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-red-500 hover:text-white shadow-lg transition-all hover:scale-110'>
+                                <FaRegHeart />
+                            </li>
+                            <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-blue-500 hover:text-white shadow-lg transition-all hover:scale-110'>
+                                <FaEye />
+                            </li>
+                            <li className='w-10 h-10 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-green-500 hover:text-white shadow-lg transition-all hover:scale-110'>
+                                <RiShoppingCartLine />
+                            </li>
+                        </ul>
+                    </div>
 
-     <div className='flex justify-start items-start flex-col gap-1'>
-            <h2 className='font-bold'>{ p.name }</h2>
-            <div className='flex justify-start items-center gap-3'>
-                <span className='text-md font-semibold'>${ p.price }</span>
-                <div className='flex'>
-                    <Rating ratings={p.rating} />
-                </div>
-
-            </div>
-        </div>    
-
-
-                </div>
-                
-                )
-            }
-             
+                    <div className='p-5 flex flex-col justify-between flex-1'>
+                        <div>
+                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors'>
+                                {p.name}
+                            </h2>
+                        </div>
+                        <div className='flex justify-between items-center mt-3'>
+                            <span className='text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+                                ${p.price}
+                            </span>
+                            <div className='flex text-amber-400'>
+                                <Rating ratings={p.rating} />
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            ))}
         </div>
     );
 };
