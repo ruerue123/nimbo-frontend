@@ -57,7 +57,7 @@ const Card = () => {
             <Header />
             
             {/* Hero Banner */}
-            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-500 overflow-hidden'>
+            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-cyan-400 via-indigo-600 to-cyan-600 overflow-hidden'>
                 <div className='absolute inset-0 bg-black opacity-20'></div>
                 <div className='absolute inset-0' style={{
                     backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
@@ -113,7 +113,7 @@ const Card = () => {
 
                                                             <div className='flex items-center gap-6 flex-wrap'>
                                                                 <div className='text-center'>
-                                                                    <p className='text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent'>
+                                                                    <p className='text-2xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>
                                                                         ${product.productInfo.price - Math.floor((product.productInfo.price * product.productInfo.discount) / 100)}
                                                                     </p>
                                                                     {product.productInfo.discount > 0 && (
@@ -209,7 +209,7 @@ const Card = () => {
                             {card_products.length > 0 && (
                                 <div className='w-[400px] lg:w-full'>
                                     <div className='bg-white rounded-2xl shadow-lg border border-gray-100 sticky top-6 overflow-hidden'>
-                                        <div className='bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4'>
+                                        <div className='bg-gradient-to-r from-cyan-500 to-cyan-600 px-6 py-4'>
                                             <h2 className='text-xl font-bold text-white'>Order Summary</h2>
                                         </div>
 
@@ -225,8 +225,8 @@ const Card = () => {
                                             </div>
 
                                             <div className='bg-gray-50 rounded-lg p-4'>
-                                                <input 
-                                                    className='w-full px-4 py-3 border border-gray-200 rounded-lg outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition-all mb-3' 
+                                                <input
+                                                    className='w-full px-4 py-3 border border-gray-200 rounded-lg outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 transition-all mb-3' 
                                                     type="text" 
                                                     placeholder='Enter coupon code' 
                                                 />
@@ -237,14 +237,14 @@ const Card = () => {
 
                                             <div className='flex justify-between items-center pt-4 border-t-2 border-gray-200'>
                                                 <span className='text-lg font-bold text-gray-900'>Total</span>
-                                                <span className='text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent'>
+                                                <span className='text-2xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>
                                                     ${price + shipping_fee}
                                                 </span>
                                             </div>
 
-                                            <button 
+                                            <button
                                                 onClick={redirect}
-                                                className='w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all mt-4'
+                                                className='w-full py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-xl font-bold text-lg hover:shadow-xl shadow-lg shadow-cyan-500/30 transition-all mt-4'
                                             >
                                                 PROCEED TO CHECKOUT ({buy_product_item})
                                             </button>
@@ -260,9 +260,9 @@ const Card = () => {
                             </div>
                             <h2 className='text-2xl font-bold text-gray-800 mb-3'>Your cart is empty</h2>
                             <p className='text-gray-600 mb-6'>Start shopping and add items to your cart!</p>
-                            <Link 
-                                to='/shops' 
-                                className='px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold hover:shadow-xl transition-all'
+                            <Link
+                                to='/shops'
+                                className='px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-xl font-semibold hover:shadow-xl shadow-lg shadow-cyan-500/30 transition-all'
                             >
                                 Continue Shopping
                             </Link>

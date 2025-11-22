@@ -1,7 +1,7 @@
-// Footer.jsx - Clean Version Without Quick Links / Services
+// Footer.jsx - Clean Modern Version
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaLinkedin, FaGithub, FaHeart, FaCartShopping } from "react-icons/fa6";
+import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { useSelector } from 'react-redux';
 
@@ -9,13 +9,6 @@ const Footer = () => {
     const navigate = useNavigate();
     const { userInfo } = useSelector(state => state.auth);
     const { card_product_count, wishlist_count } = useSelector(state => state.card);
-
-    const socialLinks = [
-        { Icon: FaFacebookF, color: 'hover:bg-cyan-400' },
-        { Icon: FaTwitter, color: 'hover:bg-sky-500' },
-        { Icon: FaLinkedin, color: 'hover:bg-cyan-700' },
-        { Icon: FaGithub, color: 'hover:bg-gray-800' }
-    ];
 
     return (
         <footer className='relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300'>
@@ -48,7 +41,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* --- Column 2: Newsletter + Social --- */}
+                    {/* --- Column 2: Newsletter --- */}
                     <div className="space-y-6">
 
                         <h2 className='font-bold text-xl text-white relative inline-block after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-gradient-to-r from-cyan-500 to-cyan-500'>
@@ -68,22 +61,6 @@ const Footer = () => {
                             <button className='absolute right-1 top-1 h-[42px] px-6 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white font-semibold rounded-lg hover:from-cyan-700 hover:to-cyan-700'>
                                 Subscribe
                             </button>
-                        </div>
-
-                        <div>
-                            <p className='text-gray-400 mb-3 text-sm'>Follow us</p>
-                            <ul className='flex gap-3'>
-                                {socialLinks.map(({ Icon, color }, i) => (
-                                    <li key={i}>
-                                        <a
-                                            href="#"
-                                            className={`w-11 h-11 flex items-center justify-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white ${color} hover:scale-110 transition`}
-                                        >
-                                            <Icon />
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
                         </div>
                     </div>
 

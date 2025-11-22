@@ -1,10 +1,8 @@
-// Header.jsx - Fixed version with working mobile menu
+// Header.jsx - Modern version
 import React, { useEffect, useState } from 'react';
 import { MdEmail, MdSearch } from "react-icons/md";
 import { IoMdPhonePortrait } from "react-icons/io";
-import { FaFacebookF, FaList, FaLock, FaUser, FaTimes } from "react-icons/fa";
-import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { FaList, FaLock, FaUser, FaTimes } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -79,29 +77,13 @@ const Header = () => {
                         </ul>
 
                         <div className='flex items-center gap-6'>
-                            <div className='flex items-center gap-3'>
-                                {[FaFacebookF, FaTwitter, FaLinkedin, FaGithub].map((Icon, i) => (
-                                    <a key={i} href="www.facebook.com" className='w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors'>
-                                        <Icon />
-                                    </a>
-                                ))}
-                            </div>
-
-                            <div className='flex group cursor-pointer items-center gap-1 relative pl-6 before:absolute before:h-[14px] before:bg-white/30 before:w-[1px] before:left-3'>
-                                <img src="/images/language.png" alt="" className='w-5 h-5' />
-                                <IoMdArrowDropdown />
-                                <ul className='absolute invisible transition-all top-12 rounded-lg duration-200 text-white p-2 w-[100px] flex flex-col gap-2 group-hover:visible group-hover:top-8 bg-gray-900 z-10 shadow-xl'>
-                                    <li className='hover:text-cyan-400 transition-colors'>English</li>
-                                </ul>
-                            </div>
-
                             {userInfo ? (
-                                <Link className='flex items-center gap-2 pl-6 relative before:absolute before:h-[14px] before:bg-white/30 before:w-[1px] before:left-3' to='/dashboard'>
+                                <Link className='flex items-center gap-2' to='/dashboard'>
                                     <FaUser />
                                     <span className='font-medium'>{userInfo.name}</span>
                                 </Link>
                             ) : (
-                                <Link to='/login' className='flex items-center gap-2 pl-6 relative before:absolute before:h-[14px] before:bg-white/30 before:w-[1px] before:left-3'>
+                                <Link to='/login' className='flex items-center gap-2'>
                                     <FaLock />
                                     <span className='font-medium'>Login</span>
                                 </Link>

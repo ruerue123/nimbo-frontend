@@ -1,130 +1,147 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaFacebookF } from "react-icons/fa6";
-import { FaGoogle } from "react-icons/fa6"; 
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { customer_login,messageClear } from '../store/reducers/authReducer';
+import { customer_login, messageClear } from '../store/reducers/authReducer';
 import toast from 'react-hot-toast';
 import { FadeLoader } from 'react-spinners';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const { loader, errorMessage, successMessage, userInfo } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
-    const navigate = useNavigate()
-    const {loader,errorMessage,successMessage,userInfo } = useSelector(state => state.auth)
-    const dispatch = useDispatch()
-
-    const [state, setState] = useState({ 
+    const [state, setState] = useState({
         email: '',
         password: ''
-    })
+    });
 
     const inputHandle = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
-        })
-    }
- 
+        });
+    };
+
     const login = (e) => {
-        e.preventDefault()
-        dispatch(customer_login(state))
-    }
+        e.preventDefault();
+        dispatch(customer_login(state));
+    };
 
-    useEffect(() => { 
+    useEffect(() => {
         if (successMessage) {
-            toast.success(successMessage)
-            dispatch(messageClear())  
-        } 
-        if (errorMessage) {
-            toast.error(errorMessage)
-            dispatch(messageClear())  
-        } 
-        if (userInfo) {
-            navigate('/')
+            toast.success(successMessage);
+            dispatch(messageClear());
         }
-    },[successMessage,errorMessage])
-
+        if (errorMessage) {
+            toast.error(errorMessage);
+            dispatch(messageClear());
+        }
+        if (userInfo) {
+            navigate('/');
+        }
+    }, [successMessage, errorMessage, userInfo, dispatch, navigate]);
 
     return (
-        <div>
-             {
-                loader && <div className='w-screen h-screen flex justify-center items-center fixed left-0 top-0 bg-[#38303033] z-[999]'>
-                    <FadeLoader/>
+        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+            {loader && (
+                <div className='w-screen h-screen flex justify-center items-center fixed left-0 top-0 bg-black/30 backdrop-blur-sm z-[999]'>
+                    <FadeLoader color='#06b6d4' />
                 </div>
-            }
-            <Header/>
-    <div className='bg-slate-200 mt-4'>
-        <div className='w-full justify-center items-center p-10'>
-            <div className='grid grid-cols-2 w-[60%] mx-auto bg-white rounded-md'>
-                <div className='px-8 py-8'>
-            <h2 className='text-center w-full text-xl text-slate-600 font-bold'>Login </h2> 
+            )}
+            <Header />
 
-    <div>
-        <form onSubmit={login} className='text-slate-600'>
-    
+            <div className='py-16'>
+                <div className='w-[90%] max-w-md mx-auto'>
+                    {/* Login Card */}
+                    <div className='bg-white rounded-2xl shadow-xl p-8 border border-gray-100'>
+                        {/* Header */}
+                        <div className='text-center mb-8'>
+                            <h2 className='text-2xl font-bold text-gray-900 mb-2'>Welcome Back</h2>
+                            <p className='text-gray-500'>Sign in to your account</p>
+                        </div>
 
-    <div className='flex flex-col gap-1 mb-2'>
-        <label htmlFor="email">Email</label>
-        <input onChange={inputHandle} value={state.email}  className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md' type="email" name="email" id="email" placeholder='Email' required />
-    </div>
+                        {/* Form */}
+                        <form onSubmit={login} className='space-y-5'>
+                            <div>
+                                <label htmlFor="email" className='block text-sm font-medium text-gray-700 mb-2'>
+                                    Email Address
+                                </label>
+                                <input
+                                    onChange={inputHandle}
+                                    value={state.email}
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder='Enter your email'
+                                    required
+                                />
+                            </div>
 
+                            <div>
+                                <label htmlFor="password" className='block text-sm font-medium text-gray-700 mb-2'>
+                                    Password
+                                </label>
+                                <input
+                                    onChange={inputHandle}
+                                    value={state.password}
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder='Enter your password'
+                                    required
+                                />
+                            </div>
 
-    <div className='flex flex-col gap-1 mb-2'>
-        <label htmlFor="password">Password</label>
-        <input onChange={inputHandle} value={state.password}  className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-green-500 rounded-md' type="password" name="password" id="password" placeholder='Password' required />
-    </div>
+                            <button className='w-full py-3.5 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 transition-all'>
+                                Sign In
+                            </button>
+                        </form>
 
-    <button className='px-8 w-full py-2 bg-[#42accf] shadow-lg hover:shadow-blue-500/40 text-white rounded-md'>Login</button>
- 
-        </form>
-    <div className='flex justify-center items-center py-2'>
-        <div className='h-[1px] bg-slate-300 w-[95%]'> </div>
-        <span className='px-3 text-slate-600'>Or</span>
-        <div className='h-[1px] bg-slate-300 w-[95%]'> </div>
-    </div>
+                        {/* Register Link */}
+                        <div className='mt-6 text-center'>
+                            <p className='text-gray-600'>
+                                Don't have an account?{' '}
+                                <Link to='/register' className='text-cyan-600 font-semibold hover:text-cyan-700 transition-colors'>
+                                    Register
+                                </Link>
+                            </p>
+                        </div>
 
-    <button className='px-8 w-full py-2 bg-indigo-500 shadow hover:shadow-indigo-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-        <span><FaFacebookF /> </span>
-        <span>Login With Facebook </span>
-    </button>
+                        {/* Divider */}
+                        <div className='flex items-center my-6'>
+                            <div className='flex-1 h-px bg-gray-200'></div>
+                            <span className='px-4 text-sm text-gray-400'>Are you a seller?</span>
+                            <div className='flex-1 h-px bg-gray-200'></div>
+                        </div>
 
-    <button className='px-8 w-full py-2 bg-red-500 shadow hover:shadow-red-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-        <span><FaGoogle  /></span>
-        <span>Login With Google </span>
-    </button> 
-    </div>    
+                        {/* Seller Links */}
+                        <div className='space-y-3'>
+                            <a
+                                target='_blank'
+                                rel="noreferrer"
+                                href="https://nimbo-dashboard.vercel.app/login"
+                                className='block w-full py-3 text-center bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors'
+                            >
+                                Login as Seller
+                            </a>
+                            <a
+                                target='_blank'
+                                rel="noreferrer"
+                                href="https://nimbo-dashboard.vercel.app/register"
+                                className='block w-full py-3 text-center border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-colors'
+                            >
+                                Register as Seller
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div className='text-center text-slate-600 pt-1'>
-        <p>Don't Have An Account ? <Link className='text-blue-500' to='/register'> Register</Link> </p>
-    </div> 
-
-     <a target='_blank' href="https://nimbo-dashboard.vercel.app/login">
-     <div className='px-8 w-full py-2 bg-[#42accf] shadow hover:shadow-blue-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-            Login As a Seller
-     </div>
-     </a>
- 
-     <a target='_blank' href="https://nimbo-dashboard.vercel.app/register">
-     <div className='px-8 w-full py-2 bg-[#42accf] shadow hover:shadow-blue-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3'>
-            Register As a Seller
-     </div>
-     </a>
-
-
-
-            </div> 
-
-        <div className='w-full h-full py-4 pr-4'>
-            <img src="http://localhost:3000/images/login.jpg" alt="" />
-         </div>    
-
-         </div>
-        </div>
-    </div>        
-            
-            <Footer/>
+            <Footer />
         </div>
     );
 };
