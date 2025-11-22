@@ -51,6 +51,11 @@ const ShopProducts = ({ styles, products }) => {
                             <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors'>
                                 {p.name}
                             </h2>
+                            {p.shopName && (
+                                <p className='text-xs text-gray-500 mb-2'>
+                                    Sold by: <span className='font-medium text-cyan-600'>{p.shopName}</span>
+                                </p>
+                            )}
                         </div>
                         <div className='flex justify-between items-center mt-3'>
                             <span className='text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>

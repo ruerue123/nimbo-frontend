@@ -77,6 +77,11 @@ const Products = ({ title, products }) => {
                                     <h4 className='text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-cyan-400 transition-colors'>
                                         {pl.name}
                                     </h4>
+                                    {pl.shopName && (
+                                        <span className='text-xs text-gray-500'>
+                                            by <span className='text-cyan-600'>{pl.shopName}</span>
+                                        </span>
+                                    )}
                                     <span className='text-lg font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                         ${pl.price}
                                     </span>

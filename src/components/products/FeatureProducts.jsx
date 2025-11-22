@@ -100,10 +100,15 @@ const FeatureProducts = ({ products }) => {
                             </ul>
                         </div>
 
-                        <div className='p-4'>
+                        <Link to={`/product/details/${p.slug}`} className='p-4 block'>
                             <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-cyan-400 transition-colors'>
                                 {p.name}
                             </h2>
+                            {p.shopName && (
+                                <p className='text-xs text-gray-500 mb-2'>
+                                    Sold by: <span className='font-medium text-cyan-600'>{p.shopName}</span>
+                                </p>
+                            )}
                             <div className='flex justify-between items-center'>
                                 <span className='text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                     ${p.price}
@@ -112,7 +117,7 @@ const FeatureProducts = ({ products }) => {
                                     <Rating ratings={p.rating} />
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 ))}
             </div>

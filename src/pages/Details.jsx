@@ -18,12 +18,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { product_details } from '../store/reducers/homeReducer';
 import toast from 'react-hot-toast';
 import { add_to_card, messageClear, add_to_wishlist } from '../store/reducers/cardReducer';
+import { FadeLoader } from 'react-spinners';
 
 const Details = () => {
     const navigate = useNavigate();
     const { slug } = useParams();
     const dispatch = useDispatch();
-    const { product, relatedProducts, moreProducts } = useSelector(state => state.home);
+    const { product, relatedProducts, moreProducts, loader } = useSelector(state => state.home);
     const { userInfo } = useSelector(state => state.auth);
     const { errorMessage, successMessage } = useSelector(state => state.card);
 
@@ -153,10 +154,22 @@ const Details = () => {
         });
     };
 
+    if (loader) {
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+                <Header />
+                <div className='w-full flex justify-center items-center py-40'>
+                    <FadeLoader color='#06b6d4' />
+                </div>
+                <Footer />
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
             <Header />
-            
+
             {/* Hero Banner */}
             <section className='relative h-[220px] mt-6 bg-gradient-to-r from-cyan-400 via-indigo-600 to-cyan-600 overflow-hidden'>
                 <div className='absolute inset-0 bg-black opacity-20'></div>

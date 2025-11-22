@@ -149,7 +149,8 @@ export const homeReducer = createSlice({
         totalReview: 0,
         rating_review: [],
         reviews : [],
-        banners: [] 
+        banners: [],
+        loader: false
     },
     reducers : {
 
@@ -157,35 +158,61 @@ export const homeReducer = createSlice({
             state.errorMessage = ""
             state.successMessage = ""
         }
- 
+
     },
     extraReducers: (builder) => {
         builder
         .addCase(get_category.fulfilled, (state, { payload }) => {
             state.categorys = payload.categorys;
         })
+        .addCase(get_products.pending, (state) => {
+            state.loader = true;
+        })
         .addCase(get_products.fulfilled, (state, { payload }) => {
+            state.loader = false;
             state.products = payload.products;
             state.latest_product = payload.latest_product;
             state.topRated_product = payload.topRated_product;
             state.discount_product = payload.discount_product;
         })
-        .addCase(price_range_product.fulfilled, (state, { payload }) => { 
-            state.latest_product = payload.latest_product;
-            state.priceRange = payload.priceRange; 
+        .addCase(get_products.rejected, (state) => {
+            state.loader = false;
         })
-        .addCase(query_products.fulfilled, (state, { payload }) => { 
+        .addCase(price_range_product.pending, (state) => {
+            state.loader = true;
+        })
+        .addCase(price_range_product.fulfilled, (state, { payload }) => {
+            state.loader = false;
+            state.latest_product = payload.latest_product;
+            state.priceRange = payload.priceRange;
+        })
+        .addCase(price_range_product.rejected, (state) => {
+            state.loader = false;
+        })
+        .addCase(query_products.pending, (state) => {
+            state.loader = true;
+        })
+        .addCase(query_products.fulfilled, (state, { payload }) => {
+            state.loader = false;
             state.products = payload.products;
             state.totalProduct = payload.totalProduct;
-            state.parPage = payload.parPage; 
+            state.parPage = payload.parPage;
         })
-
-        .addCase(product_details.fulfilled, (state, { payload }) => { 
+        .addCase(query_products.rejected, (state) => {
+            state.loader = false;
+        })
+        .addCase(product_details.pending, (state) => {
+            state.loader = true;
+        })
+        .addCase(product_details.fulfilled, (state, { payload }) => {
+            state.loader = false;
             state.product = payload.product;
             state.relatedProducts = payload.relatedProducts;
-            state.moreProducts = payload.moreProducts; 
+            state.moreProducts = payload.moreProducts;
         })
-
+        .addCase(product_details.rejected, (state) => {
+            state.loader = false;
+        })
         .addCase(customer_review.fulfilled, (state, { payload }) => {
             state.successMessage = payload.message;
         })
@@ -197,7 +224,7 @@ export const homeReducer = createSlice({
         })
 
         .addCase(get_banners.fulfilled, (state, { payload }) => {
-            state.banners = payload.banners; 
+            state.banners = payload.banners;
         })
 
     }

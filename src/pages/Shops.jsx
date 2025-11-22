@@ -13,10 +13,11 @@ import { FaThList, FaHeart, FaShoppingCart } from 'react-icons/fa';
 import Pagination from '../components/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { price_range_product, query_products } from '../store/reducers/homeReducer';
+import { FadeLoader } from 'react-spinners';
 
 const Shops = () => {
     const dispatch = useDispatch();
-    const { products, categorys, priceRange, latest_product, totalProduct, parPage } = useSelector(state => state.home);
+    const { products, categorys, priceRange, latest_product, totalProduct, parPage, loader } = useSelector(state => state.home);
 
     useEffect(() => {
         dispatch(price_range_product());
@@ -121,7 +122,12 @@ const Shops = () => {
                     <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[2.5rem] group-hover:text-cyan-400 transition-colors">
                         {product.name}
                     </h3>
-                    
+                    {product.shopName && (
+                        <p className="text-xs text-gray-500 mb-2">
+                            Sold by: <span className="font-medium text-cyan-600">{product.shopName}</span>
+                        </p>
+                    )}
+
                     <div className="flex items-center gap-2 mb-3 text-amber-400">
                         <div className="flex text-sm">
                             <RatingStars ratings={product.rating || 0} />
@@ -177,7 +183,12 @@ const Shops = () => {
                         <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
                             {product.name}
                         </h3>
-                        
+                        {product.shopName && (
+                            <p className="text-xs text-gray-500 mb-2">
+                                Sold by: <span className="font-medium text-cyan-600">{product.shopName}</span>
+                            </p>
+                        )}
+
                         <div className="flex items-center gap-2 mb-2 text-amber-400">
                             <div className="flex text-sm">
                                 <RatingStars ratings={product.rating || 0} />
@@ -366,7 +377,11 @@ const Shops = () => {
 
                             {/* Products Display */}
                             <div className='mb-8'>
-                                {styles === 'grid' ? (
+                                {loader ? (
+                                    <div className='w-full flex justify-center items-center py-20'>
+                                        <FadeLoader color='#06b6d4' />
+                                    </div>
+                                ) : styles === 'grid' ? (
                                     <div className='grid grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-6'>
                                         {products.map((product, i) => (
                                             <ProductCard key={i} product={product} />
