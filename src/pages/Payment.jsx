@@ -297,7 +297,7 @@ const Payment = () => {
                                         <span>${price}</span>
                                     </div>
                                     <div className='flex justify-between text-gray-600'>
-                                        <span>Shipping</span>
+                                        <span>Delivery</span>
                                         <span className='text-green-600'>Included</span>
                                     </div>
                                 </div>

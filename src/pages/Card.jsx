@@ -220,7 +220,7 @@ const Card = () => {
                                             </div>
 
                                             <div className='flex justify-between items-center pb-4 border-b border-gray-200'>
-                                                <span className='text-gray-600'>Shipping Fee</span>
+                                                <span className='text-gray-600'>Delivery Fee</span>
                                                 <span className='font-bold text-gray-900'>${shipping_fee}</span>
                                             </div>
 
