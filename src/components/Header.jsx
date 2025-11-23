@@ -96,50 +96,51 @@ const Header = () => {
             {/* Main Header */}
             <div className='border-b border-gray-100'>
                 <div className='w-[85%] lg:w-[90%] mx-auto'>
-                    <div className='h-[90px] md-lg:h-[100px] flex justify-between items-center'>
-                        <div className='md-lg:w-full w-3/12 md-lg:pt-4'>
-                            <div className='flex justify-between items-center'>
-                                <Link to='/' className='flex items-center gap-2'>
-                                    <img src="/images/logo.png" alt="" className='h-14' />
-                                </Link>
-                                <div className='flex items-center gap-2 lg:hidden md-lg:flex xl:hidden hidden'>
-                                    {/* Mobile Cart & Wishlist icons */}
-                                    <button
-                                        onClick={() => navigate(userInfo ? '/dashboard/my-wishlist' : '/login')}
-                                        className='relative w-10 h-10 flex items-center justify-center rounded-full bg-pink-50'
-                                    >
-                                        <FaHeart className='text-red-500' />
-                                        {wishlist_count !== 0 && (
-                                            <span className='absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white flex items-center justify-center text-xs font-bold'>
-                                                {wishlist_count}
-                                            </span>
-                                        )}
-                                    </button>
-                                    <button
-                                        onClick={redirect_card_page}
-                                        className='relative w-10 h-10 flex items-center justify-center rounded-full bg-cyan-50'
-                                    >
-                                        <FaCartShopping className='text-cyan-500' />
-                                        {card_product_count !== 0 && (
-                                            <span className='absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 rounded-full text-white flex items-center justify-center text-xs font-bold'>
-                                                {card_product_count}
-                                            </span>
-                                        )}
-                                    </button>
-                                    <button
-                                        onClick={toggleMobileMenu}
-                                        className='w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg flex items-center justify-center ml-1'
-                                    >
-                                        {mobileMenuOpen ? <FaTimes /> : <FaList />}
-                                    </button>
-                                </div>
-                            </div>
+                    <div className='h-[90px] md-lg:h-[70px] flex justify-between items-center'>
+                        {/* Logo - Left side */}
+                        <div className='w-3/12 md-lg:w-auto'>
+                            <Link to='/' className='flex items-center gap-2'>
+                                <img src="/images/logo.png" alt="" className='h-14 md-lg:h-10' />
+                            </Link>
                         </div>
 
-                        <div className='md:lg:w-full w-9/12'>
-                            <div className='flex justify-between md-lg:justify-center items-center pl-8'>
+                        {/* Mobile Icons - Right side (only visible on mobile) */}
+                        <div className='hidden md-lg:flex items-center gap-2'>
+                            <button
+                                onClick={() => navigate(userInfo ? '/dashboard/my-wishlist' : '/login')}
+                                className='relative w-9 h-9 flex items-center justify-center rounded-full bg-pink-50'
+                            >
+                                <FaHeart className='text-red-500 text-sm' />
+                                {wishlist_count !== 0 && (
+                                    <span className='absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white flex items-center justify-center text-[10px] font-bold'>
+                                        {wishlist_count}
+                                    </span>
+                                )}
+                            </button>
+                            <button
+                                onClick={redirect_card_page}
+                                className='relative w-9 h-9 flex items-center justify-center rounded-full bg-cyan-50'
+                            >
+                                <FaCartShopping className='text-cyan-500 text-sm' />
+                                {card_product_count !== 0 && (
+                                    <span className='absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 rounded-full text-white flex items-center justify-center text-[10px] font-bold'>
+                                        {card_product_count}
+                                    </span>
+                                )}
+                            </button>
+                            <button
+                                onClick={toggleMobileMenu}
+                                className='w-9 h-9 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg flex items-center justify-center'
+                            >
+                                {mobileMenuOpen ? <FaTimes className='text-sm' /> : <FaList className='text-sm' />}
+                            </button>
+                        </div>
+
+                        {/* Desktop Navigation Section - Hidden on mobile */}
+                        <div className='w-9/12 md-lg:hidden'>
+                            <div className='flex justify-between items-center pl-8'>
                                 {/* Desktop Navigation */}
-                                <ul className='flex justify-start items-center gap-8 text-sm font-semibold md-lg:hidden'>
+                                <ul className='flex justify-start items-center gap-8 text-sm font-semibold'>
                                     {navLinks.map((link, i) => (
                                         <li key={i}>
                                             <Link
@@ -155,105 +156,7 @@ const Header = () => {
                                     ))}
                                 </ul>
 
-                                {/* Mobile Navigation */}
-                                <div className={`fixed top-0 left-0 w-full h-full bg-white z-50 transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md-lg:block hidden`}>
-                                    <div className="p-6">
-                                        <div className="flex justify-between items-center mb-8">
-                                            <Link to='/' onClick={closeMobileMenu} className='flex items-center gap-2'>
-                                                <img src="/images/logo.png" alt="" className='h-12' />
-                                            </Link>
-                                            <button 
-                                                onClick={closeMobileMenu}
-                                                className='w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg flex items-center justify-center'
-                                            >
-                                                <FaTimes />
-                                            </button>
-                                        </div>
-                                        
-                                        <ul className='space-y-4'>
-                                            {navLinks.map((link, i) => (
-                                                <li key={i}>
-                                                    <Link
-                                                        to={link.path}
-                                                        onClick={closeMobileMenu}
-                                                        className={`block px-4 py-3 rounded-lg transition-all text-lg font-medium ${pathname === link.path
-                                                            ? 'text-cyan-400 bg-cyan-50'
-                                                            : 'text-gray-700 hover:text-cyan-400 hover:bg-gray-50'
-                                                            }`}
-                                                    >
-                                                        {link.label}
-                                                    </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-
-                                        {/* Mobile Auth Section */}
-                                        <div className="mt-8 pt-8 border-t border-gray-200">
-                                            {userInfo ? (
-                                                <Link 
-                                                    to='/dashboard' 
-                                                    onClick={closeMobileMenu}
-                                                    className='flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-cyan-400 transition-colors'
-                                                >
-                                                    <FaUser />
-                                                    <span className='font-medium'>{userInfo.name}</span>
-                                                </Link>
-                                            ) : (
-                                                <Link 
-                                                    to='/login' 
-                                                    onClick={closeMobileMenu}
-                                                    className='flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-cyan-400 transition-colors'
-                                                >
-                                                    <FaLock />
-                                                    <span className='font-medium'>Login</span>
-                                                </Link>
-                                            )}
-                                        </div>
-
-                                        {/* Mobile Cart & Wishlist */}
-                                        <div className="flex gap-4 mt-6">
-                                            <button
-                                                onClick={() => {
-                                                    closeMobileMenu();
-                                                    navigate(userInfo ? '/dashboard/my-wishlist' : '/login');
-                                                }}
-                                                className='relative w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-pink-50 to-red-50 hover:from-pink-100 hover:to-red-100 transition-all group flex-1'
-                                            >
-                                                <FaHeart className='text-red-500 text-xl group-hover:scale-110 transition-transform' />
-                                                {wishlist_count !== 0 && (
-                                                    <span className='absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-red-500 to-pink-500 rounded-full text-white flex items-center justify-center text-xs font-bold shadow-lg'>
-                                                        {wishlist_count}
-                                                    </span>
-                                                )}
-                                            </button>
-
-                                            <button
-                                                onClick={() => {
-                                                    closeMobileMenu();
-                                                    redirect_card_page();
-                                                }}
-                                                className='relative w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-cyan-50 to-indigo-50 hover:from-cyan-100 hover:to-indigo-100 transition-all group flex-1'
-                                            >
-                                                <FaCartShopping className='text-cyan-400 text-xl group-hover:scale-110 transition-transform' />
-                                                {card_product_count !== 0 && (
-                                                    <span className='absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full text-white flex items-center justify-center text-xs font-bold shadow-lg'>
-                                                        {card_product_count}
-                                                    </span>
-                                                )}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Mobile Menu Overlay */}
-                                {mobileMenuOpen && (
-                                    <div 
-                                        className="fixed inset-0 bg-black bg-opacity-50 z-40 md-lg:block hidden"
-                                        onClick={closeMobileMenu}
-                                    ></div>
-                                )}
-
-                                <div className='flex md-lg:hidden items-center gap-3'>
+                                <div className='flex items-center gap-3'>
                                     <button
                                         onClick={() => navigate(userInfo ? '/dashboard/my-wishlist' : '/login')}
                                         className='relative w-11 h-11 flex items-center justify-center rounded-full bg-gradient-to-br from-pink-50 to-red-50 hover:from-pink-100 hover:to-red-100 transition-all group'
@@ -368,6 +271,71 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Mobile Navigation Drawer */}
+            <div className={`fixed top-0 left-0 w-full h-full bg-white z-50 transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <div className="p-6">
+                    <div className="flex justify-between items-center mb-8">
+                        <Link to='/' onClick={closeMobileMenu} className='flex items-center gap-2'>
+                            <img src="/images/logo.png" alt="" className='h-12' />
+                        </Link>
+                        <button
+                            onClick={closeMobileMenu}
+                            className='w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg flex items-center justify-center'
+                        >
+                            <FaTimes />
+                        </button>
+                    </div>
+
+                    <ul className='space-y-4'>
+                        {navLinks.map((link, i) => (
+                            <li key={i}>
+                                <Link
+                                    to={link.path}
+                                    onClick={closeMobileMenu}
+                                    className={`block px-4 py-3 rounded-lg transition-all text-lg font-medium ${pathname === link.path
+                                        ? 'text-cyan-400 bg-cyan-50'
+                                        : 'text-gray-700 hover:text-cyan-400 hover:bg-gray-50'
+                                        }`}
+                                >
+                                    {link.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* Mobile Auth Section */}
+                    <div className="mt-8 pt-8 border-t border-gray-200">
+                        {userInfo ? (
+                            <Link
+                                to='/dashboard'
+                                onClick={closeMobileMenu}
+                                className='flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-cyan-400 transition-colors'
+                            >
+                                <FaUser />
+                                <span className='font-medium'>{userInfo.name}</span>
+                            </Link>
+                        ) : (
+                            <Link
+                                to='/login'
+                                onClick={closeMobileMenu}
+                                className='flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-cyan-400 transition-colors'
+                            >
+                                <FaLock />
+                                <span className='font-medium'>Login</span>
+                            </Link>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            {mobileMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                    onClick={closeMobileMenu}
+                ></div>
+            )}
         </div>
     );
 };

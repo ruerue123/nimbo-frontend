@@ -118,7 +118,7 @@ const Shipping = () => {
                                 <div className='p-4'>
                                     {!res ? (
                                         <form onSubmit={save} className='space-y-3'>
-                                            <div className='grid grid-cols-2 gap-3'>
+                                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                                                 <div>
                                                     <label className='block text-xs font-medium text-gray-700 mb-1'>Full Name *</label>
                                                     <input
@@ -158,7 +158,7 @@ const Shipping = () => {
                                                 />
                                             </div>
 
-                                            <div className='grid grid-cols-2 gap-3'>
+                                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                                                 <div>
                                                     <label className='block text-xs font-medium text-gray-700 mb-1'>Province *</label>
                                                     <input
@@ -185,7 +185,7 @@ const Shipping = () => {
                                                 </div>
                                             </div>
 
-                                            <div className='grid grid-cols-2 gap-3'>
+                                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                                                 <div>
                                                     <label className='block text-xs font-medium text-gray-700 mb-1'>Area *</label>
                                                     <input
