@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { get_order_details, updateOrderDeliveryDetails } from '../../store/reducers/orderReducer';
-import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle, FaClock, FaMapMarkerAlt, FaPhone, FaEnvelope, FaArrowLeft, FaUser, FaCalendarAlt, FaStickyNote } from 'react-icons/fa';
+import { FaBox, FaTruck, FaCheckCircle, FaClock, FaMapMarkerAlt, FaPhone, FaArrowLeft, FaUser, FaCalendarAlt, FaStickyNote } from 'react-icons/fa';
 import io from 'socket.io-client';
 import toast from 'react-hot-toast';
 
@@ -15,7 +15,6 @@ const OrderDetails = () => {
     const { orderId } = useParams()
     const dispatch = useDispatch()
 
-    const { userInfo } = useSelector(state => state.auth)
     const { myOrder } = useSelector(state => state.order)
 
     useEffect(() => {

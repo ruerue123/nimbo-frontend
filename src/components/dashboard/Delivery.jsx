@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { get_orders } from '../../store/reducers/orderReducer';
@@ -8,6 +8,7 @@ const Delivery = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.auth);
     const { myOrders } = useSelector(state => state.order);
+    const [activeTab, setActiveTab] = useState('pending');
 
     useEffect(() => {
         dispatch(get_orders({ customerId: userInfo.id, status: 'all' }));
@@ -44,14 +45,109 @@ const Delivery = () => {
         return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     };
 
-    // Filter orders that are in transit or have delivery details
-    const activeDeliveries = myOrders.filter(order =>
-        ['order_received', 'processing', 'dispatched'].includes(order.delivery_status) ||
-        order.deliveryDetails?.courierName
+    // Filter orders - Pending includes all non-delivered, non-cancelled orders
+    const pendingOrders = myOrders.filter(order =>
+        ['pending', 'order_received', 'processing', 'dispatched'].includes(order.delivery_status)
     );
 
-    const completedDeliveries = myOrders.filter(order =>
+    const deliveredOrders = myOrders.filter(order =>
         order.delivery_status === 'delivered'
+    );
+
+    const currentOrders = activeTab === 'pending' ? pendingOrders : deliveredOrders;
+
+    const OrderCard = ({ order }) => (
+        <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
+            {/* Order Header */}
+            <div className='p-4 border-b border-gray-100'>
+                <div className='flex items-center justify-between'>
+                    <div className='flex items-center gap-2'>
+                        {getStatusIcon(order.delivery_status)}
+                        <span className='text-sm font-medium text-gray-800'>#{order._id?.slice(-8)}</span>
+                    </div>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(order.delivery_status)}`}>
+                        {formatStatus(order.delivery_status)}
+                    </span>
+                </div>
+            </div>
+
+            {/* Products */}
+            <div className='p-4'>
+                <div className='flex gap-2 mb-3 overflow-x-auto pb-2'>
+                    {order.products?.slice(0, 3).map((p, j) => (
+                        <div key={j} className='w-16 h-16 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0'>
+                            <img src={p.images?.[0]} alt={p.name} className='w-full h-full object-cover' />
+                        </div>
+                    ))}
+                    {order.products?.length > 3 && (
+                        <div className='w-16 h-16 bg-gray-200 rounded-xl flex items-center justify-center flex-shrink-0'>
+                            <span className='text-xs font-medium text-gray-600'>+{order.products.length - 3}</span>
+                        </div>
+                    )}
+                </div>
+
+                <div className='text-sm text-gray-600 mb-3'>
+                    <span className='font-semibold text-gray-800'>{order.products?.length}</span> item(s) -
+                    <span className='font-bold text-cyan-600 ml-1'>${Number(order.price).toFixed(2)}</span>
+                </div>
+
+                {/* Delivery Details - Only for pending orders with details */}
+                {activeTab === 'pending' && order.deliveryDetails?.courierName && (
+                    <div className='bg-purple-50 rounded-xl p-3 mb-3'>
+                        <div className='grid grid-cols-2 gap-2 text-xs'>
+                            <div className='flex items-center gap-1.5'>
+                                <FaBox className='text-purple-500' />
+                                <div>
+                                    <p className='text-purple-600'>Courier</p>
+                                    <p className='font-medium text-gray-800'>{order.deliveryDetails.courierName}</p>
+                                </div>
+                            </div>
+                            {order.deliveryDetails.courierPhone && (
+                                <div className='flex items-center gap-1.5'>
+                                    <FaPhone className='text-purple-500' />
+                                    <div>
+                                        <p className='text-purple-600'>Contact</p>
+                                        <p className='font-medium text-gray-800'>{order.deliveryDetails.courierPhone}</p>
+                                    </div>
+                                </div>
+                            )}
+                            {order.deliveryDetails.estimatedDate && (
+                                <div className='flex items-center gap-1.5 col-span-2'>
+                                    <FaCalendarAlt className='text-purple-500' />
+                                    <div>
+                                        <p className='text-purple-600'>Expected</p>
+                                        <p className='font-medium text-gray-800'>
+                                            {formatDate(order.deliveryDetails.estimatedDate)}
+                                            {order.deliveryDetails.estimatedTime && ` at ${order.deliveryDetails.estimatedTime}`}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        {order.deliveryDetails.notes && (
+                            <p className='text-xs text-gray-600 mt-2 italic'>"{order.deliveryDetails.notes}"</p>
+                        )}
+                    </div>
+                )}
+
+                {/* Shipping Address */}
+                <div className='flex items-start gap-2 text-xs text-gray-600 mb-3'>
+                    <FaMapMarkerAlt className='text-gray-400 mt-0.5 flex-shrink-0' />
+                    <span className='line-clamp-2'>
+                        {order.shippingInfo?.address}, {order.shippingInfo?.area}, {order.shippingInfo?.city}
+                    </span>
+                </div>
+
+                {/* Action */}
+                <Link
+                    to={`/dashboard/order/details/${order._id}`}
+                    className={`flex items-center justify-center gap-2 w-full py-2.5 text-white rounded-xl text-sm font-medium transition-colors ${activeTab === 'pending' ? 'bg-purple-500 hover:bg-purple-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                        }`}
+                >
+                    <FaEye /> View Details
+                </Link>
+            </div>
+        </div>
     );
 
     return (
@@ -69,138 +165,63 @@ const Delivery = () => {
                 </div>
             </div>
 
-            {/* Active Deliveries */}
-            {activeDeliveries.length > 0 && (
-                <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
-                    <div className='px-4 py-3 border-b border-gray-100 bg-purple-50'>
-                        <h2 className='text-sm font-bold text-purple-800 flex items-center gap-2'>
-                            <FaTruck /> Active Deliveries ({activeDeliveries.length})
-                        </h2>
-                    </div>
-                    <div className='divide-y divide-gray-100'>
-                        {activeDeliveries.map((order, i) => (
-                            <div key={i} className='p-4'>
-                                {/* Order Header */}
-                                <div className='flex items-center justify-between mb-3'>
-                                    <div className='flex items-center gap-2'>
-                                        {getStatusIcon(order.delivery_status)}
-                                        <span className='text-sm font-medium text-gray-800'>Order #{order._id?.slice(-8)}</span>
-                                    </div>
-                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(order.delivery_status)}`}>
-                                        {formatStatus(order.delivery_status)}
-                                    </span>
-                                </div>
-
-                                {/* Products */}
-                                <div className='flex gap-2 mb-3 overflow-x-auto pb-2'>
-                                    {order.products?.slice(0, 4).map((p, j) => (
-                                        <div key={j} className='w-14 h-14 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0'>
-                                            <img src={p.images?.[0]} alt={p.name} className='w-full h-full object-cover' />
-                                        </div>
-                                    ))}
-                                    {order.products?.length > 4 && (
-                                        <div className='w-14 h-14 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0'>
-                                            <span className='text-xs font-medium text-gray-600'>+{order.products.length - 4}</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Delivery Details */}
-                                {order.deliveryDetails?.courierName && (
-                                    <div className='bg-purple-50 rounded-xl p-3 mb-3'>
-                                        <div className='grid grid-cols-2 gap-2 text-xs'>
-                                            <div className='flex items-center gap-1.5'>
-                                                <FaBox className='text-purple-500' />
-                                                <div>
-                                                    <p className='text-purple-600'>Courier</p>
-                                                    <p className='font-medium text-gray-800'>{order.deliveryDetails.courierName}</p>
-                                                </div>
-                                            </div>
-                                            {order.deliveryDetails.courierPhone && (
-                                                <div className='flex items-center gap-1.5'>
-                                                    <FaPhone className='text-purple-500' />
-                                                    <div>
-                                                        <p className='text-purple-600'>Contact</p>
-                                                        <p className='font-medium text-gray-800'>{order.deliveryDetails.courierPhone}</p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                            {order.deliveryDetails.estimatedDate && (
-                                                <div className='flex items-center gap-1.5 col-span-2'>
-                                                    <FaCalendarAlt className='text-purple-500' />
-                                                    <div>
-                                                        <p className='text-purple-600'>Expected</p>
-                                                        <p className='font-medium text-gray-800'>
-                                                            {formatDate(order.deliveryDetails.estimatedDate)}
-                                                            {order.deliveryDetails.estimatedTime && ` at ${order.deliveryDetails.estimatedTime}`}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                        {order.deliveryDetails.notes && (
-                                            <p className='text-xs text-gray-600 mt-2 italic'>"{order.deliveryDetails.notes}"</p>
-                                        )}
-                                    </div>
-                                )}
-
-                                {/* Shipping Address */}
-                                <div className='flex items-start gap-2 text-xs text-gray-600 mb-3'>
-                                    <FaMapMarkerAlt className='text-gray-400 mt-0.5' />
-                                    <span>
-                                        {order.shippingInfo?.address}, {order.shippingInfo?.area}, {order.shippingInfo?.city}
-                                    </span>
-                                </div>
-
-                                {/* Action */}
-                                <Link
-                                    to={`/dashboard/order/details/${order._id}`}
-                                    className='flex items-center justify-center gap-2 w-full py-2 bg-purple-500 text-white rounded-lg text-sm font-medium hover:bg-purple-600 transition-colors'
-                                >
-                                    <FaEye /> View Details
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
+            {/* Tabs */}
+            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
+                <div className='flex border-b border-gray-100'>
+                    <button
+                        onClick={() => setActiveTab('pending')}
+                        className={`flex-1 py-3 px-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${activeTab === 'pending'
+                            ? 'text-purple-600 bg-purple-50 border-b-2 border-purple-600'
+                            : 'text-gray-500 hover:bg-gray-50'
+                            }`}
+                    >
+                        <FaTruck />
+                        Pending ({pendingOrders.length})
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('delivered')}
+                        className={`flex-1 py-3 px-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${activeTab === 'delivered'
+                            ? 'text-emerald-600 bg-emerald-50 border-b-2 border-emerald-600'
+                            : 'text-gray-500 hover:bg-gray-50'
+                            }`}
+                    >
+                        <FaCheckCircle />
+                        Delivered ({deliveredOrders.length})
+                    </button>
                 </div>
-            )}
 
-            {/* Completed Deliveries */}
-            {completedDeliveries.length > 0 && (
-                <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
-                    <div className='px-4 py-3 border-b border-gray-100'>
-                        <h2 className='text-sm font-bold text-gray-800 flex items-center gap-2'>
-                            <FaCheckCircle className='text-emerald-500' /> Delivered ({completedDeliveries.length})
-                        </h2>
+                {/* Orders Grid - 2 cards on PC, 1 on mobile */}
+                {currentOrders.length > 0 ? (
+                    <div className='p-4'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                            {currentOrders.map((order, i) => (
+                                <OrderCard key={i} order={order} />
+                            ))}
+                        </div>
                     </div>
-                    <div className='divide-y divide-gray-100'>
-                        {completedDeliveries.slice(0, 5).map((order, i) => (
-                            <Link
-                                key={i}
-                                to={`/dashboard/order/details/${order._id}`}
-                                className='p-3 flex items-center gap-3 hover:bg-gray-50 transition-colors'
-                            >
-                                <div className='flex gap-1'>
-                                    {order.products?.slice(0, 2).map((p, j) => (
-                                        <div key={j} className='w-10 h-10 bg-gray-100 rounded-lg overflow-hidden'>
-                                            <img src={p.images?.[0]} alt={p.name} className='w-full h-full object-cover' />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className='flex-1 min-w-0'>
-                                    <p className='text-sm font-medium text-gray-800'>Order #{order._id?.slice(-8)}</p>
-                                    <p className='text-xs text-gray-500'>{order.products?.length} item(s) - ${Number(order.price).toFixed(2)}</p>
-                                </div>
-                                <span className='px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium'>
-                                    Delivered
-                                </span>
-                            </Link>
-                        ))}
+                ) : (
+                    <div className='p-8 text-center'>
+                        <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
+                            {activeTab === 'pending' ? (
+                                <FaTruck className='text-3xl text-gray-400' />
+                            ) : (
+                                <FaCheckCircle className='text-3xl text-gray-400' />
+                            )}
+                        </div>
+                        <h3 className='font-semibold text-gray-800 mb-2'>
+                            {activeTab === 'pending' ? 'No pending deliveries' : 'No delivered orders yet'}
+                        </h3>
+                        <p className='text-sm text-gray-500'>
+                            {activeTab === 'pending'
+                                ? 'Orders in transit will appear here'
+                                : 'Your completed deliveries will appear here'
+                            }
+                        </p>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
 
-            {/* Empty State */}
+            {/* Empty State - No orders at all */}
             {myOrders.length === 0 && (
                 <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center'>
                     <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>

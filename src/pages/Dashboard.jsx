@@ -21,12 +21,12 @@ const Dashboard = () => {
 
     const logout = async () => {
         try {
-            const {data} = await api.get('/customer/logout')
+            await api.get('/customer/logout')
             localStorage.removeItem('customerToken')
             dispatch(user_reset())
             dispatch(reset_count())
             navigate('/login')
-            
+
         } catch (error) {
             console.log(error.response.data)
         }

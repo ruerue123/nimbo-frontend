@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { FaEye, FaHeart, FaTrash } from "react-icons/fa";
-import { RiShoppingCartLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_wishlist_products, remove_wishlist, messageClear } from '../../store/reducers/cardReducer';

@@ -38,9 +38,10 @@ const CategoryShop = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const [sortPrice, setSortPrice] = useState('');
 
+    const low = state.values[0] || '';
+    const high = state.values[1] || '';
+
     useEffect(() => {
-        const low = state.values[0] || '';
-        const high = state.values[1] || '';
         dispatch(
             query_products({
                 low,
@@ -51,7 +52,7 @@ const CategoryShop = () => {
                 pageNumber
             })
         );
-    }, [state.values[0], state.values[1], category, rating, sortPrice, pageNumber, dispatch]);
+    }, [low, high, category, rating, sortPrice, pageNumber, dispatch]);
 
     const resetRating = () => {
         setRating('');

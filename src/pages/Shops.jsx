@@ -21,7 +21,7 @@ const Shops = () => {
 
     useEffect(() => {
         dispatch(price_range_product());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setState({
@@ -45,18 +45,21 @@ const Shops = () => {
         }
     };
 
+    const low = state.values[0];
+    const high = state.values[1];
+
     useEffect(() => {
         dispatch(
             query_products({
-                low: state.values[0],
-                high: state.values[1],
+                low,
+                high,
                 category,
                 rating,
                 sortPrice,
                 pageNumber
             })
         );
-    }, [state.values[0], state.values[1], category, rating, sortPrice, pageNumber]);
+    }, [low, high, category, rating, sortPrice, pageNumber, dispatch]);
 
     const resetRating = () => {
         setRating('');

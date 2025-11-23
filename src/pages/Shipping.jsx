@@ -42,7 +42,7 @@ const Shipping = () => {
         if (name && address && phone && post && province && city && area) {
             setRes(true)
         }
-    }, [])
+    }, [state])
 
     const inputHandle = (e) => {
         setState({

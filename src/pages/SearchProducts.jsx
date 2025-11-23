@@ -42,12 +42,10 @@ const SearchProducts = () => {
 
     
     
-const low = state.values[0];
-const high = state.values[1];
+    const low = state.values[0];
+    const high = state.values[1];
 
     useEffect(() => {
-        // const low = state.values[0] || '';
-        // const high = state.values[1] || '';
         dispatch(
             query_products({
                 low,
@@ -59,7 +57,7 @@ const high = state.values[1];
                 searchValue
             })
         );
-    }, [state.values[0], state.values[1], category, rating, sortPrice, searchValue, pageNumber, dispatch]);
+    }, [low, high, category, rating, sortPrice, searchValue, pageNumber, dispatch]);
 
     const resetRating = () => {
         setRating('');

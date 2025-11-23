@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { RiShoppingCart2Fill } from "react-icons/ri";
 import { FaBox, FaClock, FaTimesCircle, FaEye, FaCreditCard } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';

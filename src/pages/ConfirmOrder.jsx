@@ -9,7 +9,7 @@ const ConfirmOrder = () => {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
 
-    const { paymentStatus, successMessage, errorMessage } = useSelector(state => state.order);
+    const { paymentStatus, errorMessage } = useSelector(state => state.order);
 
     const [status, setStatus] = useState('checking');
     const [orderId, setOrderId] = useState('');
