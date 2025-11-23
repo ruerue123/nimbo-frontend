@@ -107,9 +107,10 @@ const Payment = () => {
             <Header />
             <section className='py-4 mt-4'>
                 <div className='w-[95%] max-w-6xl mx-auto'>
-                    <div className='flex flex-col lg:flex-row gap-4'>
-                        {/* Payment Methods - TOP on mobile, LEFT on desktop */}
-                        <div className='flex-1'>
+                    {/* MOBILE: Strict vertical stack, DESKTOP: side by side */}
+                    <div className='block lg:flex lg:flex-row gap-4'>
+                        {/* Payment Methods - ALWAYS FIRST */}
+                        <div className='w-full lg:flex-1 mb-4 lg:mb-0'>
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
                                 <div className='p-4 border-b border-gray-100'>
                                     <h2 className='text-lg font-bold text-gray-800'>Payment Method</h2>
@@ -209,9 +210,9 @@ const Payment = () => {
                             </div>
                         </div>
 
-                        {/* Summary - BOTTOM on mobile, RIGHT on desktop */}
+                        {/* Order Summary - ALWAYS SECOND */}
                         <div className='w-full lg:w-[280px]'>
-                            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:sticky lg:top-4'>
+                            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4'>
                                 <h2 className='text-sm font-bold text-gray-800 mb-3'>Order Summary</h2>
                                 <div className='flex justify-between text-sm text-gray-600 pb-2 border-b'>
                                     <span>Items ({items})</span>

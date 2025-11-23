@@ -59,9 +59,11 @@ const Chat = () => {
 
     useEffect(() => {
         socket.on('seller_message', msg => {
+            console.log('📨 Received seller message:', msg);
             setReceverMessage(msg);
         });
         socket.on('activeSeller', (sellers) => {
+            console.log('🟢 Active sellers:', sellers);
             setActiveSeller(sellers);
         });
         return () => {
@@ -72,7 +74,9 @@ const Chat = () => {
 
     useEffect(() => {
         if (successMessage) {
-            socket.emit('send_customer_message', fb_messages[fb_messages.length - 1]);
+            const lastMessage = fb_messages[fb_messages.length - 1];
+            console.log('📤 Emitting customer message:', lastMessage);
+            socket.emit('send_customer_message', lastMessage);
             dispatch(messageClear());
         }
     }, [successMessage, fb_messages, dispatch]);

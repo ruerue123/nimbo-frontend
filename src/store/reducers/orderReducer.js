@@ -122,6 +122,15 @@ export const orderReducer = createSlice({
         clearPaymentState: (state, _) => {
             state.paynowRedirectUrl = ''
             state.paymentStatus = ''
+        },
+        updateOrderDeliveryDetails: (state, { payload }) => {
+            // Update delivery details in real-time via socket
+            if (state.myOrder) {
+                state.myOrder = {
+                    ...state.myOrder,
+                    deliveryDetails: payload
+                }
+            }
         }
     },
     extraReducers: (builder) => {
@@ -175,5 +184,5 @@ export const orderReducer = createSlice({
             })
     }
 })
-export const { messageClear, clearPaymentState } = orderReducer.actions
+export const { messageClear, clearPaymentState, updateOrderDeliveryDetails } = orderReducer.actions
 export default orderReducer.reducer

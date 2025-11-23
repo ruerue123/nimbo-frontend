@@ -1,8 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { get_order_details } from '../../store/reducers/orderReducer';
+import { get_order_details, updateOrderDeliveryDetails } from '../../store/reducers/orderReducer';
 import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle, FaClock, FaMapMarkerAlt, FaPhone, FaEnvelope, FaArrowLeft, FaUser, FaCalendarAlt, FaStickyNote } from 'react-icons/fa';
+import io from 'socket.io-client';
+import toast from 'react-hot-toast';
+
+const socket = io('https://nimbo-backend-1.onrender.com', {
+    transports: ['websocket'],
+    withCredentials: true
+});
 
 const OrderDetails = () => {
     const { orderId } = useParams()
@@ -13,6 +20,21 @@ const OrderDetails = () => {
 
     useEffect(() => {
         dispatch(get_order_details(orderId))
+    }, [orderId, dispatch])
+
+    // Listen for real-time delivery updates
+    useEffect(() => {
+        socket.on('order_delivery_updated', (data) => {
+            console.log('📦 Received delivery update:', data)
+            if (data.orderId === orderId) {
+                dispatch(updateOrderDeliveryDetails(data.deliveryDetails))
+                toast.success('Delivery details updated by seller!')
+            }
+        })
+
+        return () => {
+            socket.off('order_delivery_updated')
+        }
     }, [orderId, dispatch])
 
     const formatPrice = (price) => Number(price || 0).toFixed(2)
