@@ -47,15 +47,34 @@ const Orders = () => {
             case 'delivered':
                 return 'bg-emerald-100 text-emerald-700';
             case 'pending':
+            case 'order_received':
                 return 'bg-amber-100 text-amber-700';
             case 'cancelled':
                 return 'bg-red-100 text-red-700';
             case 'processing':
             case 'warehouse':
                 return 'bg-blue-100 text-blue-700';
+            case 'dispatched':
+                return 'bg-purple-100 text-purple-700';
             default:
                 return 'bg-gray-100 text-gray-700';
         }
+    }
+
+    const formatDeliveryStatus = (status) => {
+        const statusMap = {
+            'pending': 'Pending',
+            'order_received': 'Order Received',
+            'processing': 'Processing',
+            'dispatched': 'Dispatched',
+            'delivered': 'Delivered',
+            'cancelled': 'Cancelled'
+        }
+        return statusMap[status] || status.charAt(0).toUpperCase() + status.slice(1)
+    }
+
+    const formatPrice = (price) => {
+        return price.toFixed(2)
     }
 
     const formatPaymentStatus = (status) => {
@@ -75,7 +94,9 @@ const Orders = () => {
                     >
                         <option value="all">All Orders</option>
                         <option value="pending">Pending</option>
+                        <option value="order_received">Order Received</option>
                         <option value="processing">Processing</option>
+                        <option value="dispatched">Dispatched</option>
                         <option value="delivered">Delivered</option>
                         <option value="cancelled">Cancelled</option>
                     </select>
@@ -100,7 +121,7 @@ const Orders = () => {
                                     <span className='text-sm font-medium text-gray-800'>#{o._id.slice(-8)}</span>
                                 </td>
                                 <td className='px-6 py-4 whitespace-nowrap'>
-                                    <span className='text-sm font-semibold text-gray-800'>${o.price}</span>
+                                    <span className='text-sm font-semibold text-gray-800'>${formatPrice(o.price)}</span>
                                 </td>
                                 <td className='px-6 py-4 whitespace-nowrap'>
                                     <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${getPaymentStatusBadge(o.payment_status)}`}>
@@ -109,7 +130,7 @@ const Orders = () => {
                                 </td>
                                 <td className='px-6 py-4 whitespace-nowrap'>
                                     <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${getDeliveryStatusBadge(o.delivery_status)}`}>
-                                        {o.delivery_status.charAt(0).toUpperCase() + o.delivery_status.slice(1)}
+                                        {formatDeliveryStatus(o.delivery_status)}
                                     </span>
                                 </td>
                                 <td className='px-6 py-4 whitespace-nowrap'>

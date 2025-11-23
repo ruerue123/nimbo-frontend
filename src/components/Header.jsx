@@ -102,12 +102,37 @@ const Header = () => {
                                 <Link to='/' className='flex items-center gap-2'>
                                     <img src="/images/logo.png" alt="" className='h-14' />
                                 </Link>
-                                <button 
-                                    onClick={toggleMobileMenu}
-                                    className='w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg lg:hidden md-lg:flex xl:hidden hidden items-center justify-center'
-                                >
-                                    {mobileMenuOpen ? <FaTimes /> : <FaList />}
-                                </button>
+                                <div className='flex items-center gap-2 lg:hidden md-lg:flex xl:hidden hidden'>
+                                    {/* Mobile Cart & Wishlist icons */}
+                                    <button
+                                        onClick={() => navigate(userInfo ? '/dashboard/my-wishlist' : '/login')}
+                                        className='relative w-10 h-10 flex items-center justify-center rounded-full bg-pink-50'
+                                    >
+                                        <FaHeart className='text-red-500' />
+                                        {wishlist_count !== 0 && (
+                                            <span className='absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white flex items-center justify-center text-xs font-bold'>
+                                                {wishlist_count}
+                                            </span>
+                                        )}
+                                    </button>
+                                    <button
+                                        onClick={redirect_card_page}
+                                        className='relative w-10 h-10 flex items-center justify-center rounded-full bg-cyan-50'
+                                    >
+                                        <FaCartShopping className='text-cyan-500' />
+                                        {card_product_count !== 0 && (
+                                            <span className='absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 rounded-full text-white flex items-center justify-center text-xs font-bold'>
+                                                {card_product_count}
+                                            </span>
+                                        )}
+                                    </button>
+                                    <button
+                                        onClick={toggleMobileMenu}
+                                        className='w-10 h-10 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg flex items-center justify-center ml-1'
+                                    >
+                                        {mobileMenuOpen ? <FaTimes /> : <FaList />}
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

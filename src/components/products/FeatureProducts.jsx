@@ -62,7 +62,7 @@ const FeatureProducts = ({ products }) => {
                 </div>
             </div>
 
-            <div className='w-full grid grid-cols-4 md-lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6'>
+            <div className='w-full grid grid-cols-4 md-lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-3'>
                 {products.map((p, i) => (
                     <div key={i} className='group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100'>
                         <div className='relative overflow-hidden aspect-square bg-gradient-to-br from-gray-50 to-gray-100'>
@@ -110,8 +110,8 @@ const FeatureProducts = ({ products }) => {
                                 </p>
                             )}
                             <div className='flex justify-between items-center'>
-                                <span className='text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
-                                    ${p.price}
+                                <span className='text-2xl sm:text-lg font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
+                                    ${Number(p.price).toFixed(2)}
                                 </span>
                                 <div className='flex text-amber-400'>
                                     <Rating ratings={p.rating} />

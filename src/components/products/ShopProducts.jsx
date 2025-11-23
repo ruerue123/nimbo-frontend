@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const ShopProducts = ({ styles, products }) => {
     return (
-        <div className={`w-full grid ${styles === 'grid' ? 'grid-cols-3 md-lg:grid-cols-2 md:grid-cols-2' : 'grid-cols-1 md-lg:grid-cols-2 md:grid-cols-2'} gap-6`}>
+        <div className={`w-full grid ${styles === 'grid' ? 'grid-cols-3 md-lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2' : 'grid-cols-1 md-lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2'} gap-4 sm:gap-3`}>
             {products.map((p, i) => (
                 <Link
                     key={i}
@@ -46,22 +46,22 @@ const ShopProducts = ({ styles, products }) => {
                         </ul>
                     </div>
 
-                    <div className='p-5 flex flex-col justify-between flex-1'>
+                    <div className='p-4 sm:p-3 flex flex-col justify-between flex-1'>
                         <div>
-                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors'>
+                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors text-sm sm:text-xs'>
                                 {p.name}
                             </h2>
                             {p.shopName && (
-                                <p className='text-xs text-gray-500 mb-2'>
+                                <p className='text-xs text-gray-500 mb-2 sm:hidden'>
                                     Sold by: <span className='font-medium text-cyan-600'>{p.shopName}</span>
                                 </p>
                             )}
                         </div>
                         <div className='flex justify-between items-center mt-3'>
-                            <span className='text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
-                                ${p.price}
+                            <span className='text-xl sm:text-lg font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
+                                ${Number(p.price).toFixed(2)}
                             </span>
-                            <div className='flex text-amber-400'>
+                            <div className='flex text-amber-400 text-sm'>
                                 <Rating ratings={p.rating} />
                             </div>
                         </div>

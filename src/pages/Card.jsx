@@ -52,6 +52,8 @@ const Card = () => {
         }
     };
 
+    const formatPrice = (value) => Number(value).toFixed(2);
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
             <Header />
@@ -114,11 +116,11 @@ const Card = () => {
                                                             <div className='flex items-center gap-6 flex-wrap'>
                                                                 <div className='text-center'>
                                                                     <p className='text-2xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>
-                                                                        ${product.productInfo.price - Math.floor((product.productInfo.price * product.productInfo.discount) / 100)}
+                                                                        ${formatPrice(product.productInfo.price - Math.floor((product.productInfo.price * product.productInfo.discount) / 100))}
                                                                     </p>
                                                                     {product.productInfo.discount > 0 && (
                                                                         <>
-                                                                            <p className='text-sm text-gray-400 line-through'>${product.productInfo.price}</p>
+                                                                            <p className='text-sm text-gray-400 line-through'>${formatPrice(product.productInfo.price)}</p>
                                                                             <p className='text-xs text-red-500 font-semibold'>-{product.productInfo.discount}%</p>
                                                                         </>
                                                                     )}
@@ -184,10 +186,10 @@ const Card = () => {
                                                     <div className='flex items-center gap-6'>
                                                         <div>
                                                             <p className='text-xl font-bold text-gray-600'>
-                                                                ${product.products[0].price - Math.floor((product.products[0].price * product.products[0].discount) / 100)}
+                                                                ${formatPrice(product.products[0].price - Math.floor((product.products[0].price * product.products[0].discount) / 100))}
                                                             </p>
                                                             {product.products[0].discount > 0 && (
-                                                                <p className='text-sm text-gray-400 line-through'>${product.products[0].price}</p>
+                                                                <p className='text-sm text-gray-400 line-through'>${formatPrice(product.products[0].price)}</p>
                                                             )}
                                                         </div>
 
@@ -216,12 +218,12 @@ const Card = () => {
                                         <div className='p-6 space-y-4'>
                                             <div className='flex justify-between items-center pb-4 border-b border-gray-200'>
                                                 <span className='text-gray-600'>Items ({buy_product_item})</span>
-                                                <span className='font-bold text-gray-900'>${price}</span>
+                                                <span className='font-bold text-gray-900'>${formatPrice(price)}</span>
                                             </div>
 
                                             <div className='flex justify-between items-center pb-4 border-b border-gray-200'>
                                                 <span className='text-gray-600'>Delivery Fee</span>
-                                                <span className='font-bold text-gray-900'>${shipping_fee}</span>
+                                                <span className='font-bold text-gray-900'>${formatPrice(shipping_fee)}</span>
                                             </div>
 
                                             <div className='bg-gray-50 rounded-lg p-4'>
@@ -238,7 +240,7 @@ const Card = () => {
                                             <div className='flex justify-between items-center pt-4 border-t-2 border-gray-200'>
                                                 <span className='text-lg font-bold text-gray-900'>Total</span>
                                                 <span className='text-2xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>
-                                                    ${price + shipping_fee}
+                                                    ${formatPrice(price + shipping_fee)}
                                                 </span>
                                             </div>
 
