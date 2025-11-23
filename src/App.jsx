@@ -21,7 +21,7 @@ import Orders from './components/dashboard/Orders';
 import ChangePassword from './components/dashboard/ChangePassword';
 import Wishlist from './components/dashboard/Wishlist';
 import OrderDetails from './components/dashboard/OrderDetails';
-import Chat from './components/dashboard/Chat';
+import Delivery from './components/dashboard/Delivery';
 import ConfirmOrder from './pages/ConfirmOrder';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
@@ -61,8 +61,7 @@ function App() {
       <Route path='change-password' element={<ChangePassword/>} /> 
       <Route path='my-wishlist' element={<Wishlist/>} /> 
       <Route path='order/details/:orderId' element={<OrderDetails/>} /> 
-      <Route path='chat' element={<Chat/>} /> 
-      <Route path='chat/:sellerId' element={<Chat/>} /> 
+      <Route path='delivery' element={<Delivery/>} /> 
        
        </Route> 
       </Route>

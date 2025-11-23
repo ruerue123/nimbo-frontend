@@ -158,14 +158,14 @@ const Payment = () => {
                                         ) : (
                                             <>
                                                 <div className='mb-4'>
-                                                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+                                                    <div className='grid grid-cols-2 gap-3'>
                                                         <button onClick={() => setMobileMethod('ecocash')} type="button"
                                                             className={`p-3 rounded-xl border-2 ${mobileMethod === 'ecocash' ? 'border-green-500 bg-green-50' : 'border-gray-200'}`}>
                                                             <span className='font-medium text-sm'>EcoCash</span>
                                                         </button>
-                                                        <button onClick={() => setMobileMethod('onemoney')} type="button"
-                                                            className={`p-3 rounded-xl border-2 ${mobileMethod === 'onemoney' ? 'border-red-500 bg-red-50' : 'border-gray-200'}`}>
-                                                            <span className='font-medium text-sm'>OneMoney</span>
+                                                        <button onClick={() => setMobileMethod('innbucks')} type="button"
+                                                            className={`p-3 rounded-xl border-2 ${mobileMethod === 'innbucks' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'}`}>
+                                                            <span className='font-medium text-sm'>InnBucks</span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -181,7 +181,7 @@ const Payment = () => {
                                                             placeholder='0771234567' className='w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm' />
                                                     </div>
                                                     <button onClick={handlePaynowMobile} disabled={loader} type="button"
-                                                        className={`w-full py-3 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm active:scale-[0.98] ${mobileMethod === 'ecocash' ? 'bg-green-500' : 'bg-red-500'}`}>
+                                                        className={`w-full py-3 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm active:scale-[0.98] ${mobileMethod === 'ecocash' ? 'bg-green-500' : 'bg-orange-500'}`}>
                                                         {loader ? <><FaSpinner className='animate-spin' /> Sending...</> : <>Pay ${formatPrice(price)}</>}
                                                     </button>
                                                 </div>

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { FaList } from 'react-icons/fa';
+import { FaList, FaTruck, FaHeart } from 'react-icons/fa';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { IoIosHome } from "react-icons/io";
 import { FaBorderAll } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa";
-import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 import { IoMdLogOut } from "react-icons/io";
 import { RiLockPasswordLine } from "react-icons/ri";
 import api from '../api/api';
@@ -63,8 +61,8 @@ const Dashboard = () => {
             <Link to='/dashboard/my-wishlist' className='block' >Wishlist </Link>
                 </li>
                 <li className='flex justify-start items-center gap-2 py-2'>
-            <span className='text-xl'><IoChatbubbleEllipsesSharp/></span>
-            <Link to='/dashboard/chat' className='block' >Chat  </Link>
+            <span className='text-xl'><FaTruck/></span>
+            <Link to='/dashboard/delivery' className='block' >Delivery </Link>
                 </li>
                 <li className='flex justify-start items-center gap-2 py-2'>
             <span className='text-xl'><RiLockPasswordLine/></span>

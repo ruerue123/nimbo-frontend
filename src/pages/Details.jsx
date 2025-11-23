@@ -357,11 +357,11 @@ const Details = () => {
                                         Buy Now
                                     </button>
                                 )}
-                                <Link 
-                                    to={`/dashboard/chat/${product.sellerId}`} 
+                                <Link
+                                    to={`/dashboard/my-orders`}
                                     className='flex-1 py-3 px-6 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-semibold text-center hover:shadow-xl transition-all'
                                 >
-                                    Chat with Seller
+                                    View My Orders
                                 </Link>
                             </div>
                         </div>
