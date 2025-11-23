@@ -100,10 +100,10 @@ const Shipping = () => {
 
             <section className='py-4'>
                 <div className='w-[95%] max-w-6xl mx-auto'>
-                    {/* MOBILE: Strict vertical stack, DESKTOP: side by side */}
-                    <div className='block lg:flex lg:flex-row gap-4'>
-                        {/* Left Column - Address and Items - ALWAYS FIRST */}
-                        <div className='w-full lg:flex-1 mb-4 lg:mb-0'>
+                    {/* MOBILE: vertical stack, DESKTOP: side by side */}
+                    <div className='flex flex-col lg:flex-row gap-4'>
+                        {/* Left Column - Address and Items - LEFT on desktop, TOP on mobile */}
+                        <div className='w-full lg:flex-1'>
                             {/* Step 1: Delivery Address */}
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4'>
                                 <div className='bg-gradient-to-r from-cyan-50 to-cyan-100 px-4 py-3 border-b border-cyan-200'>
@@ -290,9 +290,9 @@ const Shipping = () => {
                             )}
                         </div>
 
-                        {/* Order Summary - ALWAYS SECOND on mobile, RIGHT on desktop */}
+                        {/* Order Summary - RIGHT on desktop, BOTTOM on mobile */}
                         <div className='w-full lg:w-[300px]'>
-                            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
+                            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden lg:sticky lg:top-4'>
                                 <div className='bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-3'>
                                     <h2 className='text-sm font-bold text-white flex items-center gap-2'>
                                         <FaTruck />
