@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
-import { FaMapMarkerAlt, FaPhone, FaEdit, FaCheck, FaTruck } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhone, FaEdit, FaCheck, FaTruck, FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { place_order } from '../store/reducers/orderReducer';
 
@@ -12,6 +12,7 @@ const Shipping = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
+    const { loader } = useSelector(state => state.order)
 
     const getSavedAddress = () => {
         try {
@@ -99,9 +100,10 @@ const Shipping = () => {
 
             <section className='py-4'>
                 <div className='w-[95%] max-w-6xl mx-auto'>
+                    {/* Desktop: side by side, Mobile: all stacked */}
                     <div className='flex flex-col lg:flex-row gap-4'>
-                        {/* Main Content - Stacks vertically on mobile */}
-                        <div className='flex-1 flex flex-col gap-4'>
+                        {/* Left Column - Address and Items */}
+                        <div className='flex-1 flex flex-col gap-4 order-1'>
                             {/* Step 1: Delivery Address */}
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
                                 <div className='bg-gradient-to-r from-cyan-50 to-cyan-100 px-4 py-3 border-b border-cyan-200'>
@@ -288,8 +290,8 @@ const Shipping = () => {
                             )}
                         </div>
 
-                        {/* Order Summary - Right on desktop, after items on mobile */}
-                        <div className='w-full lg:w-[300px]'>
+                        {/* Order Summary - Right on desktop, LAST on mobile */}
+                        <div className='w-full lg:w-[300px] order-3 lg:order-2'>
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 lg:sticky lg:top-4 overflow-hidden'>
                                 <div className='bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-3'>
                                     <h2 className='text-sm font-bold text-white flex items-center gap-2'>
@@ -318,14 +320,16 @@ const Shipping = () => {
 
                                     <button
                                         onClick={placeOrder}
-                                        disabled={!res}
+                                        disabled={!res || loader}
                                         type="button"
-                                        className={`w-full py-3 font-bold rounded-xl text-white transition-all flex items-center justify-center gap-2 text-sm mt-2 ${res
+                                        className={`w-full py-3 font-bold rounded-xl text-white transition-all flex items-center justify-center gap-2 text-sm mt-2 ${res && !loader
                                             ? 'bg-gradient-to-r from-cyan-500 to-cyan-600 active:scale-[0.98]'
                                             : 'bg-gray-300 cursor-not-allowed'
                                             }`}
                                     >
-                                        {res ? 'Proceed to Payment' : 'Complete Step 1'}
+                                        {loader ? (
+                                            <><FaSpinner className='animate-spin' /> Processing...</>
+                                        ) : res ? 'Proceed to Payment' : 'Complete Step 1'}
                                     </button>
                                 </div>
                             </div>

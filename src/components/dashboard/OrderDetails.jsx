@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { get_order_details } from '../../store/reducers/orderReducer';
-import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle, FaClock, FaMapMarkerAlt, FaPhone, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
+import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle, FaClock, FaMapMarkerAlt, FaPhone, FaEnvelope, FaArrowLeft, FaUser, FaCalendarAlt, FaStickyNote } from 'react-icons/fa';
 
 const OrderDetails = () => {
     const { orderId } = useParams()
@@ -133,7 +133,7 @@ const OrderDetails = () => {
                     </div>
 
                     <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4'>
-                        <h2 className='text-sm font-bold text-gray-800 mb-3'>Delivery</h2>
+                        <h2 className='text-sm font-bold text-gray-800 mb-3'>Delivery Address</h2>
                         <div className='space-y-2 text-sm'>
                             <div className='flex items-start gap-2'>
                                 <FaMapMarkerAlt className='text-cyan-500 mt-0.5' />
@@ -148,6 +148,66 @@ const OrderDetails = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Delivery Details from Seller */}
+                    {myOrder.deliveryDetails && (myOrder.deliveryDetails.courierName || myOrder.deliveryDetails.estimatedDate) && (
+                        <div className='bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl shadow-sm border border-purple-200 p-4'>
+                            <div className='flex items-center gap-2 mb-3'>
+                                <FaTruck className='text-purple-600' />
+                                <h2 className='text-sm font-bold text-purple-800'>Delivery Information</h2>
+                            </div>
+                            <div className='space-y-3 text-sm'>
+                                {myOrder.deliveryDetails.courierName && (
+                                    <div className='flex items-start gap-2'>
+                                        <FaUser className='text-purple-500 mt-0.5' />
+                                        <div>
+                                            <p className='text-xs text-purple-600'>Courier/Driver</p>
+                                            <p className='font-medium text-gray-800'>{myOrder.deliveryDetails.courierName}</p>
+                                        </div>
+                                    </div>
+                                )}
+                                {myOrder.deliveryDetails.courierPhone && (
+                                    <div className='flex items-center gap-2'>
+                                        <FaPhone className='text-purple-500' />
+                                        <div>
+                                            <p className='text-xs text-purple-600'>Contact</p>
+                                            <p className='font-medium text-gray-800'>{myOrder.deliveryDetails.courierPhone}</p>
+                                        </div>
+                                    </div>
+                                )}
+                                {(myOrder.deliveryDetails.estimatedDate || myOrder.deliveryDetails.estimatedTime) && (
+                                    <div className='flex items-start gap-2'>
+                                        <FaCalendarAlt className='text-purple-500 mt-0.5' />
+                                        <div>
+                                            <p className='text-xs text-purple-600'>Expected Delivery</p>
+                                            <p className='font-medium text-gray-800'>
+                                                {myOrder.deliveryDetails.estimatedDate && new Date(myOrder.deliveryDetails.estimatedDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                                                {myOrder.deliveryDetails.estimatedTime && ` at ${myOrder.deliveryDetails.estimatedTime}`}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                                {myOrder.deliveryDetails.trackingNumber && (
+                                    <div className='flex items-center gap-2'>
+                                        <FaBox className='text-purple-500' />
+                                        <div>
+                                            <p className='text-xs text-purple-600'>Tracking #</p>
+                                            <p className='font-medium text-gray-800'>{myOrder.deliveryDetails.trackingNumber}</p>
+                                        </div>
+                                    </div>
+                                )}
+                                {myOrder.deliveryDetails.notes && (
+                                    <div className='flex items-start gap-2 pt-2 border-t border-purple-200'>
+                                        <FaStickyNote className='text-purple-500 mt-0.5' />
+                                        <div>
+                                            <p className='text-xs text-purple-600'>Note from Seller</p>
+                                            <p className='text-gray-700 text-xs'>{myOrder.deliveryDetails.notes}</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

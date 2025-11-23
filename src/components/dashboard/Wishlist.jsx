@@ -1,74 +1,107 @@
 import React, { useEffect } from 'react';
-import { FaEye, FaRegHeart } from "react-icons/fa";
+import { FaEye, FaHeart, FaTrash } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
-import Rating from '../Rating';
 import { Link } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
-import { get_wishlist_products, remove_wishlist,messageClear } from '../../store/reducers/cardReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { get_wishlist_products, remove_wishlist, messageClear } from '../../store/reducers/cardReducer';
 import toast from 'react-hot-toast';
 
-const Wishlist = () => { 
-
+const Wishlist = () => {
     const dispatch = useDispatch()
-    const {userInfo } = useSelector(state => state.auth)
-    const {wishlist,successMessage } = useSelector(state => state.card)
-   
+    const { userInfo } = useSelector(state => state.auth)
+    const { wishlist, successMessage } = useSelector(state => state.card)
+
     useEffect(() => {
         dispatch(get_wishlist_products(userInfo.id))
-    },[])
+    }, [dispatch, userInfo.id])
 
-    useEffect(() => { 
+    useEffect(() => {
         if (successMessage) {
             toast.success(successMessage)
-            dispatch(messageClear())  
-        }   
-    },[successMessage])
+            dispatch(messageClear())
+        }
+    }, [successMessage, dispatch])
 
+    const formatPrice = (price) => Number(price).toFixed(2)
 
     return (
-        <div className='w-full grid grid-cols-4 md-lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6'>
-            {
-                wishlist.map((p, i) => <div key={i} className='border group transition-all duration-500 hover:shadow-md hover:-mt-3 bg-white'>
-                <div className='relative overflow-hidden'>
-                
-                {
-                    p.discount !== 0 && <div className='flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2'>{p.discount}% </div> 
-                }
-           
-                   
-            
-    
-            <img className='sm:w-full w-full h-[240px]' src={p.image} alt="" />  
-    
-            <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
-                <li onClick={() => dispatch(remove_wishlist(p._id))} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
-                <FaRegHeart />
-                </li>
-                <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
-                <FaEye />
-                </Link>
-                <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-[#059473] hover:text-white hover:rotate-[720deg] transition-all'>
-                <RiShoppingCartLine />
-                </li>
-            </ul>    
+        <div className='space-y-4'>
+            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6'>
+                <div className='flex items-center justify-between mb-4'>
+                    <h2 className='text-lg sm:text-xl font-bold text-gray-800'>My Wishlist</h2>
+                    <span className='text-sm text-gray-500'>{wishlist.length} items</span>
                 </div>
-    
-            <div className='py-3 text-slate-600 px-2'>
-                <h2 className='font-bold'>{p.name} </h2>
-                <div className='flex justify-start items-center gap-3'>
-                    <span className='text-md font-semibold'>${p.price}</span>
-                    <div className='flex'>
-                        <Rating ratings={p.rating} />
+
+                {wishlist.length === 0 ? (
+                    <div className='text-center py-12'>
+                        <FaHeart className='w-12 h-12 mx-auto text-gray-300 mb-3' />
+                        <p className='text-gray-500'>Your wishlist is empty</p>
+                        <Link to='/shops' className='inline-block mt-4 px-6 py-2 bg-cyan-500 text-white rounded-lg font-medium text-sm'>
+                            Browse Products
+                        </Link>
                     </div>
-    
-                </div>
-            </div>    
-    
-    
-    
-    
-            </div> )
-            }
+                ) : (
+                    <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4'>
+                        {wishlist.map((p, i) => (
+                            <div key={i} className='bg-white rounded-xl border border-gray-100 overflow-hidden group hover:shadow-lg transition-all'>
+                                <div className='relative aspect-square bg-gray-100'>
+                                    {p.discount > 0 && (
+                                        <div className='absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10'>
+                                            -{p.discount}%
+                                        </div>
+                                    )}
+
+                                    <img
+                                        className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
+                                        src={p.image}
+                                        alt={p.name}
+                                    />
+
+                                    {/* Action buttons overlay */}
+                                    <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2'>
+                                        <Link
+                                            to={`/product/details/${p.slug}`}
+                                            className='w-10 h-10 bg-white rounded-full flex items-center justify-center text-cyan-600 hover:bg-cyan-500 hover:text-white transition-colors'
+                                        >
+                                            <FaEye />
+                                        </Link>
+                                        <button
+                                            onClick={() => dispatch(remove_wishlist(p._id))}
+                                            className='w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-colors'
+                                        >
+                                            <FaTrash />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className='p-3'>
+                                    <h3 className='font-medium text-gray-800 text-sm line-clamp-2 mb-2 min-h-[2.5rem]'>
+                                        {p.name}
+                                    </h3>
+                                    <div className='flex items-center justify-between'>
+                                        <span className='text-lg font-bold text-cyan-600'>
+                                            ${formatPrice(p.price - (p.price * p.discount / 100))}
+                                        </span>
+                                        {p.discount > 0 && (
+                                            <span className='text-xs text-gray-400 line-through'>
+                                                ${formatPrice(p.price)}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Mobile remove button */}
+                                    <button
+                                        onClick={() => dispatch(remove_wishlist(p._id))}
+                                        className='w-full mt-3 py-2 text-sm text-red-500 border border-red-200 rounded-lg flex items-center justify-center gap-2 md:hidden'
+                                    >
+                                        <FaTrash className='text-xs' /> Remove
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

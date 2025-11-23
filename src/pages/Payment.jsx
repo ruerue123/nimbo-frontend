@@ -108,7 +108,23 @@ const Payment = () => {
             <section className='py-4 mt-4'>
                 <div className='w-[95%] max-w-6xl mx-auto'>
                     <div className='flex flex-col lg:flex-row gap-4'>
-                        <div className='flex-1'>
+                        {/* Summary - TOP on mobile, RIGHT on desktop */}
+                        <div className='w-full lg:w-[280px] order-1 lg:order-2'>
+                            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:sticky lg:top-4'>
+                                <h2 className='text-sm font-bold text-gray-800 mb-3'>Order Summary</h2>
+                                <div className='flex justify-between text-sm text-gray-600 pb-2 border-b'>
+                                    <span>Items ({items})</span>
+                                    <span>${formatPrice(price)}</span>
+                                </div>
+                                <div className='flex justify-between items-center pt-2'>
+                                    <span className='font-bold text-gray-800'>Total</span>
+                                    <span className='text-xl font-bold text-cyan-600'>${formatPrice(price)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Payment Methods - BOTTOM on mobile, LEFT on desktop */}
+                        <div className='flex-1 order-2 lg:order-1'>
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
                                 <div className='p-4 border-b border-gray-100'>
                                     <h2 className='text-lg font-bold text-gray-800'>Payment Method</h2>
@@ -205,20 +221,6 @@ const Payment = () => {
                                         </button>
                                     </div>
                                 )}
-                            </div>
-                        </div>
-
-                        <div className='w-full lg:w-[280px]'>
-                            <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4 lg:sticky lg:top-4'>
-                                <h2 className='text-sm font-bold text-gray-800 mb-3'>Summary</h2>
-                                <div className='flex justify-between text-sm text-gray-600 pb-2 border-b'>
-                                    <span>Items ({items})</span>
-                                    <span>${formatPrice(price)}</span>
-                                </div>
-                                <div className='flex justify-between items-center pt-2'>
-                                    <span className='font-bold text-gray-800'>Total</span>
-                                    <span className='text-xl font-bold text-cyan-600'>${formatPrice(price)}</span>
-                                </div>
                             </div>
                         </div>
                     </div>
