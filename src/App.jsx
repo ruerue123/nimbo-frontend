@@ -25,6 +25,8 @@ import Chat from './components/dashboard/Chat';
 import ConfirmOrder from './pages/ConfirmOrder';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
+import Blog from './pages/Blog';
+import BlogDetails from './pages/BlogDetails';
 
 function App() {
   const dispatch = useDispatch()
@@ -49,6 +51,8 @@ function App() {
       <Route path='/order/confirm?' element={<ConfirmOrder/>} /> 
       <Route path='/about' element={<AboutPage/>} />
       <Route path='/contact' element={<ContactPage/>} />
+      <Route path='/blog' element={<Blog/>} />
+      <Route path='/blog/:slug' element={<BlogDetails/>} />
 
       <Route path='/dashboard' element={<ProtectUser/>} >
       <Route path='' element={<Dashboard/>} >        

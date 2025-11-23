@@ -103,7 +103,7 @@ const Shipping = () => {
                     {/* Desktop: side by side, Mobile: all stacked */}
                     <div className='flex flex-col lg:flex-row gap-4'>
                         {/* Left Column - Address and Items */}
-                        <div className='flex-1 flex flex-col gap-4 order-1'>
+                        <div className='flex-1 flex flex-col gap-4'>
                             {/* Step 1: Delivery Address */}
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden'>
                                 <div className='bg-gradient-to-r from-cyan-50 to-cyan-100 px-4 py-3 border-b border-cyan-200'>
@@ -290,8 +290,8 @@ const Shipping = () => {
                             )}
                         </div>
 
-                        {/* Order Summary - Right on desktop, LAST on mobile */}
-                        <div className='w-full lg:w-[300px] order-3 lg:order-2'>
+                        {/* Order Summary - Right on desktop, comes after items on mobile */}
+                        <div className='w-full lg:w-[300px]'>
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 lg:sticky lg:top-4 overflow-hidden'>
                                 <div className='bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-3'>
                                     <h2 className='text-sm font-bold text-white flex items-center gap-2'>
