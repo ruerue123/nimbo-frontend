@@ -61,7 +61,7 @@ const ShopProducts = ({ styles, products }) => {
                             <span className='text-xl sm:text-lg font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                 ${Number(p.price).toFixed(2)}
                             </span>
-                            <div className='flex text-amber-400 text-sm'>
+                            <div className='flex text-amber-400 text-sm sm:hidden'>
                                 <Rating ratings={p.rating} />
                             </div>
                         </div>
