@@ -171,7 +171,7 @@ const Payment = () => {
                                                         }`}
                                                 >
                                                     <div className='text-center'>
-                                                        <div className='text-2xl mb-2'>💚</div>
+                                                        <div className='text-2xl mb-2'></div>
                                                         <span className='font-medium text-gray-800'>EcoCash</span>
                                                     </div>
                                                 </button>
@@ -183,7 +183,7 @@ const Payment = () => {
                                                         }`}
                                                 >
                                                     <div className='text-center'>
-                                                        <div className='text-2xl mb-2'>❤️</div>
+                                                        <div className='text-2xl mb-2'></div>
                                                         <span className='font-medium text-gray-800'>OneMoney</span>
                                                     </div>
                                                 </button>
