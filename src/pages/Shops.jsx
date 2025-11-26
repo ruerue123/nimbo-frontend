@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
 import { BsFillGridFill } from 'react-icons/bs';
-import { FaThList, FaHeart, FaShoppingCart, FaStore, FaBox, FaShoppingBag, FaArrowRight } from 'react-icons/fa';
+import { FaThList, FaHeart, FaShoppingCart, FaStore, FaArrowRight } from 'react-icons/fa';
 import Pagination from '../components/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { query_products, get_shops } from '../store/reducers/homeReducer';
@@ -236,32 +236,15 @@ const Shops = () => {
                                             <Link
                                                 key={i}
                                                 to={`/shop/${shop._id}`}
-                                                className='block p-3 rounded-xl hover:bg-gradient-to-r hover:from-cyan-50 hover:to-purple-50 transition-all group border border-transparent hover:border-cyan-200'
+                                                className='block p-3 rounded-xl hover:bg-gradient-to-r hover:from-cyan-50 hover:to-cyan-50 transition-all group'
                                             >
                                                 <div className='flex items-center gap-3'>
-                                                    <div className='w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 flex-shrink-0'>
-                                                        <img
-                                                            src={shop.image}
-                                                            alt={shop.shopInfo?.shopName}
-                                                            className='w-full h-full object-cover'
-                                                        />
+                                                    <div className='w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0'>
+                                                        <FaStore className='text-cyan-600' />
                                                     </div>
-                                                    <div className='flex-1 min-w-0'>
-                                                        <h3 className='font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors truncate text-sm'>
-                                                            {shop.shopInfo?.shopName}
-                                                        </h3>
-                                                        <div className='flex items-center gap-2 mt-1'>
-                                                            <span className='text-xs text-gray-500 flex items-center gap-1'>
-                                                                <FaBox className='text-[10px]' />
-                                                                {shop.productCount} products
-                                                            </span>
-                                                            <span className='text-xs text-gray-400'>•</span>
-                                                            <span className='text-xs text-gray-500 flex items-center gap-1'>
-                                                                <FaShoppingBag className='text-[10px]' />
-                                                                {shop.totalSales} sales
-                                                            </span>
-                                                        </div>
-                                                    </div>
+                                                    <h3 className='font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors text-sm'>
+                                                        {shop.shopInfo?.shopName}
+                                                    </h3>
                                                 </div>
                                             </Link>
                                         ))}

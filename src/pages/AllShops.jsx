@@ -21,10 +21,10 @@ const AllShops = () => {
             <Header />
 
             {/* Hero Banner */}
-            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 overflow-hidden'>
+            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-cyan-400 via-cyan-600 to-cyan-500 overflow-hidden'>
                 <div className='absolute inset-0 bg-black opacity-20'></div>
                 <div className='absolute inset-0' style={{
-                    backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\\"60\\" height=\\"60\\" viewBox=\\"0 0 60 60\\" xmlns=\\"http://www.w3.org/2000/svg\\"%3E%3Cg fill=\\"none\\" fill-rule=\\"evenodd\\"%3E%3Cg fill=\\"%23ffffff\\" fill-opacity=\\"0.05\\"%3E%3Cpath d=\\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
+                    backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
                 }}></div>
                 <div className='relative w-[85%] md:w-[90%] h-full mx-auto flex flex-col justify-center items-center text-white z-10'>
                     <h1 className='text-4xl md:text-3xl sm:text-2xl font-bold mb-3'>All Shops</h1>
@@ -48,61 +48,57 @@ const AllShops = () => {
                         <>
                             <div className='mb-8 text-center'>
                                 <h2 className='text-3xl font-bold text-gray-800 mb-2'>
-                                    Browse Our <span className='bg-gradient-to-r from-cyan-500 to-purple-600 bg-clip-text text-transparent'>Featured Shops</span>
+                                    Browse Our <span className='bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>Featured Shops</span>
                                 </h2>
                                 <p className='text-gray-600'>Discover amazing products from trusted sellers</p>
                             </div>
 
-                            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                            <div className='grid grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 gap-6'>
                                 {shops.map((shop, i) => (
                                     <Link
                                         key={i}
                                         to={`/shop/${shop._id}`}
                                         className='group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100'
                                     >
-                                        {/* Shop Header with Image */}
-                                        <div className='relative h-40 bg-gradient-to-br from-cyan-400 via-purple-400 to-pink-400 overflow-hidden'>
+                                        {/* Shop Header with Icon */}
+                                        <div className='relative h-32 bg-gradient-to-br from-cyan-400 to-cyan-600 overflow-hidden'>
                                             <div className='absolute inset-0 bg-black opacity-10'></div>
                                             <div className='absolute inset-0 flex items-center justify-center'>
-                                                <div className='w-24 h-24 rounded-full overflow-hidden bg-white shadow-2xl border-4 border-white group-hover:scale-110 transition-transform duration-300'>
-                                                    <img
-                                                        src={shop.image}
-                                                        alt={shop.shopInfo?.shopName}
-                                                        className='w-full h-full object-cover'
-                                                    />
+                                                <div className='w-20 h-20 rounded-full bg-white shadow-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300'>
+                                                    <FaStore className='text-4xl text-cyan-600' />
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Shop Details */}
-                                        <div className='p-6'>
-                                            <h3 className='text-xl font-bold text-gray-800 mb-2 text-center group-hover:text-cyan-600 transition-colors'>
+                                        <div className='p-5'>
+                                            <h3 className='text-lg font-bold text-gray-800 mb-2 text-center group-hover:text-cyan-600 transition-colors line-clamp-1'>
                                                 {shop.shopInfo?.shopName}
                                             </h3>
 
                                             {shop.shopInfo?.division && (
-                                                <div className='flex items-center justify-center gap-2 text-sm text-gray-500 mb-4'>
-                                                    <FaMapMarkerAlt className='text-cyan-500' />
+                                                <div className='flex items-center justify-center gap-2 text-xs text-gray-500 mb-3'>
+                                                    <FaMapMarkerAlt className='text-cyan-500 text-[10px]' />
                                                     <span>{shop.shopInfo.division}</span>
                                                 </div>
                                             )}
 
                                             {/* Stats */}
-                                            <div className='grid grid-cols-2 gap-4 mb-4'>
-                                                <div className='bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl p-4 text-center'>
-                                                    <FaBox className='text-2xl text-cyan-600 mx-auto mb-2' />
-                                                    <p className='text-2xl font-bold text-gray-800'>{shop.productCount}</p>
-                                                    <p className='text-xs text-gray-600'>Products</p>
+                                            <div className='grid grid-cols-2 gap-3 mb-3'>
+                                                <div className='bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg p-3 text-center'>
+                                                    <FaBox className='text-lg text-cyan-600 mx-auto mb-1' />
+                                                    <p className='text-xl font-bold text-gray-800'>{shop.productCount}</p>
+                                                    <p className='text-[10px] text-gray-600'>Products</p>
                                                 </div>
-                                                <div className='bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 text-center'>
-                                                    <FaShoppingBag className='text-2xl text-purple-600 mx-auto mb-2' />
-                                                    <p className='text-2xl font-bold text-gray-800'>{shop.totalSales}</p>
-                                                    <p className='text-xs text-gray-600'>Sales</p>
+                                                <div className='bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg p-3 text-center'>
+                                                    <FaShoppingBag className='text-lg text-cyan-600 mx-auto mb-1' />
+                                                    <p className='text-xl font-bold text-gray-800'>{shop.totalSales}</p>
+                                                    <p className='text-[10px] text-gray-600'>Sales</p>
                                                 </div>
                                             </div>
 
                                             {/* View Shop Button */}
-                                            <div className='w-full py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-xl font-semibold text-center group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all'>
+                                            <div className='w-full py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-lg font-semibold text-center text-sm group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all'>
                                                 View Shop
                                             </div>
                                         </div>

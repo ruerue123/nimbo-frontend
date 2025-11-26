@@ -201,7 +201,7 @@ const Delivery = () => {
                 {/* Orders Grid - 1 card on mobile, 2 on desktop */}
                 {currentOrders.length > 0 ? (
                     <div className='p-4'>
-                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                             {currentOrders.map((order, i) => (
                                 <OrderCard key={i} order={order} />
                             ))}
