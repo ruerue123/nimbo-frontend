@@ -38,7 +38,11 @@ const Index = () => {
         }
     }
 
-    const getDeliveryBadge = (status) => {
+    const getDeliveryBadge = (status, paymentStatus) => {
+        // Show 'failed' for cancelled orders with unpaid status
+        if (status === 'cancelled' && paymentStatus === 'unpaid') {
+            return 'bg-red-100 text-red-700';
+        }
         switch (status) {
             case 'delivered': return 'bg-emerald-100 text-emerald-700';
             case 'dispatched': return 'bg-purple-100 text-purple-700';
@@ -48,7 +52,11 @@ const Index = () => {
         }
     }
 
-    const formatStatus = (status) => {
+    const formatStatus = (status, paymentStatus) => {
+        // Show 'Failed' for cancelled orders with unpaid status (payment failures)
+        if (status === 'cancelled' && paymentStatus === 'unpaid') {
+            return 'Failed';
+        }
         const map = {
             'pending': 'Pending', 'order_received': 'Received', 'processing': 'Processing',
             'dispatched': 'Dispatched', 'delivered': 'Delivered', 'cancelled': 'Cancelled'
@@ -133,8 +141,8 @@ const Index = () => {
                                         </span>
                                     </td>
                                     <td className='px-4 py-3'>
-                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDeliveryBadge(o.delivery_status)}`}>
-                                            {formatStatus(o.delivery_status)}
+                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDeliveryBadge(o.delivery_status, o.payment_status)}`}>
+                                            {formatStatus(o.delivery_status, o.payment_status)}
                                         </span>
                                     </td>
                                     <td className='px-4 py-3'>
@@ -183,8 +191,8 @@ const Index = () => {
                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPaymentBadge(o.payment_status)}`}>
                                         {o.payment_status === 'cod' ? 'COD' : o.payment_status?.charAt(0).toUpperCase() + o.payment_status?.slice(1)}
                                     </span>
-                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDeliveryBadge(o.delivery_status)}`}>
-                                        {formatStatus(o.delivery_status)}
+                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDeliveryBadge(o.delivery_status, o.payment_status)}`}>
+                                        {formatStatus(o.delivery_status, o.payment_status)}
                                     </span>
                                 </div>
 

@@ -122,6 +122,49 @@ export const get_banners = createAsyncThunk(
         }
     }
 )
+// End Method
+
+export const get_shops = createAsyncThunk(
+    'home/get_shops',
+    async(limit, { fulfillWithValue, rejectWithValue }) => {
+        try {
+            const url = limit ? `/home/get-shops?limit=${limit}` : '/home/get-shops'
+            const {data} = await api.get(url)
+            return fulfillWithValue(data)
+        } catch (error) {
+            console.log(error.response)
+            return rejectWithValue(error)
+        }
+    }
+)
+// End Method
+
+export const get_shop_details = createAsyncThunk(
+    'home/get_shop_details',
+    async(shopId, { fulfillWithValue, rejectWithValue }) => {
+        try {
+            const {data} = await api.get(`/home/shop-details/${shopId}`)
+            return fulfillWithValue(data)
+        } catch (error) {
+            console.log(error.response)
+            return rejectWithValue(error)
+        }
+    }
+)
+// End Method
+
+export const query_shop_products = createAsyncThunk(
+    'home/query_shop_products',
+    async({shopId, category, sortPrice, pageNumber}, { fulfillWithValue, rejectWithValue }) => {
+        try {
+            const {data} = await api.get(`/home/shop-products/${shopId}?category=${category}&&sortPrice=${sortPrice}&&pageNumber=${pageNumber}`)
+            return fulfillWithValue(data)
+        } catch (error) {
+            console.log(error.response)
+            return rejectWithValue(error)
+        }
+    }
+)
 // End Method 
 
 
@@ -150,6 +193,10 @@ export const homeReducer = createSlice({
         rating_review: [],
         reviews : [],
         banners: [],
+        shops: [],
+        shop: null,
+        shopProducts: [],
+        totalShopProduct: 0,
         loader: false
     },
     reducers : {
@@ -225,6 +272,34 @@ export const homeReducer = createSlice({
 
         .addCase(get_banners.fulfilled, (state, { payload }) => {
             state.banners = payload.banners;
+        })
+
+        .addCase(get_shops.fulfilled, (state, { payload }) => {
+            state.shops = payload.shops;
+        })
+
+        .addCase(get_shop_details.pending, (state) => {
+            state.loader = true;
+        })
+        .addCase(get_shop_details.fulfilled, (state, { payload }) => {
+            state.loader = false;
+            state.shop = payload.shop;
+        })
+        .addCase(get_shop_details.rejected, (state) => {
+            state.loader = false;
+        })
+
+        .addCase(query_shop_products.pending, (state) => {
+            state.loader = true;
+        })
+        .addCase(query_shop_products.fulfilled, (state, { payload }) => {
+            state.loader = false;
+            state.shopProducts = payload.products;
+            state.totalShopProduct = payload.totalProduct;
+            state.parPage = payload.parPage;
+        })
+        .addCase(query_shop_products.rejected, (state) => {
+            state.loader = false;
         })
 
     }

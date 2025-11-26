@@ -50,23 +50,23 @@ const Dashboard = () => {
                 
                 <li className='flex justify-start items-center gap-2 py-2'>
             <span className='text-xl'><IoIosHome /></span>
-            <Link to='/dashboard' className='block' >Dashboard </Link>
+            <Link to='/dashboard' onClick={() => setFilterShow(false)} className='block' >Dashboard </Link>
                 </li>
                 <li className='flex justify-start items-center gap-2 py-2'>
             <span className='text-xl'><FaBorderAll/></span>
-            <Link to='/dashboard/my-orders' className='block' >My Orders </Link>
+            <Link to='/dashboard/my-orders' onClick={() => setFilterShow(false)} className='block' >My Orders </Link>
                 </li>
                 <li className='flex justify-start items-center gap-2 py-2'>
             <span className='text-xl'><FaHeart/></span>
-            <Link to='/dashboard/my-wishlist' className='block' >Wishlist </Link>
+            <Link to='/dashboard/my-wishlist' onClick={() => setFilterShow(false)} className='block' >Wishlist </Link>
                 </li>
                 <li className='flex justify-start items-center gap-2 py-2'>
             <span className='text-xl'><FaTruck/></span>
-            <Link to='/dashboard/delivery' className='block' >Delivery </Link>
+            <Link to='/dashboard/delivery' onClick={() => setFilterShow(false)} className='block' >Delivery </Link>
                 </li>
                 <li className='flex justify-start items-center gap-2 py-2'>
             <span className='text-xl'><RiLockPasswordLine/></span>
-            <Link to='/dashboard/change-password' className='block' >Change Password  </Link>
+            <Link to='/dashboard/change-password' onClick={() => setFilterShow(false)} className='block' >Change Password  </Link>
                 </li>
                 <li onClick={logout} className='flex justify-start items-center gap-2 py-2 cursor-pointer'>
             <span className='text-xl'><IoMdLogOut/></span>

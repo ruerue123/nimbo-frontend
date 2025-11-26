@@ -23,7 +23,11 @@ const Delivery = () => {
         }
     };
 
-    const getStatusBadge = (status) => {
+    const getStatusBadge = (status, paymentStatus) => {
+        // Show 'failed' for cancelled orders with unpaid status
+        if (status === 'cancelled' && paymentStatus === 'unpaid') {
+            return 'bg-red-100 text-red-700';
+        }
         switch (status) {
             case 'delivered': return 'bg-emerald-100 text-emerald-700';
             case 'dispatched': return 'bg-purple-100 text-purple-700';
@@ -33,7 +37,11 @@ const Delivery = () => {
         }
     };
 
-    const formatStatus = (status) => {
+    const formatStatus = (status, paymentStatus) => {
+        // Show 'Failed' for cancelled orders with unpaid status (payment failures)
+        if (status === 'cancelled' && paymentStatus === 'unpaid') {
+            return 'Failed';
+        }
         const map = {
             'pending': 'Pending', 'order_received': 'Received', 'processing': 'Processing',
             'dispatched': 'On the Way', 'delivered': 'Delivered', 'cancelled': 'Cancelled'
@@ -65,8 +73,8 @@ const Delivery = () => {
                         {getStatusIcon(order.delivery_status)}
                         <span className='text-sm font-medium text-gray-800'>#{order._id?.slice(-8)}</span>
                     </div>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(order.delivery_status)}`}>
-                        {formatStatus(order.delivery_status)}
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(order.delivery_status, order.payment_status)}`}>
+                        {formatStatus(order.delivery_status, order.payment_status)}
                     </span>
                 </div>
             </div>
@@ -94,9 +102,9 @@ const Delivery = () => {
                 {/* Delivery Details - Only for pending orders with details */}
                 {activeTab === 'pending' && order.deliveryDetails?.courierName && (
                     <div className='bg-purple-50 rounded-xl p-3 mb-3'>
-                        <div className='grid grid-cols-2 gap-2 text-xs'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs'>
                             <div className='flex items-center gap-1.5'>
-                                <FaBox className='text-purple-500' />
+                                <FaBox className='text-purple-500 flex-shrink-0' />
                                 <div>
                                     <p className='text-purple-600'>Courier</p>
                                     <p className='font-medium text-gray-800'>{order.deliveryDetails.courierName}</p>
@@ -104,7 +112,7 @@ const Delivery = () => {
                             </div>
                             {order.deliveryDetails.courierPhone && (
                                 <div className='flex items-center gap-1.5'>
-                                    <FaPhone className='text-purple-500' />
+                                    <FaPhone className='text-purple-500 flex-shrink-0' />
                                     <div>
                                         <p className='text-purple-600'>Contact</p>
                                         <p className='font-medium text-gray-800'>{order.deliveryDetails.courierPhone}</p>
@@ -112,8 +120,8 @@ const Delivery = () => {
                                 </div>
                             )}
                             {order.deliveryDetails.estimatedDate && (
-                                <div className='flex items-center gap-1.5 col-span-2'>
-                                    <FaCalendarAlt className='text-purple-500' />
+                                <div className='flex items-center gap-1.5 sm:col-span-2'>
+                                    <FaCalendarAlt className='text-purple-500 flex-shrink-0' />
                                     <div>
                                         <p className='text-purple-600'>Expected</p>
                                         <p className='font-medium text-gray-800'>
@@ -151,7 +159,7 @@ const Delivery = () => {
     );
 
     return (
-        <div className='space-y-4'>
+        <div className='px-4 md:px-6 py-6 space-y-4'>
             {/* Header */}
             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 p-4'>
                 <div className='flex items-center gap-3'>
@@ -175,8 +183,8 @@ const Delivery = () => {
                             : 'text-gray-500 hover:bg-gray-50'
                             }`}
                     >
-                        <FaTruck />
-                        Pending ({pendingOrders.length})
+                        <FaTruck className='text-base' />
+                        <span className='hidden sm:inline'>Pending</span> ({pendingOrders.length})
                     </button>
                     <button
                         onClick={() => setActiveTab('delivered')}
@@ -185,15 +193,15 @@ const Delivery = () => {
                             : 'text-gray-500 hover:bg-gray-50'
                             }`}
                     >
-                        <FaCheckCircle />
-                        Delivered ({deliveredOrders.length})
+                        <FaCheckCircle className='text-base' />
+                        <span className='hidden sm:inline'>Delivered</span> ({deliveredOrders.length})
                     </button>
                 </div>
 
-                {/* Orders Grid - 2 cards on PC, 1 on mobile */}
+                {/* Orders Grid - 1 card on mobile, 2 on desktop */}
                 {currentOrders.length > 0 ? (
                     <div className='p-4'>
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                             {currentOrders.map((order, i) => (
                                 <OrderCard key={i} order={order} />
                             ))}
@@ -229,7 +237,7 @@ const Delivery = () => {
                     </div>
                     <h3 className='font-semibold text-gray-800 mb-2'>No deliveries yet</h3>
                     <p className='text-sm text-gray-500 mb-4'>Your order deliveries will appear here</p>
-                    <Link to='/' className='inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white rounded-xl text-sm font-medium'>
+                    <Link to='/' className='inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white rounded-xl text-sm font-medium hover:bg-cyan-600 transition-colors'>
                         Start Shopping
                     </Link>
                 </div>

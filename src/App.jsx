@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Shops from './pages/Shops';
+import AllShops from './pages/AllShops';
+import SingleShop from './pages/SingleShop';
 import Card from './pages/Card';
 import Shipping from './pages/Shipping';
 import Details from './pages/Details';
@@ -41,6 +43,8 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/shops' element={<Shops/>} />
+      <Route path='/all-shops' element={<AllShops/>} />
+      <Route path='/shop/:shopId' element={<SingleShop/>} />
       <Route path='/card' element={<Card/>} />
       <Route path='/shipping' element={<Shipping/>} />
       <Route path='/payment' element={<Payment/>} />

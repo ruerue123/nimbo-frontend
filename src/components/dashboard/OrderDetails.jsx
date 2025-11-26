@@ -38,7 +38,11 @@ const OrderDetails = () => {
 
     const formatPrice = (price) => Number(price || 0).toFixed(2)
 
-    const getStatusBadge = (status) => {
+    const getStatusBadge = (status, paymentStatus) => {
+        // Show 'failed' for cancelled orders with unpaid status
+        if (status === 'cancelled' && paymentStatus === 'unpaid') {
+            return 'bg-red-100 text-red-700';
+        }
         switch (status) {
             case 'order_received': return 'bg-amber-100 text-amber-700';
             case 'processing': return 'bg-blue-100 text-blue-700';
@@ -49,7 +53,11 @@ const OrderDetails = () => {
         }
     }
 
-    const formatStatus = (status) => {
+    const formatStatus = (status, paymentStatus) => {
+        // Show 'Failed' for cancelled orders with unpaid status (payment failures)
+        if (status === 'cancelled' && paymentStatus === 'unpaid') {
+            return 'Failed';
+        }
         const map = {
             'pending': 'Pending', 'order_received': 'Order Received', 'processing': 'Processing',
             'dispatched': 'Dispatched', 'delivered': 'Delivered', 'cancelled': 'Cancelled'
@@ -87,8 +95,8 @@ const OrderDetails = () => {
                         <span className={`px-3 py-1 rounded-full text-xs font-medium ${myOrder.payment_status === 'paid' ? 'bg-emerald-100 text-emerald-700' : myOrder.payment_status === 'cod' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
                             {myOrder.payment_status === 'paid' ? 'Paid' : myOrder.payment_status === 'cod' ? 'COD' : 'Unpaid'}
                         </span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadge(myOrder.delivery_status)}`}>
-                            {formatStatus(myOrder.delivery_status)}
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusBadge(myOrder.delivery_status, myOrder.payment_status)}`}>
+                            {formatStatus(myOrder.delivery_status, myOrder.payment_status)}
                         </span>
                     </div>
                 </div>

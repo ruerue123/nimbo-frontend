@@ -103,8 +103,8 @@ const Orders = () => {
                 </div>
             </div>
 
-            {/* Desktop Table View */}
-            <div className='hidden md:block overflow-x-auto'>
+            {/* Desktop Table View - Show on large screens only */}
+            <div className='hidden lg:block overflow-x-auto'>
                 <table className='w-full'>
                     <thead className='bg-gray-50'>
                         <tr>
@@ -158,8 +158,8 @@ const Orders = () => {
                 </table>
             </div>
 
-            {/* Mobile Card View */}
-            <div className='md:hidden divide-y divide-gray-100'>
+            {/* Mobile Card View - Show on mobile and tablet */}
+            <div className='lg:hidden divide-y divide-gray-100'>
                 {myOrders.map((o, i) => (
                     <div key={i} className='p-4'>
                         <div className='flex items-start justify-between mb-3'>
@@ -171,25 +171,27 @@ const Orders = () => {
                         </div>
 
                         <div className='flex flex-wrap gap-2 mb-3'>
-                            <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${getPaymentStatusBadge(o.payment_status)}`}>
+                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${getPaymentStatusBadge(o.payment_status)}`}>
+                                <FaCreditCard className='mr-1 text-xs' />
                                 {formatPaymentStatus(o.payment_status)}
                             </span>
-                            <span className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${getDeliveryStatusBadge(o.delivery_status)}`}>
+                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${getDeliveryStatusBadge(o.delivery_status)}`}>
+                                <FaBox className='mr-1 text-xs' />
                                 {formatDeliveryStatus(o.delivery_status)}
                             </span>
                         </div>
 
-                        <div className='flex gap-2'>
+                        <div className='flex flex-col sm:flex-row gap-2'>
                             <Link
                                 to={`/dashboard/order/details/${o._id}`}
-                                className='flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-cyan-50 text-cyan-600 text-sm font-medium rounded-lg'
+                                className='flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-cyan-50 text-cyan-600 text-sm font-medium rounded-lg hover:bg-cyan-100 transition-colors'
                             >
                                 <FaEye className='text-xs' /> View Details
                             </Link>
                             {o.payment_status === 'unpaid' && (
                                 <button
                                     onClick={() => redirect(o)}
-                                    className='flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-500 text-white text-sm font-medium rounded-lg'
+                                    className='flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm font-medium rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all'
                                 >
                                     <FaCreditCard className='text-xs' /> Pay Now
                                 </button>
@@ -201,8 +203,11 @@ const Orders = () => {
 
             {myOrders.length === 0 && (
                 <div className='text-center py-12'>
-                    <FaBox className='w-12 h-12 mx-auto text-gray-300 mb-3' />
-                    <p className='text-gray-500'>No orders found</p>
+                    <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
+                        <FaBox className='w-8 h-8 text-gray-300' />
+                    </div>
+                    <h3 className='font-semibold text-gray-800 mb-2'>No orders found</h3>
+                    <p className='text-sm text-gray-500'>Your orders will appear here once you make a purchase</p>
                 </div>
             )}
         </div>

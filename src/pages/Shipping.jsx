@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
 import { FaMapMarkerAlt, FaPhone, FaEdit, FaCheck, FaTruck, FaSpinner } from "react-icons/fa";
@@ -81,8 +79,6 @@ const Shipping = () => {
 
     return (
         <div className='min-h-screen bg-gray-50'>
-            <Header />
-
             {/* Hero Banner */}
             <section className='relative h-[120px] mt-6 bg-gradient-to-r from-cyan-500 to-cyan-700 overflow-hidden'>
                 <div className='absolute inset-0 bg-black/20'></div>
@@ -100,9 +96,10 @@ const Shipping = () => {
 
             <section className='py-4'>
                 <div className='w-[95%] max-w-6xl mx-auto'>
-                    {/* MOBILE: vertical stack, DESKTOP: side by side */}
-                    <div className='flex flex-col lg:flex-row gap-4'>
-                        {/* Left Column - Address and Items - LEFT on desktop, TOP on mobile */}
+                    {/* MOBILE: Order Summary at top, then address/items below */}
+                    {/* DESKTOP: Address/items on left, Order Summary on right */}
+                    <div className='flex flex-col-reverse lg:flex-row gap-4'>
+                        {/* Left Column - Address and Items */}
                         <div className='w-full lg:flex-1'>
                             {/* Step 1: Delivery Address */}
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4'>
@@ -290,7 +287,7 @@ const Shipping = () => {
                             )}
                         </div>
 
-                        {/* Order Summary - RIGHT on desktop, BOTTOM on mobile */}
+                        {/* Right Column - Order Summary (shows at top on mobile due to flex-col-reverse) */}
                         <div className='w-full lg:w-[300px]'>
                             <div className='bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden lg:sticky lg:top-4'>
                                 <div className='bg-gradient-to-r from-cyan-500 to-cyan-600 px-4 py-3'>
@@ -337,8 +334,6 @@ const Shipping = () => {
                     </div>
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 };
