@@ -25,10 +25,10 @@ const Blog = () => {
     }, [currentPage, category, searchValue, dispatch]);
 
     const categories = [
-        { value: 'all', label: 'All Posts', icon: FaNewspaper },
+        { value: 'all', label: 'All News', icon: FaNewspaper },
         { value: 'new_seller', label: 'New Sellers', icon: FaStore },
-        { value: 'new_product', label: 'New Products', icon: FaShoppingBag },
-        { value: 'promotion', label: 'Promotions', icon: FaBullhorn },
+        { value: 'new_product', label: 'New Arrivals', icon: FaShoppingBag },
+        { value: 'promotion', label: 'Hot Deals', icon: FaBullhorn },
         { value: 'announcement', label: 'Announcements', icon: FaNewspaper }
     ];
 
@@ -64,12 +64,12 @@ const Blog = () => {
                     <div className='absolute bottom-5 right-20 w-24 h-24 bg-white rounded-full'></div>
                 </div>
                 <div className='relative w-[90%] max-w-6xl h-full mx-auto flex flex-col justify-center items-center text-white z-10'>
-                    <h1 className='text-3xl font-bold mb-2'>Blog & News</h1>
-                    <p className='text-cyan-100 mb-3'>Discover new sellers, products, and promotions</p>
+                    <h1 className='text-3xl font-bold mb-2'>News & Promotions</h1>
+                    <p className='text-cyan-100 mb-3'>Discover new sellers, hot deals, and exclusive offers</p>
                     <div className='flex items-center gap-2 text-sm'>
                         <Link to='/' className="hover:underline opacity-80">Home</Link>
                         <IoIosArrowForward className='opacity-60' />
-                        <span className="font-medium">Blog</span>
+                        <span className="font-medium">News</span>
                     </div>
                 </div>
             </section>
@@ -79,7 +79,7 @@ const Blog = () => {
                     {/* Featured Posts */}
                     {featuredBlogs.length > 0 && (
                         <div className='mb-10'>
-                            <h2 className='text-2xl font-bold text-gray-800 mb-6'>Featured Posts</h2>
+                            <h2 className='text-2xl font-bold text-gray-800 mb-6'>Featured Deals & News</h2>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                                 {featuredBlogs.slice(0, 3).map((blog, i) => (
                                     <Link
@@ -132,7 +132,7 @@ const Blog = () => {
                                 <FaSearch className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-400' />
                                 <input
                                     type='text'
-                                    placeholder='Search posts...'
+                                    placeholder='Search deals, products, sellers...'
                                     value={searchValue}
                                     onChange={(e) => setSearchValue(e.target.value)}
                                     className='w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl focus:border-cyan-500 outline-none'
@@ -169,8 +169,8 @@ const Blog = () => {
                     ) : blogs.length === 0 ? (
                         <div className='text-center py-20'>
                             <FaNewspaper className='text-6xl text-gray-300 mx-auto mb-4' />
-                            <p className='text-gray-500 text-lg'>No posts found</p>
-                            <p className='text-gray-400 text-sm'>Try adjusting your search or filter</p>
+                            <p className='text-gray-500 text-lg'>No news or deals found</p>
+                            <p className='text-gray-400 text-sm'>Check back later for new promotions and announcements</p>
                         </div>
                     ) : (
                         <>

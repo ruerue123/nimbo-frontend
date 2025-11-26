@@ -61,9 +61,9 @@ const BlogDetails = () => {
                 <Header />
                 <div className='flex flex-col items-center justify-center py-40'>
                     <FaNewspaper className='text-6xl text-gray-300 mb-4' />
-                    <p className='text-gray-500 text-xl mb-4'>Blog post not found</p>
+                    <p className='text-gray-500 text-xl mb-4'>News post not found</p>
                     <Link to='/blog' className='px-6 py-2 bg-cyan-500 text-white rounded-xl font-medium'>
-                        Back to Blog
+                        Back to News
                     </Link>
                 </div>
                 <Footer />
@@ -88,7 +88,7 @@ const BlogDetails = () => {
                         <div className='flex items-center gap-2 text-sm mb-4'>
                             <Link to='/' className="hover:underline opacity-80">Home</Link>
                             <IoIosArrowForward className='opacity-60' />
-                            <Link to='/blog' className="hover:underline opacity-80">Blog</Link>
+                            <Link to='/blog' className="hover:underline opacity-80">News</Link>
                             <IoIosArrowForward className='opacity-60' />
                             <span className="opacity-80 truncate max-w-[200px]">{blog.title}</span>
                         </div>
@@ -128,7 +128,7 @@ const BlogDetails = () => {
                 <div className='w-[95%] max-w-4xl mx-auto'>
                     {/* Back Button */}
                     <Link to='/blog' className='inline-flex items-center gap-2 text-cyan-600 font-medium mb-6 hover:gap-3 transition-all'>
-                        <FaArrowLeft /> Back to Blog
+                        <FaArrowLeft /> Back to News
                     </Link>
 
                     <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
@@ -161,11 +161,11 @@ const BlogDetails = () => {
                                 )}
 
                                 {/* Product Link */}
-                                {blog.productId && (
+                                {blog.productId && blog.productSlug && (
                                     <div className='mt-8 p-4 bg-cyan-50 rounded-xl border border-cyan-100'>
                                         <p className='text-cyan-800 font-medium mb-2'>Check out this product:</p>
                                         <Link
-                                            to={`/product/details/${blog.productName?.toLowerCase().replace(/\s+/g, '-')}`}
+                                            to={`/product/details/${blog.productSlug}`}
                                             className='inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white rounded-lg font-medium hover:bg-cyan-600 transition-colors'
                                         >
                                             <FaShoppingBag /> View {blog.productName}
@@ -178,7 +178,7 @@ const BlogDetails = () => {
                                     <div className='mt-8 p-4 bg-emerald-50 rounded-xl border border-emerald-100'>
                                         <p className='text-emerald-800 font-medium mb-2'>Visit the seller's store:</p>
                                         <Link
-                                            to={`/shops`}
+                                            to={`/shop/${blog.sellerId}`}
                                             className='inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors'
                                         >
                                             <FaStore /> Browse {blog.sellerName}'s Products

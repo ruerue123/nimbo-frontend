@@ -102,7 +102,7 @@ const Delivery = () => {
                 {/* Delivery Details - Only for pending orders with details */}
                 {activeTab === 'pending' && order.deliveryDetails?.courierName && (
                     <div className='bg-purple-50 rounded-xl p-3 mb-3'>
-                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs'>
+                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
                             <div className='flex items-center gap-1.5'>
                                 <FaBox className='text-purple-500 flex-shrink-0' />
                                 <div>
@@ -201,7 +201,7 @@ const Delivery = () => {
                 {/* Orders Grid - 1 card on mobile, 2 on desktop */}
                 {currentOrders.length > 0 ? (
                     <div className='p-4'>
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
                             {currentOrders.map((order, i) => (
                                 <OrderCard key={i} order={order} />
                             ))}
