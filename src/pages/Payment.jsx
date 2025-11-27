@@ -158,7 +158,7 @@ const Payment = () => {
                                         ) : (
                                             <>
                                                 <div className='mb-4'>
-                                                    <div className='grid grid-cols-2 gap-3'>
+                                                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                                                         <button onClick={() => setMobileMethod('ecocash')} type="button"
                                                             className={`p-3 rounded-xl border-2 ${mobileMethod === 'ecocash' ? 'border-green-500 bg-green-50' : 'border-gray-200'}`}>
                                                             <span className='font-medium text-sm'>EcoCash</span>
