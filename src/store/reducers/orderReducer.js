@@ -3,10 +3,10 @@ import api from "../../api/api";
 
 export const place_order = createAsyncThunk(
     'order/place_order',
-    async({ price, products, shipping_fee, items, shippingInfo, userId, navigate }) => {
+    async({ price, products, shipping_fee, items, shippingInfo, userId, navigate }, { rejectWithValue, fulfillWithValue }) => {
         try {
             const { data } = await api.post('/home/order/place-order', {
-                price, products, shipping_fee, items, shippingInfo, userId, navigate
+                price, products, shipping_fee, items, shippingInfo, userId
             })
             navigate('/payment', {
                 state: {
@@ -15,9 +15,10 @@ export const place_order = createAsyncThunk(
                     orderId: data.orderId
                 }
             })
-            console.log(data)
+            return fulfillWithValue(data)
         } catch (error) {
-            console.log(error.response)
+            console.log('Place order error:', error.response)
+            return rejectWithValue(error.response?.data || { error: 'Failed to place order' })
         }
     }
 )
@@ -135,6 +136,18 @@ export const orderReducer = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // Place order
+            .addCase(place_order.pending, (state) => {
+                state.loader = true;
+            })
+            .addCase(place_order.fulfilled, (state, { payload }) => {
+                state.loader = false;
+                state.successMessage = 'Order placed successfully';
+            })
+            .addCase(place_order.rejected, (state, { payload }) => {
+                state.loader = false;
+                state.errorMessage = payload?.error || 'Failed to place order';
+            })
             .addCase(get_orders.fulfilled, (state, { payload }) => {
                 state.myOrders = payload.orders;
             })
