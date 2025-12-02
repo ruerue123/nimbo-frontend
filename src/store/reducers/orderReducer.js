@@ -8,14 +8,23 @@ export const place_order = createAsyncThunk(
             const { data } = await api.post('/home/order/place-order', {
                 price, products, shipping_fee, items, shippingInfo, userId
             })
-            navigate('/payment', {
-                state: {
-                    price: price + shipping_fee,
-                    items,
-                    orderId: data.orderId
-                }
+
+            // Navigate after successful order placement
+            setTimeout(() => {
+                navigate('/payment', {
+                    state: {
+                        price: price + shipping_fee,
+                        items,
+                        orderId: data.orderId
+                    }
+                })
+            }, 100)
+
+            return fulfillWithValue({
+                ...data,
+                totalPrice: price + shipping_fee,
+                items
             })
-            return fulfillWithValue(data)
         } catch (error) {
             console.log('Place order error:', error.response)
             return rejectWithValue(error.response?.data || { error: 'Failed to place order' })
