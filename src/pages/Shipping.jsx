@@ -14,7 +14,9 @@ const Shipping = () => {
 
     const getSavedAddress = () => {
         try {
-            const saved = localStorage.getItem('shippingAddress')
+            // Save address per user, not globally
+            const storageKey = `shippingAddress_${userInfo?.id}`
+            const saved = localStorage.getItem(storageKey)
             if (saved) {
                 return JSON.parse(saved)
             }
@@ -33,7 +35,7 @@ const Shipping = () => {
     }
 
     const [res, setRes] = useState(false)
-    const [state, setState] = useState(getSavedAddress)
+    const [state, setState] = useState(getSavedAddress())
 
     useEffect(() => {
         const { name, address, phone, post, province, city, area } = state
@@ -53,7 +55,9 @@ const Shipping = () => {
         e.preventDefault()
         const { name, address, phone, post, province, city, area } = state;
         if (name && address && phone && post && province && city && area) {
-            localStorage.setItem('shippingAddress', JSON.stringify(state))
+            // Save address per user, not globally
+            const storageKey = `shippingAddress_${userInfo?.id}`
+            localStorage.setItem(storageKey, JSON.stringify(state))
             setRes(true)
         }
     }
