@@ -11,6 +11,7 @@ import Details from './pages/Details';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { get_category } from './store/reducers/homeReducer';
+import { customer_fetch_me } from './store/reducers/authReducer';
 import { useDispatch} from 'react-redux';
 import CategoryShop from './pages/CategoryShop';
 import SearchProducts from './pages/SearchProducts';
@@ -33,6 +34,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(get_category())
+    dispatch(customer_fetch_me())
 },[dispatch])
 
 
