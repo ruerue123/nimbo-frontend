@@ -83,6 +83,7 @@ export const authReducer = createSlice({
                 state.successMessage = payload.message;
                 state.loader = false;
                 state.userInfo = payload.userInfo || '';
+                state.authChecked = true;
             })
 
             .addCase(customer_login.pending, (state) => {
@@ -96,6 +97,7 @@ export const authReducer = createSlice({
                 state.successMessage = payload.message;
                 state.loader = false;
                 state.userInfo = payload.userInfo || '';
+                state.authChecked = true;
             })
 
             .addCase(customer_fetch_me.fulfilled, (state, { payload }) => {
