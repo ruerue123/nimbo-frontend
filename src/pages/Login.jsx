@@ -52,7 +52,7 @@ const Login = () => {
             )}
             <Header />
 
-            <div className='py-16'>
+            <div className='py-12 md:py-6'>
                 <div className='w-[90%] max-w-md mx-auto'>
                     {/* Login Card */}
                     <div className='bg-white rounded-2xl shadow-xl p-8 border border-gray-100'>
@@ -71,10 +71,16 @@ const Login = () => {
                                 <input
                                     onChange={inputHandle}
                                     value={state.email}
-                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-base'
                                     type="email"
                                     name="email"
                                     id="email"
+                                    inputMode="email"
+                                    autoComplete="email"
+                                    autoCapitalize="none"
+                                    autoCorrect="off"
+                                    spellCheck={false}
+                                    enterKeyHint="next"
                                     placeholder='Enter your email'
                                     required
                                 />
@@ -87,13 +93,21 @@ const Login = () => {
                                 <input
                                     onChange={inputHandle}
                                     value={state.password}
-                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-base'
                                     type="password"
                                     name="password"
                                     id="password"
+                                    autoComplete="current-password"
+                                    enterKeyHint="go"
                                     placeholder='Enter your password'
                                     required
                                 />
+                            </div>
+
+                            <div className='flex justify-end -mt-2'>
+                                <Link to='/forgot-password' className='text-sm text-cyan-600 hover:text-cyan-700 font-medium'>
+                                    Forgot password?
+                                </Link>
                             </div>
 
                             <button className='w-full py-3.5 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-xl shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 transition-all'>

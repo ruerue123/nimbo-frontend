@@ -15,9 +15,15 @@ const Card = () => {
     const { card_products, successMessage, price, buy_product_item, shipping_fee, outofstock_products } = useSelector(state => state.card);
     const navigate = useNavigate();
 
+    // Guard against direct navigation by logged-out users — `userInfo` may be
+    // null until customer_fetch_me resolves, so we check before dispatching.
     useEffect(() => {
+        if (!userInfo) {
+            navigate('/login');
+            return;
+        }
         dispatch(get_card_products(userInfo.id));
-    }, [userInfo.id, dispatch]);
+    }, [userInfo, dispatch, navigate]);
 
     const redirect = () => {
         navigate('/shipping', {
@@ -31,12 +37,14 @@ const Card = () => {
     };
 
     useEffect(() => {
-        if (successMessage) {
+        if (successMessage && userInfo) {
             toast.success(successMessage);
             dispatch(messageClear());
             dispatch(get_card_products(userInfo.id));
         }
-    }, [successMessage, dispatch, userInfo.id]);
+    }, [successMessage, dispatch, userInfo]);
+
+    if (!userInfo) return null;
 
     const inc = (quantity, stock, card_id) => {
         const temp = quantity + 1;
@@ -55,17 +63,14 @@ const Card = () => {
     const formatPrice = (value) => Number(value).toFixed(2);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white md-lg:pb-20">
             <Header />
-            
-            {/* Hero Banner */}
-            <section className='relative h-[220px] mt-6 bg-gradient-to-r from-cyan-400 via-indigo-600 to-cyan-600 overflow-hidden'>
+
+            {/* Hero Banner — desktop only. Mobile gets a compact title row below. */}
+            <section className='md-lg:hidden relative h-[220px] mt-6 bg-gradient-to-r from-cyan-400 via-indigo-600 to-cyan-600 overflow-hidden'>
                 <div className='absolute inset-0 bg-black opacity-20'></div>
-                <div className='absolute inset-0' style={{
-                    backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
-                }}></div>
-                <div className='relative w-[85%] md:w-[90%] h-full mx-auto flex flex-col justify-center items-center text-white z-10'>
-                    <h1 className='text-4xl md:text-3xl sm:text-2xl font-bold mb-3'>Shopping Cart</h1>
+                <div className='relative w-[85%] h-full mx-auto flex flex-col justify-center items-center text-white z-10'>
+                    <h1 className='text-4xl font-bold mb-3'>Shopping Cart</h1>
                     <div className='flex items-center gap-2 text-lg'>
                         <Link to='/' className="hover:underline">Home</Link>
                         <IoIosArrowForward />
@@ -74,8 +79,16 @@ const Card = () => {
                 </div>
             </section>
 
-            <section className='py-12'>
-                <div className='w-[85%] lg:w-[90%] md:w-[90%] sm:w-[90%] mx-auto'>
+            {/* Mobile compact title */}
+            <div className='hidden md-lg:block bg-white border-b border-gray-100'>
+                <div className='w-[92%] mx-auto py-4 flex items-center justify-between'>
+                    <h1 className='text-xl font-bold text-gray-900'>Cart</h1>
+                    <span className='text-sm text-gray-500'>{buy_product_item} item{buy_product_item === 1 ? '' : 's'}</span>
+                </div>
+            </div>
+
+            <section className='py-10 md:py-5'>
+                <div className='w-[85%] lg:w-[90%] md:w-[92%] mx-auto'>
                     {card_products.length > 0 || outofstock_products.length > 0 ? (
                         <div className='flex flex-wrap gap-6'>
                             {/* Cart Items */}
@@ -98,57 +111,63 @@ const Card = () => {
                                                     </div>
 
                                                     {shop.products.map((product, productIndex) => (
-                                                        <div key={productIndex} className='p-6 flex flex-wrap gap-4 items-center hover:bg-gray-50 transition-colors'>
-                                                            <div className='flex gap-4 flex-1 min-w-[250px]'>
-                                                                <div className='w-24 h-24 rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex-shrink-0'>
-                                                                    <img 
-                                                                        className='w-full h-full object-cover' 
-                                                                        src={product.productInfo.images[0]} 
-                                                                        alt={product.productInfo.name} 
+                                                        <div key={productIndex} className='p-4 md:p-3 hover:bg-gray-50 transition-colors'>
+                                                            <div className='flex gap-3'>
+                                                                <div className='w-20 h-20 md:w-16 md:h-16 rounded-xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex-shrink-0'>
+                                                                    <img
+                                                                        className='w-full h-full object-cover'
+                                                                        src={product.productInfo.images[0]}
+                                                                        alt={product.productInfo.name}
+                                                                        loading='lazy'
+                                                                        decoding='async'
                                                                     />
                                                                 </div>
-                                                                <div className='flex-1 min-w-[150px]'>
-                                                                    <h4 className='font-semibold text-gray-900 mb-1 line-clamp-2'>{product.productInfo.name}</h4>
-                                                                    <p className='text-sm text-gray-500'>Brand: {product.productInfo.brand}</p>
+                                                                <div className='flex-1 min-w-0'>
+                                                                    <h4 className='font-semibold text-gray-900 line-clamp-2 text-sm md:text-[13px]'>{product.productInfo.name}</h4>
+                                                                    <p className='text-xs text-gray-500 mt-0.5'>{product.productInfo.brand}</p>
+                                                                    {(product.selectedSize || product.selectedColor) && (
+                                                                        <p className='text-xs text-gray-500 mt-0.5'>
+                                                                            {product.selectedSize && <span>Size: <span className='text-gray-700 font-medium'>{product.selectedSize}</span></span>}
+                                                                            {product.selectedSize && product.selectedColor && <span> · </span>}
+                                                                            {product.selectedColor && <span>Color: <span className='text-gray-700 font-medium'>{product.selectedColor}</span></span>}
+                                                                        </p>
+                                                                    )}
+                                                                    <div className='flex items-baseline gap-2 mt-1'>
+                                                                        <span className='text-lg md:text-base font-bold bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>
+                                                                            ${formatPrice(product.productInfo.price - Math.floor((product.productInfo.price * product.productInfo.discount) / 100))}
+                                                                        </span>
+                                                                        {product.productInfo.discount > 0 && (
+                                                                            <span className='text-xs text-gray-400 line-through'>${formatPrice(product.productInfo.price)}</span>
+                                                                        )}
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
-                                                            <div className='flex items-center gap-6 flex-wrap'>
-                                                                <div className='text-center'>
-                                                                    <p className='text-2xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-600 bg-clip-text text-transparent'>
-                                                                        ${formatPrice(product.productInfo.price - Math.floor((product.productInfo.price * product.productInfo.discount) / 100))}
-                                                                    </p>
-                                                                    {product.productInfo.discount > 0 && (
-                                                                        <>
-                                                                            <p className='text-sm text-gray-400 line-through'>${formatPrice(product.productInfo.price)}</p>
-                                                                            <p className='text-xs text-red-500 font-semibold'>-{product.productInfo.discount}%</p>
-                                                                        </>
-                                                                    )}
-                                                                </div>
-
-                                                                <div className='flex flex-col gap-2'>
-                                                                    <div className='flex items-center bg-gray-100 rounded-lg overflow-hidden'>
-                                                                        <button 
-                                                                            onClick={() => dec(product.quantity, product._id)}
-                                                                            className='w-10 h-10 flex items-center justify-center hover:bg-gray-200 transition-colors'
-                                                                        >
-                                                                            <FaMinus className="text-sm" />
-                                                                        </button>
-                                                                        <span className='w-12 h-10 flex items-center justify-center font-bold'>{product.quantity}</span>
-                                                                        <button 
-                                                                            onClick={() => inc(product.quantity, product.productInfo.stock, product._id)}
-                                                                            className='w-10 h-10 flex items-center justify-center hover:bg-gray-200 transition-colors'
-                                                                        >
-                                                                            <FaPlus className="text-sm" />
-                                                                        </button>
-                                                                    </div>
-                                                                    <button 
-                                                                        onClick={() => dispatch(delete_card_product(product._id))}
-                                                                        className='px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors font-medium text-sm flex items-center justify-center gap-2'
+                                                            <div className='flex items-center justify-between mt-3'>
+                                                                <div className='flex items-center bg-gray-100 rounded-lg overflow-hidden'>
+                                                                    <button
+                                                                        onClick={() => dec(product.quantity, product._id)}
+                                                                        aria-label='Decrease quantity'
+                                                                        className='w-10 h-10 flex items-center justify-center hover:bg-gray-200 transition-colors'
                                                                     >
-                                                                        <FaTrash /> Remove
+                                                                        <FaMinus className="text-sm" />
+                                                                    </button>
+                                                                    <span className='w-10 h-10 flex items-center justify-center font-bold text-sm'>{product.quantity}</span>
+                                                                    <button
+                                                                        onClick={() => inc(product.quantity, product.productInfo.stock, product._id)}
+                                                                        aria-label='Increase quantity'
+                                                                        className='w-10 h-10 flex items-center justify-center hover:bg-gray-200 transition-colors'
+                                                                    >
+                                                                        <FaPlus className="text-sm" />
                                                                     </button>
                                                                 </div>
+                                                                <button
+                                                                    onClick={() => dispatch(delete_card_product(product._id))}
+                                                                    className='px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors font-medium text-sm flex items-center gap-1.5'
+                                                                    aria-label='Remove from cart'
+                                                                >
+                                                                    <FaTrash className='text-xs' /> Remove
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     ))}
@@ -207,9 +226,10 @@ const Card = () => {
                                 </div>
                             </div>
 
-                            {/* Order Summary */}
+                            {/* Order Summary — desktop/tablet only. On phones the
+                                checkout CTA lives in the sticky bottom bar. */}
                             {card_products.length > 0 && (
-                                <div className='w-[400px] lg:w-full'>
+                                <div className='w-[400px] lg:w-full md-lg:hidden'>
                                     <div className='bg-white rounded-2xl shadow-lg border border-gray-100 sticky top-6 overflow-hidden'>
                                         <div className='bg-gradient-to-r from-cyan-500 to-cyan-600 px-6 py-4'>
                                             <h2 className='text-xl font-bold text-white'>Order Summary</h2>
@@ -274,6 +294,26 @@ const Card = () => {
             </section>
 
             <Footer />
+
+            {/* Sticky mobile checkout — sits above the bottom nav. Only shows when
+                there's something to actually buy. */}
+            {card_products.length > 0 && (
+                <div
+                    className='hidden md-lg:flex fixed left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-gray-200 px-3 py-3 gap-3 items-center pl-safe pr-safe'
+                    style={{ bottom: 'calc(4.5rem + env(safe-area-inset-bottom))' }}
+                >
+                    <div className='flex flex-col leading-tight'>
+                        <span className='text-xs text-gray-500'>Total</span>
+                        <span className='text-lg font-bold text-gray-900'>${formatPrice(price + shipping_fee)}</span>
+                    </div>
+                    <button
+                        onClick={redirect}
+                        className='flex-1 h-11 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/30'
+                    >
+                        Checkout ({buy_product_item})
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

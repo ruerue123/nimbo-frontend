@@ -51,6 +51,22 @@ const Header = () => {
         }
     }, [userInfo, dispatch]);
 
+    // Lock body scroll while the mobile drawer is open so the user can't
+    // accidentally scroll the page underneath.
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            const prev = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+            return () => { document.body.style.overflow = prev; };
+        }
+    }, [mobileMenuOpen]);
+
+    // Close the drawer on route change so going to a new page doesn't leave
+    // it open behind the new view.
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [pathname]);
+
     const navLinks = [
         { path: '/', label: 'Home' },
         { path: '/shops', label: 'Shop' },
@@ -60,7 +76,7 @@ const Header = () => {
     ];
 
     return (
-        <div className='w-full bg-white shadow-sm'>
+        <div className='w-full bg-white shadow-sm pt-safe'>
             {/* Top Header */}
             <div className='bg-gradient-to-r from-cyan-400 via-indigo-600 to-cyan-600 md-lg:hidden'>
                 <div className='w-[85%] lg:w-[90%] mx-auto'>
@@ -104,35 +120,16 @@ const Header = () => {
                             </Link>
                         </div>
 
-                        {/* Mobile Icons - Right side (only visible on mobile) */}
+                        {/* Mobile Icons — wishlist + cart live in the bottom nav,
+                            so the top bar only carries the hamburger. Hit area
+                            is bumped to 44×44 to meet touch-target guidelines. */}
                         <div className='hidden md-lg:flex items-center gap-2'>
                             <button
-                                onClick={() => navigate(userInfo ? '/dashboard/my-wishlist' : '/login')}
-                                className='relative w-9 h-9 flex items-center justify-center rounded-full bg-pink-50'
-                            >
-                                <FaHeart className='text-red-500 text-sm' />
-                                {wishlist_count !== 0 && (
-                                    <span className='absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white flex items-center justify-center text-[10px] font-bold'>
-                                        {wishlist_count}
-                                    </span>
-                                )}
-                            </button>
-                            <button
-                                onClick={redirect_card_page}
-                                className='relative w-9 h-9 flex items-center justify-center rounded-full bg-cyan-50'
-                            >
-                                <FaCartShopping className='text-cyan-500 text-sm' />
-                                {card_product_count !== 0 && (
-                                    <span className='absolute -top-1 -right-1 w-4 h-4 bg-cyan-500 rounded-full text-white flex items-center justify-center text-[10px] font-bold'>
-                                        {card_product_count}
-                                    </span>
-                                )}
-                            </button>
-                            <button
                                 onClick={toggleMobileMenu}
-                                className='w-9 h-9 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-lg flex items-center justify-center'
+                                className='w-11 h-11 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white rounded-xl flex items-center justify-center shadow-sm shadow-cyan-500/30'
+                                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
                             >
-                                {mobileMenuOpen ? <FaTimes className='text-sm' /> : <FaList className='text-sm' />}
+                                {mobileMenuOpen ? <FaTimes /> : <FaList />}
                             </button>
                         </div>
 
@@ -239,10 +236,15 @@ const Header = () => {
                                             </select>
                                         </div>
                                         <input
-                                            className='flex-1 px-4 h-full outline-none bg-transparent text-gray-700'
+                                            className='flex-1 px-4 h-full outline-none bg-transparent text-gray-700 text-base'
                                             onChange={(e) => setSearchValue(e.target.value)}
-                                            type="text"
+                                            onKeyDown={(e) => { if (e.key === 'Enter') search(); }}
+                                            type="search"
+                                            inputMode="search"
+                                            enterKeyHint="search"
+                                            autoComplete="off"
                                             placeholder='Search for products...'
+                                            aria-label='Search products'
                                         />
                                         <button
                                             onClick={search}
@@ -273,8 +275,8 @@ const Header = () => {
             </div>
 
             {/* Mobile Navigation Drawer */}
-            <div className={`fixed top-0 left-0 w-full h-full bg-white z-50 transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-                <div className="p-6">
+            <div className={`fixed top-0 left-0 w-full h-full bg-white z-[60] transform transition-transform duration-300 overflow-y-auto ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <div className="p-6 pt-safe pb-safe">
                     <div className="flex justify-between items-center mb-8">
                         <Link to='/' onClick={closeMobileMenu} className='flex items-center gap-2'>
                             <img src="/images/logo.png" alt="" className='h-12' />

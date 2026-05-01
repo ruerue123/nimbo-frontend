@@ -53,7 +53,7 @@ const Register = () => {
             )}
             <Header />
 
-            <div className='py-16'>
+            <div className='py-12 md:py-6'>
                 <div className='w-[90%] max-w-md mx-auto'>
                     {/* Register Card */}
                     <div className='bg-white rounded-2xl shadow-xl p-8 border border-gray-100'>
@@ -72,10 +72,13 @@ const Register = () => {
                                 <input
                                     onChange={inputHandle}
                                     value={state.name}
-                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-base'
                                     type="text"
                                     name="name"
                                     id="name"
+                                    autoComplete="name"
+                                    autoCapitalize="words"
+                                    enterKeyHint="next"
                                     placeholder='Enter your full name'
                                     required
                                 />
@@ -88,10 +91,16 @@ const Register = () => {
                                 <input
                                     onChange={inputHandle}
                                     value={state.email}
-                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-base'
                                     type="email"
                                     name="email"
                                     id="email"
+                                    inputMode="email"
+                                    autoComplete="email"
+                                    autoCapitalize="none"
+                                    autoCorrect="off"
+                                    spellCheck={false}
+                                    enterKeyHint="next"
                                     placeholder='Enter your email'
                                     required
                                 />
@@ -104,11 +113,14 @@ const Register = () => {
                                 <input
                                     onChange={inputHandle}
                                     value={state.password}
-                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all'
+                                    className='w-full px-4 py-3 outline-none border border-gray-200 rounded-xl text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all text-base'
                                     type="password"
                                     name="password"
                                     id="password"
-                                    placeholder='Create a password'
+                                    autoComplete="new-password"
+                                    minLength={8}
+                                    enterKeyHint="go"
+                                    placeholder='At least 8 characters'
                                     required
                                 />
                             </div>

@@ -52,13 +52,13 @@ const FeatureProducts = ({ products }) => {
 
     return (
         <div className='w-[85%] flex flex-wrap mx-auto'>
-            <div className='w-full mb-12'>
+            <div className='w-full mb-8 md:mb-6'>
                 <div className='text-center'>
-                    <h2 className='text-4xl font-bold mb-3 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
+                    <h2 className='text-3xl md:text-2xl sm:text-xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                         Featured Products
                     </h2>
-                    <p className="text-gray-600 mb-4">Discover our hand-picked selection</p>
-                    <div className='w-24 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 mx-auto rounded-full'></div>
+                    <p className="text-gray-600 text-sm md:text-xs mb-3">Discover our hand-picked selection</p>
+                    <div className='w-20 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 mx-auto rounded-full'></div>
                 </div>
             </div>
 
@@ -76,41 +76,49 @@ const FeatureProducts = ({ products }) => {
                                 className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
                                 src={p.images[0]}
                                 alt={p.name}
+                                loading='lazy'
+                                decoding='async'
                             />
 
-                            <ul className='flex transition-all duration-500 -bottom-12 justify-center items-center gap-2 absolute w-full group-hover:bottom-4 px-4'>
+                            {/* On touch devices hover doesn't fire, so the action
+                                strip slides up on hover (desktop) but is always
+                                visible on mobile. */}
+                            <ul className='flex transition-all duration-500 md:bottom-2 -bottom-12 justify-center items-center gap-2 absolute w-full group-hover:bottom-4 px-4 md:px-2'>
                                 <li
                                     onClick={() => add_wishlist(p)}
-                                    className='w-11 h-11 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-red-500 hover:text-white shadow-lg transition-all hover:scale-110'
+                                    aria-label='Add to wishlist'
+                                    className='w-11 h-11 md:w-9 md:h-9 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-red-500 hover:text-white shadow-lg transition-all hover:scale-110'
                                 >
                                     <FaRegHeart />
                                 </li>
                                 <Link
                                     to={`/product/details/${p.slug}`}
-                                    className='w-11 h-11 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-cyan-500 hover:text-white shadow-lg transition-all hover:scale-110'
+                                    aria-label='View product'
+                                    className='w-11 h-11 md:w-9 md:h-9 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-cyan-500 hover:text-white shadow-lg transition-all hover:scale-110'
                                 >
                                     <FaEye />
                                 </Link>
                                 <li
                                     onClick={() => add_card(p._id)}
-                                    className='w-11 h-11 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-green-500 hover:text-white shadow-lg transition-all hover:scale-110'
+                                    aria-label='Add to cart'
+                                    className='w-11 h-11 md:w-9 md:h-9 cursor-pointer bg-white/95 backdrop-blur-sm flex justify-center items-center rounded-xl hover:bg-green-500 hover:text-white shadow-lg transition-all hover:scale-110'
                                 >
                                     <RiShoppingCartLine />
                                 </li>
                             </ul>
                         </div>
 
-                        <Link to={`/product/details/${p.slug}`} className='p-4 block'>
-                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-cyan-400 transition-colors'>
+                        <Link to={`/product/details/${p.slug}`} className='p-4 md:p-3 block'>
+                            <h2 className='font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[2.5rem] md:min-h-0 text-sm md:text-[13px] group-hover:text-cyan-400 transition-colors'>
                                 {p.name}
                             </h2>
                             {p.shopName && (
-                                <p className='text-xs text-gray-500 mb-2'>
+                                <p className='text-xs text-gray-500 mb-2 line-clamp-1'>
                                     Sold by: <span className='font-medium text-cyan-600'>{p.shopName}</span>
                                 </p>
                             )}
                             <div className='flex justify-between items-center'>
-                                <span className='text-2xl sm:text-lg font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
+                                <span className='text-xl md:text-base font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent'>
                                     ${Number(p.price).toFixed(2)}
                                 </span>
                                 <div className='flex text-amber-400 sm:hidden'>

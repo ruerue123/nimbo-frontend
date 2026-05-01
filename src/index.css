@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Mobile UX baseline — applied globally so individual pages don't have to
+   re-discover them. */
+@layer base {
+    html {
+        /* Avoid the iOS Safari viewport-jump when an input gets focused. */
+        -webkit-text-size-adjust: 100%;
+    }
+    body {
+        /* Block the rubber-band scroll-bounce on iOS so a fixed bottom nav
+           feels native. min-height: 100dvh tracks dynamic viewport correctly
+           on mobile (skirts the address bar resize problem). */
+        min-height: 100dvh;
+        overscroll-behavior-y: none;
+    }
+    /* Buttons should always feel tappable on touch — no double-tap zoom and
+       no system tap highlight (we draw our own focus rings). */
+    button, a, [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    /* Make number inputs not show the spinner on mobile — distracting and
+       takes up real estate. Sellers/buyers can still type freely. */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+}
+
+@layer utilities {
+    /* Safe-area helpers for notched devices. Use `pb-safe` on a fixed
+       bottom bar so its content sits above the home indicator. */
+    .pb-safe {
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+    .pt-safe {
+        padding-top: max(0px, env(safe-area-inset-top));
+    }
+    .pl-safe {
+        padding-left: max(0px, env(safe-area-inset-left));
+    }
+    .pr-safe {
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+    /* Reserve space at the bottom of every page so the floating mobile
+       nav never overlaps content. Only on mobile, where the nav exists. */
+    .has-bottom-nav {
+        padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+    }
+}

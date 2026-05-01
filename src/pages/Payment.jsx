@@ -136,8 +136,19 @@ const Payment = () => {
                                         <div className='space-y-3'>
                                             <div>
                                                 <label className='block text-xs font-medium text-gray-700 mb-1'>Email</label>
-                                                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)}
-                                                    placeholder='your@email.com' className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm' />
+                                                <input
+                                                    type='email'
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    inputMode="email"
+                                                    autoComplete="email"
+                                                    autoCapitalize="none"
+                                                    autoCorrect="off"
+                                                    spellCheck={false}
+                                                    enterKeyHint="go"
+                                                    placeholder='your@email.com'
+                                                    className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
+                                                />
                                             </div>
                                             <button onClick={handlePaynowWeb} disabled={loader} type="button"
                                                 className='w-full py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 text-sm active:scale-[0.98]'>
@@ -172,13 +183,32 @@ const Payment = () => {
                                                 <div className='space-y-3'>
                                                     <div>
                                                         <label className='block text-xs font-medium text-gray-700 mb-1'>Email</label>
-                                                        <input type='email' value={email} onChange={(e) => setEmail(e.target.value)}
-                                                            placeholder='your@email.com' className='w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm' />
+                                                        <input
+                                                            type='email'
+                                                            value={email}
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            inputMode="email"
+                                                            autoComplete="email"
+                                                            autoCapitalize="none"
+                                                            autoCorrect="off"
+                                                            spellCheck={false}
+                                                            enterKeyHint="next"
+                                                            placeholder='your@email.com'
+                                                            className='w-full px-3 py-2.5 border border-gray-200 rounded-lg text-base'
+                                                        />
                                                     </div>
                                                     <div>
                                                         <label className='block text-xs font-medium text-gray-700 mb-1'>Phone</label>
-                                                        <input type='tel' value={phone} onChange={(e) => setPhone(e.target.value)}
-                                                            placeholder='0771234567' className='w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm' />
+                                                        <input
+                                                            type='tel'
+                                                            value={phone}
+                                                            onChange={(e) => setPhone(e.target.value)}
+                                                            inputMode="tel"
+                                                            autoComplete="tel"
+                                                            enterKeyHint="go"
+                                                            placeholder='0771234567'
+                                                            className='w-full px-3 py-2.5 border border-gray-200 rounded-lg text-base'
+                                                        />
                                                     </div>
                                                     <button onClick={handlePaynowMobile} disabled={loader} type="button"
                                                         className={`w-full py-3 text-white font-semibold rounded-xl flex items-center justify-center gap-2 text-sm active:scale-[0.98] ${mobileMethod === 'ecocash' ? 'bg-green-500' : 'bg-orange-500'}`}>

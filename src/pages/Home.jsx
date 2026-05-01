@@ -30,13 +30,13 @@ const Home = () => {
                 </div>
             ) : (
                 <>
-                    <div className='py-[45px]'>
+                    <div className='py-10 md:py-6'>
                         <FeatureProducts products={products} />
                     </div>
 
-                    <div className='py-10'>
-                        <div className='w-[85%] flex flex-wrap mx-auto'>
-                            <div className='grid w-full grid-cols-3 md-lg:grid-cols-2 md:grid-cols-1 gap-7'>
+                    <div className='py-8 md:py-4'>
+                        <div className='w-[85%] md:w-[92%] flex flex-wrap mx-auto'>
+                            <div className='grid w-full grid-cols-3 md-lg:grid-cols-2 md:grid-cols-1 gap-6 md:gap-4'>
                                 <div className='overflow-hidden'>
                                     <Products title='Latest Product' products={latest_product} />
                                 </div>

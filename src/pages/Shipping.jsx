@@ -129,9 +129,12 @@ const Shipping = () => {
                                                         value={state.name}
                                                         type="text"
                                                         name="name"
+                                                        autoComplete="name"
+                                                        autoCapitalize="words"
+                                                        enterKeyHint="next"
                                                         required
                                                         placeholder='John Doe'
-                                                        className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                        className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                     />
                                                 </div>
                                                 <div>
@@ -141,9 +144,12 @@ const Shipping = () => {
                                                         value={state.phone}
                                                         type="tel"
                                                         name="phone"
+                                                        inputMode="tel"
+                                                        autoComplete="tel"
+                                                        enterKeyHint="next"
                                                         required
                                                         placeholder='0771234567'
-                                                        className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                        className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                     />
                                                 </div>
                                             </div>
@@ -155,9 +161,11 @@ const Shipping = () => {
                                                     value={state.address}
                                                     type="text"
                                                     name="address"
+                                                    autoComplete="street-address"
+                                                    enterKeyHint="next"
                                                     required
                                                     placeholder='123 Main Street'
-                                                    className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                    className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                 />
                                             </div>
 
@@ -169,9 +177,11 @@ const Shipping = () => {
                                                         value={state.province}
                                                         type="text"
                                                         name="province"
+                                                        autoComplete="address-level1"
+                                                        enterKeyHint="next"
                                                         required
                                                         placeholder='Harare'
-                                                        className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                        className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                     />
                                                 </div>
                                                 <div>
@@ -181,9 +191,11 @@ const Shipping = () => {
                                                         value={state.city}
                                                         type="text"
                                                         name="city"
+                                                        autoComplete="address-level2"
+                                                        enterKeyHint="next"
                                                         required
                                                         placeholder='CBD'
-                                                        className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                        className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                     />
                                                 </div>
                                             </div>
@@ -196,9 +208,11 @@ const Shipping = () => {
                                                         value={state.area}
                                                         type="text"
                                                         name="area"
+                                                        autoComplete="address-level3"
+                                                        enterKeyHint="next"
                                                         required
                                                         placeholder='Avondale'
-                                                        className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                        className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                     />
                                                 </div>
                                                 <div>
@@ -208,9 +222,12 @@ const Shipping = () => {
                                                         value={state.post}
                                                         type="text"
                                                         name="post"
+                                                        inputMode="numeric"
+                                                        autoComplete="postal-code"
+                                                        enterKeyHint="done"
                                                         required
                                                         placeholder='00263'
-                                                        className='w-full px-3 py-2 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-sm'
+                                                        className='w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:border-cyan-500 outline-none text-base'
                                                     />
                                                 </div>
                                             </div>

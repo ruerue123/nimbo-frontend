@@ -10,6 +10,8 @@ import Shipping from './pages/Shipping';
 import Details from './pages/Details';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import { get_category } from './store/reducers/homeReducer';
 import { customer_fetch_me } from './store/reducers/authReducer';
 import { useDispatch} from 'react-redux';
@@ -29,6 +31,8 @@ import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 import Blog from './pages/Blog';
 import BlogDetails from './pages/BlogDetails';
+import MobileBottomNav from './components/MobileBottomNav';
+import InstallPrompt from './components/InstallPrompt';
 
 function App() {
   const dispatch = useDispatch()
@@ -40,10 +44,13 @@ function App() {
 
   return (
     <BrowserRouter>
+    <div className='md:has-bottom-nav'>
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
+      <Route path='/forgot-password' element={<ForgotPassword/>} />
+      <Route path='/reset-password' element={<ResetPassword/>} />
       <Route path='/shops' element={<Shops/>} />
       <Route path='/all-shops' element={<AllShops/>} />
       <Route path='/shop/:shopId' element={<SingleShop/>} />
@@ -77,7 +84,9 @@ function App() {
 
 
     </Routes>
-    
+    </div>
+    <MobileBottomNav />
+    <InstallPrompt />
     </BrowserRouter>
   );
 }
