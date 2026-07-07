@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 const Reviews = ({product}) => {
 
     const dispatch = useDispatch()
-    const [parPage, setParPage] = useState(10)
+    const [parPage] = useState(10)
     const [pageNumber, setPageNumber] = useState(1)
     
     const {userInfo } = useSelector(state => state.auth)
@@ -45,7 +45,8 @@ const Reviews = ({product}) => {
             setRat('')
             setRe('')
             dispatch(messageClear())
-        }  
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[successMessage])
 
     useEffect(() => {
@@ -55,6 +56,7 @@ const Reviews = ({product}) => {
                 pageNumber
             }))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[pageNumber,product])
 
 
