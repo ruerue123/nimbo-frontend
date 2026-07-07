@@ -25,6 +25,32 @@ export const customer_login = createAsyncThunk(
     }
 )
 
+// Confirms a signup verification code. On success the backend sets the auth
+// cookie and returns userInfo, so this doubles as first login.
+export const customer_verify_email = createAsyncThunk(
+    'auth/customer_verify_email',
+    async (info, { rejectWithValue, fulfillWithValue }) => {
+        try {
+            const { data } = await api.post('/customer/verify-email', info)
+            return fulfillWithValue(data)
+        } catch (error) {
+            return rejectWithValue(error.response?.data || { error: 'Network error' })
+        }
+    }
+)
+
+export const customer_resend_verification = createAsyncThunk(
+    'auth/customer_resend_verification',
+    async (info, { rejectWithValue, fulfillWithValue }) => {
+        try {
+            const { data } = await api.post('/customer/resend-verification', info)
+            return fulfillWithValue(data)
+        } catch (error) {
+            return rejectWithValue(error.response?.data || { error: 'Network error' })
+        }
+    }
+)
+
 // Fetches the current user from the HttpOnly customerToken cookie. Called on
 // app mount to rehydrate auth state, since JS can no longer read the cookie.
 export const customer_fetch_me = createAsyncThunk(
@@ -60,6 +86,10 @@ export const authReducer = createSlice({
         authChecked: false,
         errorMessage: '',
         successMessage: '',
+        // Set when a signup/login needs email verification. The Verify page
+        // reads pendingEmail; both are cleared once verification succeeds.
+        needsVerification: false,
+        pendingEmail: '',
     },
     reducers: {
         messageClear: (state) => {
@@ -68,6 +98,10 @@ export const authReducer = createSlice({
         },
         user_reset: (state) => {
             state.userInfo = ""
+        },
+        verification_clear: (state) => {
+            state.needsVerification = false
+            state.pendingEmail = ""
         }
     },
     extraReducers: (builder) => {
@@ -82,8 +116,9 @@ export const authReducer = createSlice({
             .addCase(customer_register.fulfilled, (state, { payload }) => {
                 state.successMessage = payload.message;
                 state.loader = false;
-                state.userInfo = payload.userInfo || '';
-                state.authChecked = true;
+                // Registration no longer logs in — it triggers email verification.
+                state.needsVerification = true;
+                state.pendingEmail = payload.email || '';
             })
 
             .addCase(customer_login.pending, (state) => {
@@ -92,6 +127,11 @@ export const authReducer = createSlice({
             .addCase(customer_login.rejected, (state, { payload }) => {
                 state.errorMessage = payload?.error || 'Login failed';
                 state.loader = false;
+                // Unverified accounts get bounced to the verify screen.
+                if (payload?.needsVerification) {
+                    state.needsVerification = true;
+                    state.pendingEmail = payload.email || '';
+                }
             })
             .addCase(customer_login.fulfilled, (state, { payload }) => {
                 state.successMessage = payload.message;
@@ -109,10 +149,33 @@ export const authReducer = createSlice({
                 state.authChecked = true;
             })
 
+            .addCase(customer_verify_email.pending, (state) => {
+                state.loader = true;
+            })
+            .addCase(customer_verify_email.rejected, (state, { payload }) => {
+                state.errorMessage = payload?.error || 'Verification failed';
+                state.loader = false;
+            })
+            .addCase(customer_verify_email.fulfilled, (state, { payload }) => {
+                state.successMessage = payload.message;
+                state.loader = false;
+                state.userInfo = payload.userInfo || '';
+                state.authChecked = true;
+                state.needsVerification = false;
+                state.pendingEmail = '';
+            })
+
+            .addCase(customer_resend_verification.fulfilled, (state, { payload }) => {
+                state.successMessage = payload.message;
+            })
+            .addCase(customer_resend_verification.rejected, (state, { payload }) => {
+                state.errorMessage = payload?.error || 'Could not resend code';
+            })
+
             .addCase(customer_logout.fulfilled, (state) => {
                 state.userInfo = '';
             })
     }
 })
-export const { messageClear, user_reset } = authReducer.actions
+export const { messageClear, user_reset, verification_clear } = authReducer.actions
 export default authReducer.reducer

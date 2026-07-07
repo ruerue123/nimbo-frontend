@@ -9,7 +9,7 @@ import { FadeLoader } from 'react-spinners';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { loader, errorMessage, successMessage, userInfo } = useSelector(state => state.auth);
+    const { loader, errorMessage, successMessage, userInfo, needsVerification } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
@@ -38,10 +38,12 @@ const Login = () => {
             toast.error(errorMessage);
             dispatch(messageClear());
         }
-        if (userInfo) {
+        if (needsVerification) {
+            navigate('/verify-email');
+        } else if (userInfo) {
             navigate('/');
         }
-    }, [successMessage, errorMessage, userInfo, dispatch, navigate]);
+    }, [successMessage, errorMessage, userInfo, needsVerification, dispatch, navigate]);
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">

@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import VerifyEmail from './pages/VerifyEmail';
 import { get_category } from './store/reducers/homeReducer';
 import { customer_fetch_me } from './store/reducers/authReducer';
 import { useDispatch} from 'react-redux';
@@ -51,6 +52,7 @@ function App() {
       <Route path='/register' element={<Register/>} />
       <Route path='/forgot-password' element={<ForgotPassword/>} />
       <Route path='/reset-password' element={<ResetPassword/>} />
+      <Route path='/verify-email' element={<VerifyEmail/>} />
       <Route path='/shops' element={<Shops/>} />
       <Route path='/all-shops' element={<AllShops/>} />
       <Route path='/shop/:shopId' element={<SingleShop/>} />
