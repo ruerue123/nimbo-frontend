@@ -2,63 +2,111 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { useSelector } from 'react-redux';
+
+const quickLinks = [
+    { label: 'Home', to: '/' },
+    { label: 'Shops', to: '/all-shops' },
+    { label: 'Blog', to: '/blog' },
+    { label: 'About Us', to: '/about' },
+    { label: 'Contact', to: '/contact' },
+];
+
+const socials = [
+    { Icon: FaFacebookF, href: 'https://facebook.com', label: 'Facebook' },
+    { Icon: FaInstagram, href: 'https://instagram.com', label: 'Instagram' },
+    { Icon: FaWhatsapp, href: 'https://wa.me/263776573701', label: 'WhatsApp' },
+    { Icon: FaXTwitter, href: 'https://x.com', label: 'X' },
+];
 
 const Footer = () => {
     const navigate = useNavigate();
     const { userInfo } = useSelector(state => state.auth);
     const { card_product_count, wishlist_count } = useSelector(state => state.card);
 
+    const heading = 'font-bold text-lg text-white relative inline-block after:absolute after:-bottom-2 after:left-0 after:w-10 after:h-1 after:bg-gradient-to-r after:from-cyan-500 after:to-cyan-400';
+
     return (
         <footer className='relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300'>
             <div className='w-[85%] mx-auto py-16'>
 
-                {/* GRID = 2 CLEAN COLUMNS */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                {/* GRID = 4 COLUMNS */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
                     {/* --- Column 1: Company Info --- */}
                     <div className="space-y-6">
-                        <img className='w-[180px]' src="/images/logo.png" alt="logo" />
+                        <img className='w-[160px]' src="/images/logo.png" alt="logo" />
 
-                        <p className='text-gray-400 leading-relaxed'>
+                        <p className='text-gray-400 leading-relaxed text-sm'>
                             Your one-stop destination for quality products and exceptional service. Shop with confidence!
                         </p>
 
-                        <ul className='space-y-3 text-gray-300'>
+                        <div className='flex gap-3'>
+                            {socials.map(({ Icon, href, label }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    aria-label={label}
+                                    className='w-9 h-9 rounded-full bg-white/10 hover:bg-cyan-500 flex items-center justify-center text-gray-300 hover:text-white transition-colors'
+                                >
+                                    <Icon />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* --- Column 2: Quick Links --- */}
+                    <div className="space-y-6">
+                        <h2 className={heading}>Quick Links</h2>
+                        <ul className='space-y-3 text-gray-400'>
+                            {quickLinks.map(({ label, to }) => (
+                                <li key={label}>
+                                    <Link to={to} className='hover:text-cyan-400 transition-colors'>
+                                        {label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* --- Column 3: Contact --- */}
+                    <div className="space-y-6">
+                        <h2 className={heading}>Contact</h2>
+                        <ul className='space-y-3 text-gray-300 text-sm'>
                             <li className='flex items-center gap-3'>
-                                <MdLocationOn className='text-cyan-500 text-xl' />
+                                <MdLocationOn className='text-cyan-500 text-xl shrink-0' />
                                 Zimre Park, Harare
                             </li>
                             <li className='flex items-center gap-3'>
-                                <MdPhone className='text-green-500 text-xl' />
+                                <MdPhone className='text-green-500 text-xl shrink-0' />
                                 +263 776 573 701
                             </li>
                             <li className='flex items-center gap-3'>
-                                <MdEmail className='text-red-500 text-xl' />
+                                <MdEmail className='text-red-500 text-xl shrink-0' />
                                 info@nimbo.co.zw
                             </li>
                         </ul>
                     </div>
 
-                    {/* --- Column 2: Newsletter --- */}
+                    {/* --- Column 4: Newsletter --- */}
                     <div className="space-y-6">
+                        <h2 className={heading}>Newsletter</h2>
 
-                        <h2 className='font-bold text-xl text-white relative inline-block after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-gradient-to-r from-cyan-500 to-cyan-500'>
-                            Newsletter
-                        </h2>
-
-                        <p className='text-gray-300'>
+                        <p className='text-gray-400 text-sm'>
                             Subscribe to get special offers, free giveaways, and exclusive deals!
                         </p>
 
-                        <div className='relative'>
+                        <div className='space-y-3'>
                             <input
-                                className='w-full h-[50px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 outline-none text-white placeholder:text-gray-400 focus:border-cyan-500'
+                                className='w-full h-[46px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 outline-none text-white placeholder:text-gray-400 focus:border-cyan-500'
                                 type="email"
                                 placeholder='Enter your email'
                             />
-                            <button className='absolute right-1 top-1 h-[42px] px-6 bg-gradient-to-r from-cyan-400 to-cyan-600 text-white font-semibold rounded-lg hover:from-cyan-700 hover:to-cyan-700'>
+                            <button className='w-full h-[46px] bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-cyan-700 transition-colors'>
                                 Subscribe
                             </button>
                         </div>
@@ -67,11 +115,11 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className='border-t border-white/10 mt-12 pt-6 flex justify-between flex-wrap text-gray-400 text-sm'>
-                    <span>© 2025 Nimbo. All Rights Reserved.</span>
+                <div className='border-t border-white/10 mt-12 pt-6 flex justify-between flex-wrap gap-3 text-gray-400 text-sm'>
+                    <span>© {new Date().getFullYear()} Nimbo. All Rights Reserved.</span>
                     <div className='flex gap-6'>
-                        <Link to="#" className='hover:text-cyan-400'>Terms of Service</Link>
-                        <Link to="#" className='hover:text-cyan-400'>Privacy Policy</Link>
+                        <Link to="/about" className='hover:text-cyan-400'>Terms of Service</Link>
+                        <Link to="/about" className='hover:text-cyan-400'>Privacy Policy</Link>
                     </div>
                 </div>
             </div>
