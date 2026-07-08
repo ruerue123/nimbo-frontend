@@ -33,7 +33,9 @@ const Footer = () => {
             <div className='w-[85%] mx-auto py-10'>
 
                 {/* GRID = 4 COLUMNS */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+                {/* NB: this project's Tailwind screens are max-width (desktop-first),
+                    so base = desktop (4 cols), md: overrides for small screens (2 cols). */}
+                <div className="grid grid-cols-4 md:grid-cols-2 gap-x-8 gap-y-8">
 
                     {/* --- Column 1: Company Info --- */}
                     <div className="space-y-3">
@@ -93,7 +95,7 @@ const Footer = () => {
                     </div>
 
                     {/* --- Column 4: Newsletter --- */}
-                    <div className="space-y-3 col-span-2 lg:col-span-1">
+                    <div className="space-y-3 md:col-span-2">
                         <h2 className={heading}>Newsletter</h2>
 
                         <p className='text-gray-400 text-sm'>
