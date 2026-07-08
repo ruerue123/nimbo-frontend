@@ -54,7 +54,7 @@ const AllShops = () => {
                             </div>
 
                             <div className='grid grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 gap-6'>
-                                {shops.map((shop, i) => (
+                                {shops.filter(shop => shop.shopInfo?.shopName?.trim()).map((shop, i) => (
                                     <Link
                                         key={i}
                                         to={`/shop/${shop._id}`}

@@ -232,7 +232,10 @@ const Shops = () => {
                                         </h2>
                                     </div>
                                     <div className='space-y-3'>
-                                        {shops.slice(0, 6).map((shop, i) => (
+                                        {shops
+                                            .filter(shop => shop.shopInfo?.shopName?.trim())
+                                            .slice(0, 6)
+                                            .map((shop, i) => (
                                             <Link
                                                 key={i}
                                                 to={`/shop/${shop._id}`}
@@ -243,7 +246,7 @@ const Shops = () => {
                                                         <FaStore className='text-cyan-600' />
                                                     </div>
                                                     <h3 className='font-semibold text-gray-800 group-hover:text-cyan-600 transition-colors text-sm'>
-                                                        {shop.shopInfo?.shopName}
+                                                        {shop.shopInfo.shopName}
                                                     </h3>
                                                 </div>
                                             </Link>
