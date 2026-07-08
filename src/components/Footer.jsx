@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 import { useSelector } from 'react-redux';
 
@@ -15,10 +15,9 @@ const quickLinks = [
 ];
 
 const socials = [
-    { Icon: FaFacebookF, href: 'https://facebook.com', label: 'Facebook' },
-    { Icon: FaInstagram, href: 'https://instagram.com', label: 'Instagram' },
-    { Icon: FaWhatsapp, href: 'https://wa.me/263776573701', label: 'WhatsApp' },
-    { Icon: FaXTwitter, href: 'https://x.com', label: 'X' },
+    { Icon: FaInstagram, href: 'https://www.instagram.com/nimbo.cloud', label: 'Instagram' },
+    { Icon: FaFacebookF, href: 'https://www.facebook.com/share/18x5nmg38S/', label: 'Facebook' },
+    { Icon: FaWhatsapp, href: 'https://wa.me/263771133269', label: 'WhatsApp' },
 ];
 
 const Footer = () => {

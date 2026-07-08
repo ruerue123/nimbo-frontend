@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
+import api from '../api/api';
+import toast from 'react-hot-toast';
 
 const contactInfo = [
     { Icon: MdEmail, label: 'Email', value: 'info@nimbo.co.zw', color: 'text-red-500', bg: 'bg-red-50' },
@@ -10,6 +12,25 @@ const contactInfo = [
 ];
 
 const Contact = () => {
+    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [loading, setLoading] = useState(false);
+
+    const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const { data } = await api.post('/home/contact', form);
+            toast.success(data?.message || 'Message sent!');
+            setForm({ name: '', email: '', message: '' });
+        } catch (err) {
+            toast.error(err?.response?.data?.error || 'Could not send your message. Try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="w-full bg-gradient-to-b from-gray-50 to-white min-h-screen">
             <Header />
@@ -44,11 +65,15 @@ const Contact = () => {
                     </div>
 
                     {/* Contact Form */}
-                    <form className="bg-white shadow-xl p-8 rounded-2xl border border-gray-100 space-y-5">
+                    <form onSubmit={onSubmit} className="bg-white shadow-xl p-8 rounded-2xl border border-gray-100 space-y-5">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
                             <input
                                 type="text"
+                                name="name"
+                                value={form.name}
+                                onChange={onChange}
+                                required
                                 placeholder="Enter your name"
                                 className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                             />
@@ -57,6 +82,10 @@ const Contact = () => {
                             <label className="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
                             <input
                                 type="email"
+                                name="email"
+                                value={form.email}
+                                onChange={onChange}
+                                required
                                 placeholder="you@example.com"
                                 className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all"
                             />
@@ -64,6 +93,10 @@ const Contact = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
                             <textarea
+                                name="message"
+                                value={form.message}
+                                onChange={onChange}
+                                required
                                 placeholder="How can we help?"
                                 className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none text-gray-700 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all h-32 resize-none"
                             ></textarea>
@@ -71,9 +104,10 @@ const Contact = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white py-3.5 rounded-xl font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:from-cyan-600 hover:to-cyan-700 transition-all"
+                            disabled={loading}
+                            className="w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white py-3.5 rounded-xl font-semibold shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:from-cyan-600 hover:to-cyan-700 transition-all disabled:opacity-60"
                         >
-                            Send Message
+                            {loading ? 'Sending...' : 'Send Message'}
                         </button>
                     </form>
 
