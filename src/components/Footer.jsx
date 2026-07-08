@@ -30,20 +30,20 @@ const Footer = () => {
 
     return (
         <footer className='relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-300'>
-            <div className='w-[85%] mx-auto py-16'>
+            <div className='w-[85%] mx-auto py-10'>
 
                 {/* GRID = 4 COLUMNS */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
 
                     {/* --- Column 1: Company Info --- */}
-                    <div className="space-y-6">
-                        <img className='w-[160px]' src="/images/logo.png" alt="logo" />
+                    <div className="space-y-3">
+                        <img className='w-[130px]' src="/images/logo.png" alt="logo" />
 
                         <p className='text-gray-400 leading-relaxed text-sm'>
-                            Your one-stop destination for quality products and exceptional service. Shop with confidence!
+                            Your one-stop destination for quality products and exceptional service.
                         </p>
 
-                        <div className='flex gap-3'>
+                        <div className='flex gap-2'>
                             {socials.map(({ Icon, href, label }) => (
                                 <a
                                     key={label}
@@ -51,7 +51,7 @@ const Footer = () => {
                                     target='_blank'
                                     rel='noreferrer'
                                     aria-label={label}
-                                    className='w-9 h-9 rounded-full bg-white/10 hover:bg-cyan-500 flex items-center justify-center text-gray-300 hover:text-white transition-colors'
+                                    className='w-8 h-8 rounded-full bg-white/10 hover:bg-cyan-500 flex items-center justify-center text-gray-300 hover:text-white transition-colors text-sm'
                                 >
                                     <Icon />
                                 </a>
@@ -60,9 +60,9 @@ const Footer = () => {
                     </div>
 
                     {/* --- Column 2: Quick Links --- */}
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                         <h2 className={heading}>Quick Links</h2>
-                        <ul className='space-y-3 text-gray-400'>
+                        <ul className='space-y-2 text-gray-400 text-sm'>
                             {quickLinks.map(({ label, to }) => (
                                 <li key={label}>
                                     <Link to={to} className='hover:text-cyan-400 transition-colors'>
@@ -74,39 +74,39 @@ const Footer = () => {
                     </div>
 
                     {/* --- Column 3: Contact --- */}
-                    <div className="space-y-6">
+                    <div className="space-y-3">
                         <h2 className={heading}>Contact</h2>
-                        <ul className='space-y-3 text-gray-300 text-sm'>
+                        <ul className='space-y-2 text-gray-300 text-sm'>
                             <li className='flex items-center gap-3'>
-                                <MdLocationOn className='text-cyan-500 text-xl shrink-0' />
+                                <MdLocationOn className='text-cyan-500 text-lg shrink-0' />
                                 Zimre Park, Harare
                             </li>
                             <li className='flex items-center gap-3'>
-                                <MdPhone className='text-green-500 text-xl shrink-0' />
+                                <MdPhone className='text-green-500 text-lg shrink-0' />
                                 +263 776 573 701
                             </li>
                             <li className='flex items-center gap-3'>
-                                <MdEmail className='text-red-500 text-xl shrink-0' />
+                                <MdEmail className='text-red-500 text-lg shrink-0' />
                                 info@nimbo.co.zw
                             </li>
                         </ul>
                     </div>
 
                     {/* --- Column 4: Newsletter --- */}
-                    <div className="space-y-6">
+                    <div className="space-y-3 col-span-2 lg:col-span-1">
                         <h2 className={heading}>Newsletter</h2>
 
                         <p className='text-gray-400 text-sm'>
-                            Subscribe to get special offers, free giveaways, and exclusive deals!
+                            Subscribe to get special offers and exclusive deals!
                         </p>
 
-                        <div className='space-y-3'>
+                        <div className='flex gap-2'>
                             <input
-                                className='w-full h-[46px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 outline-none text-white placeholder:text-gray-400 focus:border-cyan-500'
+                                className='flex-1 min-w-0 h-[42px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-3 outline-none text-white placeholder:text-gray-400 focus:border-cyan-500 text-sm'
                                 type="email"
                                 placeholder='Enter your email'
                             />
-                            <button className='w-full h-[46px] bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-cyan-700 transition-colors'>
+                            <button className='h-[42px] px-4 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-cyan-700 transition-colors text-sm shrink-0'>
                                 Subscribe
                             </button>
                         </div>
@@ -115,7 +115,7 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className='border-t border-white/10 mt-12 pt-6 flex justify-between flex-wrap gap-3 text-gray-400 text-sm'>
+                <div className='border-t border-white/10 mt-8 pt-5 flex justify-between flex-wrap gap-3 text-gray-400 text-sm'>
                     <span>© {new Date().getFullYear()} Nimbo. All Rights Reserved.</span>
                     <div className='flex gap-6'>
                         <Link to="/about" className='hover:text-cyan-400'>Terms of Service</Link>
