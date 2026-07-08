@@ -23,7 +23,7 @@ const Shops = () => {
     const [category, setCategory] = useState('');
 
     useEffect(() => {
-        dispatch(get_shops(6)); // Get 6 featured shops
+        dispatch(get_shops(50)); // Fetch a generous pool; many active sellers have no shop name, so we over-fetch and filter down to 6 named shops below
     }, [dispatch]);
 
     const queryCategory = (e, value) => {
