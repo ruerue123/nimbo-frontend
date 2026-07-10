@@ -3,14 +3,24 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
 import { FaMapMarkerAlt, FaPhone, FaEdit, FaCheck, FaTruck, FaSpinner } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { place_order } from '../store/reducers/orderReducer';
+import toast from 'react-hot-toast';
+import { place_order, messageClear } from '../store/reducers/orderReducer';
 
 const Shipping = () => {
     const { state: { products, price, shipping_fee, items } } = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
-    const { loader } = useSelector(state => state.order)
+    const { loader, errorMessage } = useSelector(state => state.order)
+
+    // Surface order-placement failures — otherwise a rejected place_order just
+    // logs to the console and the button appears to do nothing.
+    useEffect(() => {
+        if (errorMessage) {
+            toast.error(errorMessage)
+            dispatch(messageClear())
+        }
+    }, [errorMessage, dispatch])
 
     const getSavedAddress = () => {
         try {
